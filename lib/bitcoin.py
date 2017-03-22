@@ -270,8 +270,8 @@ def hash_160(public_key):
 
 def hash_160_to_bc_address(h160, addrtype, witness_program_version=1):
     s = chr(addrtype)
-    if addrtype == ADDRTYPE_P2WPKH:
-        s += chr(witness_program_version) + chr(0)
+    #if addrtype == ADDRTYPE_P2WPKH:
+    #    s += chr(witness_program_version) + chr(0)
     s += h160
     return base_encode(s+Hash(s)[0:4], base=58)
 
