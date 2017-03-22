@@ -38,22 +38,23 @@ import pyaes
 
 # Bitcoin network constants
 TESTNET = False
-NOLNET = False
+# NOLNET = False
 ADDRTYPE_P2PKH = 0x75
 ADDRTYPE_P2SH = 0xAE
-ADDRTYPE_P2WPKH = 6 # Segwit Addresses
+WIF_BYTE = 0x31
+#ADDRTYPE_P2WPKH = 6 # Segwit Addresses
 XPRV_HEADER = 0xAE3416F6
 XPUB_HEADER = 0x2780915F
-HEADERS_URL = "https://headers.electrum.org/blockchain_headers"
+HEADERS_URL = "https://headers.electrum.org/blockchain_headers" # TODO Change this
 
 def set_testnet():
-    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH, ADDRTYPE_P2WPKH
+    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH#, ADDRTYPE_P2WPKH
     global XPRV_HEADER, XPUB_HEADER
     global TESTNET, HEADERS_URL
     TESTNET = True
     ADDRTYPE_P2PKH = 0x82
     ADDRTYPE_P2SH = 0x31
-    ADDRTYPE_P2WPKH = 3 # Segwit Addresses
+    #ADDRTYPE_P2WPKH = 3 # Segwit Addresses
     XPRV_HEADER = 0x2B7FA42A
     XPUB_HEADER = 0xBB8F4852
     HEADERS_URL = "https://headers.electrum.org/testnet_headers"
@@ -371,15 +372,15 @@ def PrivKeyToSecret(privkey):
 
 
 def SecretToASecret(secret, compressed=False):
-    addrtype = ADDRTYPE_P2PKH
-    vchIn = chr((addrtype+128)&255) + secret
+    #addrtype = ADDRTYPE_P2PKH
+    vchIn = chr(WIF_BYTE&255) + secret
     if compressed: vchIn += '\01'
     return EncodeBase58Check(vchIn)
 
 def ASecretToSecret(key):
-    addrtype = ADDRTYPE_P2PKH
+    #addrtype = ADDRTYPE_P2PKH
     vch = DecodeBase58Check(key)
-    if vch and vch[0] == chr((addrtype+128)&255):
+    if vch and vch[0] == chr(WIF_BYTE&255):
         return vch[1:]
     elif is_minikey(key):
         return minikey_to_private_key(key)
