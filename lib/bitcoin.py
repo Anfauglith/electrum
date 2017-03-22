@@ -39,11 +39,11 @@ import pyaes
 # Bitcoin network constants
 TESTNET = False
 NOLNET = False
-ADDRTYPE_P2PKH = 0
-ADDRTYPE_P2SH = 5
-ADDRTYPE_P2WPKH = 6
-XPRV_HEADER = 0x0488ade4
-XPUB_HEADER = 0x0488b21e
+ADDRTYPE_P2PKH = 0x75
+ADDRTYPE_P2SH = 0xAE
+ADDRTYPE_P2WPKH = 6 # Segwit Addresses
+XPRV_HEADER = 0xAE3416F6
+XPUB_HEADER = 0x2780915F
 HEADERS_URL = "https://headers.electrum.org/blockchain_headers"
 
 def set_testnet():
@@ -51,24 +51,24 @@ def set_testnet():
     global XPRV_HEADER, XPUB_HEADER
     global TESTNET, HEADERS_URL
     TESTNET = True
-    ADDRTYPE_P2PKH = 111
-    ADDRTYPE_P2SH = 196
-    ADDRTYPE_P2WPKH = 3
-    XPRV_HEADER = 0x04358394
-    XPUB_HEADER = 0x043587cf
+    ADDRTYPE_P2PKH = 0x82
+    ADDRTYPE_P2SH = 0x31
+    ADDRTYPE_P2WPKH = 3 # Segwit Addresses
+    XPRV_HEADER = 0x2B7FA42A
+    XPUB_HEADER = 0xBB8F4852
     HEADERS_URL = "https://headers.electrum.org/testnet_headers"
 
-def set_nolnet():
-    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH, ADDRTYPE_P2WPKH
-    global XPRV_HEADER, XPUB_HEADER
-    global NOLNET, HEADERS_URL
-    NOLNET = True
-    ADDRTYPE_P2PKH = 0
-    ADDRTYPE_P2SH = 5
-    ADDRTYPE_P2WPKH = 6
-    XPRV_HEADER = 0x0488ade4
-    XPUB_HEADER = 0x0488b21e
-    HEADERS_URL = "https://headers.electrum.org/nolnet_headers"
+#def set_nolnet():
+#    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH, ADDRTYPE_P2WPKH
+#    global XPRV_HEADER, XPUB_HEADER
+#    global NOLNET, HEADERS_URL
+#    NOLNET = True
+#    ADDRTYPE_P2PKH = 0
+#    ADDRTYPE_P2SH = 5
+#    ADDRTYPE_P2WPKH = 6
+#    XPRV_HEADER = 0x0488ade4
+#    XPUB_HEADER = 0x0488b21e
+#    HEADERS_URL = "https://headers.electrum.org/nolnet_headers"
 
 
 
