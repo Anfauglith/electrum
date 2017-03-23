@@ -32,16 +32,16 @@ from hashlib import sha256
 from urlparse import urljoin
 from urllib import quote
 
-import electrum
-from electrum import bitcoin
-from electrum import keystore
-from electrum.bitcoin import *
-from electrum.mnemonic import Mnemonic
-from electrum import version
-from electrum.wallet import Multisig_Wallet, Deterministic_Wallet, Wallet
-from electrum.i18n import _
-from electrum.plugins import BasePlugin, run_hook, hook
-from electrum.util import NotEnoughFunds
+import electrum_iop as electrum
+from electrum_iop import bitcoin
+from electrum_iop import keystore
+from electrum_iop.bitcoin import *
+from electrum_iop.mnemonic import Mnemonic
+from electrum_iop import version
+from electrum_iop.wallet import Multisig_Wallet, Deterministic_Wallet, Wallet
+from electrum_iop.i18n import _
+from electrum_iop.plugins import BasePlugin, run_hook, hook
+from electrum_iop.util import NotEnoughFunds
 
 # signing_xpub is hardcoded so that the wallet can be restored from seed, without TrustedCoin's server
 signing_xpub = "xpub661MyMwAqRbcGnMkaTx2594P9EDuiEqMq25PM2aeG6UmwzaohgA6uDmNsvSUV8ubqwA3Wpste1hg69XHgjUuCD5HLcEp2QPzyV1HMrPppsL"

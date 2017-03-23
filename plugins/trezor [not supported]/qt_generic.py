@@ -8,10 +8,10 @@ from electrum_gui.qt.util import *
 from .plugin import TIM_NEW, TIM_RECOVER, TIM_MNEMONIC
 from ..hw_wallet.qt import QtHandlerBase, QtPluginBase
 
-from electrum.i18n import _
-from electrum.plugins import hook, DeviceMgr
-from electrum.util import PrintError, UserCancelled
-from electrum.wallet import Wallet, Standard_Wallet
+from electrum_iop.i18n import _
+from electrum_iop.plugins import hook, DeviceMgr
+from electrum_iop.util import PrintError, UserCancelled
+from electrum_iop.wallet import Wallet, Standard_Wallet
 
 PASSPHRASE_HELP_SHORT =_(
     "Passphrases allow you to access new wallets, each "

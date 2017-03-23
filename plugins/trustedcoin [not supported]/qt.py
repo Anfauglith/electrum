@@ -31,12 +31,12 @@ from decimal import Decimal
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from electrum_gui.qt.util import *
-from electrum_gui.qt.qrcodewidget import QRCodeWidget
-from electrum_gui.qt.amountedit import AmountEdit
-from electrum_gui.qt.main_window import StatusBarButton
-from electrum.i18n import _
-from electrum.plugins import hook
+from electrum_iop_gui.qt.util import *
+from electrum_iop_gui.qt.qrcodewidget import QRCodeWidget
+from electrum_iop_gui.qt.amountedit import AmountEdit
+from electrum_iop_gui.qt.main_window import StatusBarButton
+from electrum_iop.i18n import _
+from electrum_iop.plugins import hook
 from trustedcoin import TrustedCoinPlugin, server
 
 
@@ -278,5 +278,3 @@ class Plugin(TrustedCoinPlugin):
         window.exec_layout(vbox, next_enabled=False,
                                raise_on_cancel=False)
         return pw.get_amount(), cb_lost.isChecked()
-
-
