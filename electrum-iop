@@ -398,7 +398,7 @@ if __name__ == '__main__':
                 d = daemon.Daemon(config, fd)
                 d.start()
                 if config.get('websocket_server'):
-                    from electrum import websockets
+                    from electrum_iop import websockets
                     websockets.WebSocketServer(config, d.network).start()
                 if config.get('requests_dir'):
                     check_www_dir(config.get('requests_dir'))
