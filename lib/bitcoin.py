@@ -54,6 +54,7 @@ def set_testnet():
     TESTNET = True
     ADDRTYPE_P2PKH = 0x82
     ADDRTYPE_P2SH = 0x31
+    WIF_BYTE = 0x4C
     #ADDRTYPE_P2WPKH = 3 # Segwit Addresses
     XPRV_HEADER = 0x2B7FA42A
     XPUB_HEADER = 0xBB8F4852
