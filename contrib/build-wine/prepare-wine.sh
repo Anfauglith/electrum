@@ -2,7 +2,7 @@
 
 # Please update these links carefully, some versions won't work under Wine
 PYTHON_URL=https://www.python.org/ftp/python/2.7.13/python-2.7.13.msi
-PYQT4_URL=http://sourceforge.net/projects/pyqt/files/PyQt4/PyQt-4.11.1/PyQt4-4.11.1-gpl-Py2.7-Qt4.8.6-x32.exe
+PYQt5_URL=http://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-4.11.1/PyQt5-4.11.1-gpl-Py2.7-Qt5.8.6-x32.exe
 PYWIN32_URL=http://sourceforge.net/projects/pywin32/files/pywin32/Build%20219/pywin32-219.win32-py2.7.exe/download
 PYINSTALLER_URL=https://pypi.python.org/packages/source/P/PyInstaller/PyInstaller-2.1.zip
 NSIS_URL=http://prdownloads.sourceforge.net/nsis/nsis-2.46-setup.exe?download
@@ -42,8 +42,8 @@ wine msiexec /q /i python.msi
 wget -O pywin32.exe "$PYWIN32_URL"
 wine pywin32.exe
 
-# Install PyQt4
-wget -O PyQt.exe "$PYQT4_URL"
+# Install PyQt5
+wget -O PyQt.exe "$PYQt5_URL"
 wine PyQt.exe
 
 # Install pyinstaller

@@ -28,13 +28,13 @@ import os
 import signal
 
 try:
-    import PyQt4
+    import PyQt5
 except Exception:
-    sys.exit("Error: Could not import PyQt4 on Linux systems, you may try 'sudo apt-get install python-qt4'")
+    sys.exit("Error: Could not import PyQt5 on Linux systems, you may try 'sudo apt-get install python-Qt5'")
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
-import PyQt4.QtCore as QtCore
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
+import PyQt5.QtCore as QtCore
 
 from electrum_iop.i18n import _, set_language
 from electrum_iop.plugins import run_hook

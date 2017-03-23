@@ -1,7 +1,7 @@
 from functools import partial
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 
 from electrum_iop.plugins import hook
 from electrum_iop.i18n import _

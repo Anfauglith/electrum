@@ -28,14 +28,14 @@ import threading
 import time
 import xmlrpclib
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 
 from electrum_iop import bitcoin, util
 from electrum_iop import transaction
-from electrum.plugins import BasePlugin, hook
-from electrum.i18n import _
-from electrum.wallet import Multisig_Wallet
+from electrum_iop.plugins import BasePlugin, hook
+from electrum_iop.i18n import _
+from electrum_iop.wallet import Multisig_Wallet
 
 from electrum_gui.qt.transaction_dialog import show_transaction
 
@@ -158,7 +158,7 @@ class Plugin(BasePlugin):
             d.cosigner_send_button.hide()
 
     def cosigner_can_sign(self, tx, cosigner_xpub):
-        from electrum.keystore import is_xpubkey, parse_xpubkey
+        from electrum_iop.keystore import is_xpubkey, parse_xpubkey
         xpub_set = set([])
         for txin in tx.inputs():
             for x_pubkey in txin['x_pubkeys']:

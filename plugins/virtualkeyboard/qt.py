@@ -1,4 +1,4 @@
-from PyQt4.QtGui import *
+from PyQt5.QtGui import *
 from electrum_iop.plugins import BasePlugin, hook
 from electrum_iop.i18n import _
 import random

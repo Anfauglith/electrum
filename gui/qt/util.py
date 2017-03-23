@@ -9,8 +9,8 @@ from collections import namedtuple
 from functools import partial
 
 from electrum_iop.i18n import _
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 
 if platform.system() == 'Windows':
     MONOSPACE_FONT = 'Lucida Console'

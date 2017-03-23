@@ -24,8 +24,8 @@
 # SOFTWARE.
 import socket
 
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 
 from electrum_iop.i18n import _
 from electrum_iop.network import DEFAULT_PORTS

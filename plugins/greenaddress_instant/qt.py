@@ -28,7 +28,7 @@ import urllib
 import sys
 import requests
 
-from PyQt4.QtGui import QApplication, QPushButton
+from PyQt5.QtGui import QApplication, QPushButton
 
 from electrum_iop.plugins import BasePlugin, hook
 from electrum_iop.i18n import _
