@@ -17,15 +17,15 @@ from kivy.lang import Builder
 from kivy.factory import Factory
 from kivy.utils import platform
 
-from electrum.util import profiler, parse_URI, format_time, InvalidPassword, NotEnoughFunds
-from electrum import bitcoin
-from electrum.util import timestamp_to_datetime
-from electrum.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
+from electrum_iop.util import profiler, parse_URI, format_time, InvalidPassword, NotEnoughFunds
+from electrum_iop import bitcoin
+from electrum_iop.util import timestamp_to_datetime
+from electrum_iop.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
 
 from context_menu import ContextMenu
 
 
-from electrum_gui.kivy.i18n import _
+from electrum_iop_gui.kivy.i18n import _
 
 class EmptyLabel(Factory.Label):
     pass
@@ -352,7 +352,7 @@ class ReceiveScreen(CScreen):
         Clock.schedule_once(lambda dt: self.update_qr())
 
     def get_URI(self):
-        from electrum.util import create_URI
+        from electrum_iop.util import create_URI
         amount = self.screen.amount
         if amount:
             a, u = self.screen.amount.split()

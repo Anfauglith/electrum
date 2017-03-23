@@ -29,7 +29,7 @@ from qrtextedit import ScanQRTextEdit
 
 import re
 from decimal import Decimal
-from electrum import bitcoin
+from electrum_iop import bitcoin
 
 import util
 

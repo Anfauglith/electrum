@@ -27,10 +27,10 @@
 import webbrowser
 
 from util import *
-from electrum.i18n import _
-from electrum.util import block_explorer_URL, format_satoshis, format_time
-from electrum.plugins import run_hook
-from electrum.bitcoin import is_address
+from electrum_iop.i18n import _
+from electrum_iop.util import block_explorer_URL, format_satoshis, format_time
+from electrum_iop.plugins import run_hook
+from electrum_iop.bitcoin import is_address
 
 
 class AddressList(MyTreeWidget):
@@ -136,4 +136,3 @@ class AddressList(MyTreeWidget):
 
         run_hook('receive_menu', menu, addrs, self.wallet)
         menu.exec_(self.viewport().mapToGlobal(position))
-

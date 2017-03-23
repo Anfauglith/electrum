@@ -1,5 +1,5 @@
-from electrum.i18n import _
-from electrum.plugins import run_hook
+from electrum_iop.i18n import _
+from electrum_iop.plugins import run_hook
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 

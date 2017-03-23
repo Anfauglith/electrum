@@ -41,18 +41,18 @@ import PyQt4.QtCore as QtCore
 
 import icons_rc
 
-from electrum import keystore
-from electrum.bitcoin import COIN, is_valid, TYPE_ADDRESS
-from electrum.plugins import run_hook
-from electrum.i18n import _
-from electrum.util import (block_explorer, block_explorer_info, format_time,
+from electrum_iop import keystore
+from electrum_iop.bitcoin import COIN, is_valid, TYPE_ADDRESS
+from electrum_iop.plugins import run_hook
+from electrum_iop.i18n import _
+from electrum_iop.util import (block_explorer, block_explorer_info, format_time,
                            block_explorer_URL, format_satoshis, PrintError,
                            format_satoshis_plain, NotEnoughFunds,
                            UserCancelled)
-from electrum import Transaction, mnemonic
-from electrum import util, bitcoin, commands, coinchooser
-from electrum import SimpleConfig, paymentrequest
-from electrum.wallet import Wallet, Multisig_Wallet
+from electrum_iop import Transaction, mnemonic
+from electrum_iop import util, bitcoin, commands, coinchooser
+from electrum_iop import SimpleConfig, paymentrequest
+from electrum_iop.wallet import Wallet, Multisig_Wallet
 
 from amountedit import AmountEdit, BTCAmountEdit, MyLineEdit, BTCkBEdit
 from network_dialog import NetworkDialog
@@ -62,7 +62,7 @@ from transaction_dialog import show_transaction
 from fee_slider import FeeSlider
 
 
-from electrum import ELECTRUM_VERSION
+from electrum_iop import ELECTRUM_VERSION
 import re
 
 from util import *

@@ -121,5 +121,3 @@ if __name__ == '__main__':
     import sys
     data = str(sys.argv[1:])
     runTouchApp(QRCodeWidget(data=data))
-
-

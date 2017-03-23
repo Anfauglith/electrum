@@ -14,9 +14,9 @@ from kivy.core.window import Window
 from kivy.clock import Clock
 from kivy.utils import platform
 
-from electrum_gui.kivy.uix.dialogs import EventsDialog
-from electrum_gui.kivy.i18n import _
-from electrum.base_wizard import BaseWizard
+from electrum_iop_gui.kivy.uix.dialogs import EventsDialog
+from electrum_iop_gui.kivy.i18n import _
+from electrum_iop.base_wizard import BaseWizard
 
 from password_dialog import PasswordDialog
 

@@ -5,9 +5,9 @@ from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.uix.label import Label
 
-from electrum_gui.kivy.i18n import _
+from electrum_iop_gui.kivy.i18n import _
 from datetime import datetime
-from electrum.util import InvalidPassword
+from electrum_iop.util import InvalidPassword
 
 Builder.load_string('''
 

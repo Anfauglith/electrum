@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = Electrum
+title = Electrum-IOP
 
 # (str) Package name
-package.name = Electrum
+package.name = Electrum-IOP
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.electrum
+package.domain = org.electrum-iop
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -35,7 +35,7 @@ requirements = hostpython2, android, openssl, pycrypto, pil, plyer, kivy==master
 
 # (str) Presplash of the application
 #presplash.filename = %(source.dir)s/gui/kivy/theming/splash.png
-presplash.filename = %(source.dir)s/icons/electrum.png
+presplash.filename = %(source.dir)s/icons/electrum-iop.png
 
 # (str) Icon of the application
 #icon.filename = %(source.dir)s/icons/electrum_android_launcher_icon.png
