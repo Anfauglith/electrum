@@ -33,7 +33,7 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
     ]
 
 setup(
-    name="Electrum",
+    name="Electrum-IOP",
     version=version.ELECTRUM_VERSION,
     install_requires=[
         'pyaes',
@@ -47,42 +47,42 @@ setup(
         'PySocks>=1.6.6',
     ],
     packages=[
-        'electrum',
-        'electrum_gui',
-        'electrum_gui.qt',
-        'electrum_plugins',
-        'electrum_plugins.audio_modem',
-        #'electrum_plugins.cosigner_pool',
-        #'electrum_plugins.email_requests',
-        #'electrum_plugins.greenaddress_instant',
-        #'electrum_plugins.hw_wallet',
-        #'electrum_plugins.keepkey',
-        #'electrum_plugins.labels',
-        #'electrum_plugins.ledger',
-        #'electrum_plugins.trezor',
-        #'electrum_plugins.digitalbitbox',
-        #'electrum_plugins.trustedcoin',
-        #'electrum_plugins.virtualkeyboard',
+        'electrum_iop',
+        'electrum_iop_gui',
+        'electrum_iop_gui.qt',
+        'electrum_iop_plugins',
+        'electrum_iop_plugins.audio_modem',
+        #'electrum_iop_plugins.cosigner_pool',
+        #'electrum_iop_plugins.email_requests',
+        #'electrum_iop_plugins.greenaddress_instant',
+        #'electrum_iop_plugins.hw_wallet',
+        #'electrum_iop_plugins.keepkey',
+        #'electrum_iop_plugins.labels',
+        #'electrum_iop_plugins.ledger',
+        #'electrum_iop_plugins.trezor',
+        #'electrum_iop_plugins.digitalbitbox',
+        #'electrum_iop_plugins.trustedcoin',
+        #'electrum_iop_plugins.virtualkeyboard',
     ],
     package_dir={
-        'electrum': 'lib',
-        'electrum_gui': 'gui',
-        'electrum_plugins': 'plugins',
+        'electrum_iop': 'lib',
+        'electrum_iop_gui': 'gui',
+        'electrum_iop_plugins': 'plugins',
     },
     package_data={
-        'electrum': [
+        'electrum_iop': [
             'currencies.json',
             'www/index.html',
             'wordlist/*.txt',
             'locale/*/LC_MESSAGES/electrum.mo',
         ]
     },
-    scripts=['electrum'],
+    scripts=['electrum-iop'],
     data_files=data_files,
-    description="Lightweight Bitcoin Wallet",
+    description="Lightweight IoP Wallet",
     author="Thomas Voegtlin",
     author_email="thomasv@electrum.org",
     license="MIT Licence",
-    url="https://electrum.org",
-    long_description="""Lightweight Bitcoin Wallet"""
+    url="https://electrum-iop.org",
+    long_description="""Lightweight IoP Wallet"""
 )
