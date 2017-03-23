@@ -51,6 +51,8 @@ DEFAULT_PORTS = {'t':'50001', 's':'50002'}
 #then gradually switch remaining nodes to e-x nodes
 
 DEFAULT_SERVERS = {
+    '127.0.0.1': DEFAULT_PORTS,
+    '163.172.128.134': DEFAULT_PORTS,
 }
 
 def set_testnet():

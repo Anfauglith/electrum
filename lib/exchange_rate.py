@@ -87,22 +87,22 @@ class ExchangeBase(PrintError):
         return [str(a) for (a, b) in rates.iteritems() if b is not None]
 
 
-# class BitcoinAverage(ExchangeBase):
-#     def get_rates(self, ccy):
-#         json = self.get_json('api.bitcoinaverage.com', '/ticker/global/all')
-#         return dict([(r, Decimal(json[r]['last']))
-#                      for r in json if r != 'timestamp'])
-# 
-#     def history_ccys(self):
-#         return ['AUD', 'BRL', 'CAD', 'CHF', 'CNY', 'EUR', 'GBP', 'IDR', 'ILS',
-#                 'MXN', 'NOK', 'NZD', 'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'USD',
-#                 'ZAR']
-# 
-#     def historical_rates(self, ccy):
-#         history = self.get_csv('api.bitcoinaverage.com',
-#                                "/history/%s/per_day_all_time_history.csv" % ccy)
-#         return dict([(h['DateTime'][:10], h['Average'])
-#                      for h in history])
+class BitcoinAverage(ExchangeBase):
+    def get_rates(self, ccy):
+        json = self.get_json('api.bitcoinaverage.com', '/ticker/global/all')
+        return dict([(r, Decimal(json[r]['last']))
+                     for r in json if r != 'timestamp'])
+
+    def history_ccys(self):
+        return ['AUD', 'BRL', 'CAD', 'CHF', 'CNY', 'EUR', 'GBP', 'IDR', 'ILS',
+                'MXN', 'NOK', 'NZD', 'PLN', 'RON', 'RUB', 'SEK', 'SGD', 'USD',
+                'ZAR']
+
+    def historical_rates(self, ccy):
+        history = self.get_csv('api.bitcoinaverage.com',
+                               "/history/%s/per_day_all_time_history.csv" % ccy)
+        return dict([(h['DateTime'][:10], h['Average'])
+                     for h in history])
 # 
 # class BitcoinVenezuela(ExchangeBase):
 # 
