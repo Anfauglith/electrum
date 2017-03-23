@@ -3,15 +3,14 @@
 
 [Desktop Entry]
 Comment=Lightweight Bitcoin Client
-Exec=electrum %u
-GenericName[en_US]=Electrum
-GenericName=Electrum
-Icon=electrum
-Name[en_US]=Electrum Bitcoin Wallet
-Name=Electrum Bitcoin Wallet
+Exec=electrum-iop %u
+GenericName[en_US]=Electrum-IOP
+GenericName=Electrum-IOP
+Icon=electrum-iop
+Name[en_US]=Electrum IoP Wallet
+Name=Electrum IoP Wallet
 Categories=Network;
 StartupNotify=false
 Terminal=false
 Type=Application
-MimeType=x-scheme-handler/bitcoin;
-
+MimeType=x-scheme-handler/IoP;

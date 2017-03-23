@@ -1,19 +1,13 @@
-Electrum - Lightweight Bitcoin client
+Electrum-IOP - Lightweight IoP client
 =====================================
 
 ::
 
   Licence: MIT Licence
-  Author: Thomas Voegtlin
+  Original Author: Thomas Voegtlin
+  Port Maintainer: Amon Engemann
   Language: Python
-  Homepage: https://electrum.org/
-
-
-.. image:: https://travis-ci.org/spesmilo/electrum.svg?branch=master
-    :target: https://travis-ci.org/spesmilo/electrum
-    :alt: Build Status
-
-
+  Homepage: https://electrum-iop.org/
 
 
 
@@ -30,7 +24,7 @@ Electrum from its root directory, without installing it on your
 system; all the python dependencies are included in the 'packages'
 directory. To run Electrum from its root directory, just do::
 
-    ./electrum
+    ./electrum-iop
 
 You can also install Electrum on your system, by running this command::
 
@@ -50,8 +44,8 @@ Development version
 
 Check out the code from Github::
 
-    git clone git://github.com/spesmilo/electrum.git
-    cd electrum
+    git clone git://github.com/Anfauglith/electrum-iop.git
+    cd electrum-iop
 
 Run install (this should install dependencies)::
 
@@ -96,7 +90,7 @@ Mac OS X
     # On Homebrew installs: 
     ARCHFLAGS="-arch i386 -arch x86_64" sudo python setup-release.py py2app --includes sip
     
-    sudo hdiutil create -fs HFS+ -volname "Electrum" -srcfolder dist/Electrum.app dist/electrum-VERSION-macosx.dmg
+    sudo hdiutil create -fs HFS+ -volname "Electrum-IOP" -srcfolder dist/Electrum-IOP.app dist/electrum-ltc-VERSION-macosx.dmg
 
 Windows
 -------
