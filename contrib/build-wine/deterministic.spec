@@ -1,18 +1,9 @@
 # -*- mode: python -*-
 
-import sys
-for i, x in enumerate(sys.argv):
-    if x == '--name':
-        cmdline_name = sys.argv[i+1]
-        break
-else:
-    raise BaseException('no name')
-
-
-home = 'C:\\electrum\\'
+home = 'C:\\electrum-iop\\'
 
 # We don't put these files in to actually include them in the script but to make the Analysis method scan them for imports
-a = Analysis([home+'electrum',
+a = Analysis([home+'electrum-iop',
               home+'gui/qt/main_window.py',
               home+'gui/text.py',
               home+'lib/util.py',
@@ -80,7 +71,7 @@ exe = EXE(pyz,
           a.scripts,
           a.binaries,
           a.datas,
-          name=os.path.join('build\\pyi.win32\\electrum', cmdline_name),
+          name=os.path.join('build\\pyi.win32\\electrum-iop', 'electrum-iop.exe'),
           debug=False,
           strip=None,
           upx=False,
