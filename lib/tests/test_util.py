@@ -32,12 +32,12 @@ class TestUtil(unittest.TestCase):
 
 
     def test_parse_URI_address_label(self):
-        self._do_test_parse_URI('IoP:pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv?label=electrum-iop%20test',
-                                {'address': 'pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv', 'label': 'electrum-iop test'})
+        self._do_test_parse_URI('IoP:pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv?label=fermatum%20test',
+                                {'address': 'pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv', 'label': 'fermatum test'})
 
     def test_parse_URI_address_message(self):
-        self._do_test_parse_URI('bitcoin:pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv?message=electrum-iop%20test',
-                                {'address': 'pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv', 'message': 'electrum-iop test', 'memo': 'electrum-iop test'})
+        self._do_test_parse_URI('bitcoin:pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv?message=fermatum%20test',
+                                {'address': 'pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv', 'message': 'fermatum test', 'memo': 'fermatum test'})
 
     def test_parse_URI_address_amount(self):
         self._do_test_parse_URI('IoP:pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv?amount=0.0003',
@@ -52,8 +52,8 @@ class TestUtil(unittest.TestCase):
                                 {'address': 'pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv', 'test': 'test'})
 
     def test_parse_URI_multiple_args(self):
-        self._do_test_parse_URI('IoP:pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv?amount=0.00004&label=electrum-iop-test&message=electrum%20test&test=none&r=http://domain.tld/page',
-                                {'address': 'pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv', 'amount': 4000, 'label': 'electrum-iop-test', 'message': u'electrum test', 'memo': u'electrum test', 'r': 'http://domain.tld/page', 'test': 'none'})
+        self._do_test_parse_URI('IoP:pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv?amount=0.00004&label=fermatum-test&message=fermatum%20test&test=none&r=http://domain.tld/page',
+                                {'address': 'pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv', 'amount': 4000, 'label': 'fermatum-test', 'message': u'fermatum test', 'memo': u'fermatum test', 'r': 'http://domain.tld/page', 'test': 'none'})
 
     def test_parse_URI_no_address_request_url(self):
         self._do_test_parse_URI('IoP:?r=http://domain.tld/page?h%3D2a8628fc2fbe',

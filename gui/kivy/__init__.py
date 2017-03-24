@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -39,15 +39,15 @@ except ImportError:
 # minimum required version for kivy
 kivy.require('1.8.0')
 from kivy.logger import Logger
-from main_window import ElectrumWindow
+from main_window import FermatumWindow
 
 
 
 
-class ElectrumGui:
+class FermatumGui:
 
     def __init__(self, config, daemon, plugins):
-        Logger.debug('ElectrumGUI: initialising')
+        Logger.debug('FermatumGUI: initialising')
         self.daemon = daemon
         self.network = daemon.network
         self.config = config
@@ -55,7 +55,7 @@ class ElectrumGui:
 
     def main(self):
         self.config.open_last_wallet()
-        w = ElectrumWindow(config=self.config,
+        w = FermatumWindow(config=self.config,
                            network=self.network,
                            plugins = self.plugins,
                            gui_object=self)

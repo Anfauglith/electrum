@@ -17,15 +17,15 @@ from kivy.lang import Builder
 from kivy.factory import Factory
 from kivy.utils import platform
 
-from electrum_iop.util import profiler, parse_URI, format_time, InvalidPassword, NotEnoughFunds
-from electrum_iop import bitcoin
-from electrum_iop.util import timestamp_to_datetime
-from electrum_iop.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
+from fermatum.util import profiler, parse_URI, format_time, InvalidPassword, NotEnoughFunds
+from fermatum import bitcoin
+from fermatum.util import timestamp_to_datetime
+from fermatum.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
 
 from context_menu import ContextMenu
 
 
-from electrum_iop_gui.kivy.i18n import _
+from fermatum_gui.kivy.i18n import _
 
 class EmptyLabel(Factory.Label):
     pass
@@ -176,9 +176,9 @@ class SendScreen(CScreen):
     payment_request = None
 
     def set_URI(self, text):
-        import electrum
+        import fermatum
         try:
-            uri = electrum.util.parse_URI(text, self.app.on_pr)
+            uri = fermatum.util.parse_URI(text, self.app.on_pr)
         except:
             self.app.show_info(_("Not a Bitcoin URI"))
             return
@@ -218,7 +218,7 @@ class SendScreen(CScreen):
             # it sould be already saved
             return
         # save address as invoice
-        from electrum_iop.paymentrequest import make_unsigned_request, PaymentRequest
+        from fermatum.paymentrequest import make_unsigned_request, PaymentRequest
         req = {'address':self.screen.address, 'memo':self.screen.message}
         amount = self.app.get_amount(self.screen.amount) if self.screen.amount else 0
         req['amount'] = amount
@@ -263,7 +263,7 @@ class SendScreen(CScreen):
             outputs = [(bitcoin.TYPE_ADDRESS, address, amount)]
         message = unicode(self.screen.message)
         amount = sum(map(lambda x:x[2], outputs))
-        if self.app.electrum_config.get('use_rbf'):
+        if self.app.fermatum_config.get('use_rbf'):
             from dialogs.question import Question
             d = Question(_('Should this transaction be replaceable?'), lambda b: self._do_send(amount, message, outputs, b))
             d.open()
@@ -273,7 +273,7 @@ class SendScreen(CScreen):
     def _do_send(self, amount, message, outputs, rbf):
         # make unsigned transaction
         coins = self.app.wallet.get_spendable_coins()
-        config = self.app.electrum_config
+        config = self.app.fermatum_config
         try:
             tx = self.app.wallet.make_unsigned_transaction(coins, outputs, config, None)
         except NotEnoughFunds:
@@ -341,7 +341,7 @@ class ReceiveScreen(CScreen):
         return b
 
     def on_address(self, addr):
-        req = self.app.wallet.get_payment_request(addr, self.app.electrum_config)
+        req = self.app.wallet.get_payment_request(addr, self.app.fermatum_config)
         self.screen.status = ''
         if req:
             self.screen.message = unicode(req.get('memo', ''))
@@ -352,7 +352,7 @@ class ReceiveScreen(CScreen):
         Clock.schedule_once(lambda dt: self.update_qr())
 
     def get_URI(self):
-        from electrum_iop.util import create_URI
+        from fermatum.util import create_URI
         amount = self.screen.amount
         if amount:
             a, u = self.screen.amount.split()
@@ -381,7 +381,7 @@ class ReceiveScreen(CScreen):
         message = unicode(self.screen.message)
         amount = self.app.get_amount(amount) if amount else 0
         req = self.app.wallet.make_payment_request(addr, amount, message, None)
-        self.app.wallet.add_payment_request(req, self.app.electrum_config)
+        self.app.wallet.add_payment_request(req, self.app.fermatum_config)
         self.app.update_tab('requests')
 
     def on_amount_or_message(self):
@@ -511,7 +511,7 @@ class RequestsScreen(CScreen):
         self.menu_actions = [('Show', self.do_show), ('Details', self.do_view), ('Delete', self.do_delete)]
         requests_list = self.screen.ids.requests_container
         requests_list.clear_widgets()
-        _list = self.app.wallet.get_sorted_requests(self.app.electrum_config) if self.app.wallet else []
+        _list = self.app.wallet.get_sorted_requests(self.app.fermatum_config) if self.app.wallet else []
         for req in _list:
             ci = self.get_card(req)
             requests_list.add_widget(ci)
@@ -523,7 +523,7 @@ class RequestsScreen(CScreen):
         self.app.show_request(obj.address)
 
     def do_view(self, obj):
-        req = self.app.wallet.get_payment_request(obj.address, self.app.electrum_config)
+        req = self.app.wallet.get_payment_request(obj.address, self.app.fermatum_config)
         status = req.get('status')
         amount = req.get('amount')
         address = req['address']
@@ -540,7 +540,7 @@ class RequestsScreen(CScreen):
         from dialogs.question import Question
         def cb(result):
             if result:
-                self.app.wallet.remove_payment_request(obj.address, self.app.electrum_config)
+                self.app.wallet.remove_payment_request(obj.address, self.app.fermatum_config)
                 self.update()
         d = Question(_('Delete request?'), cb)
         d.open()

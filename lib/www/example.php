@@ -1,12 +1,12 @@
 <?php
 
 require_once 'jsonRPCClient.php';
-$electrum = new jsonRPCClient('http://localhost:7777');
+$fermatum = new jsonRPCClient('http://localhost:7777');
 
 echo '<b>Wallet balance</b><br />'."\n";
 try {
 
-    $balance = $electrum->getbalance();
+    $balance = $fermatum->getbalance();
     echo 'confirmed: <i>'.$balance['confirmed'].'</i><br />'."\n";
     echo 'unconfirmed: <i>'.$balance['unconfirmed'].'</i><br />'."\n";
 

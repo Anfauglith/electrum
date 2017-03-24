@@ -1,4 +1,4 @@
-# Electrum - Lightweight Bitcoin Client
+# Fermatum - Lightweight Bitcoin Client
 # Copyright (c) 2011-2016 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -41,11 +41,11 @@ import bitcoin
 from bitcoin import *
 from interface import Connection, Interface
 from blockchain import Blockchain
-from version import ELECTRUM_VERSION, PROTOCOL_VERSION
+from version import FERMATUM_VERSION, PROTOCOL_VERSION
 
 DEFAULT_PORTS = {'t':'50001', 's':'50002'}
 
-#There is a schedule to move the default list to e-x (electrumx) by Jan 2018
+#There is a schedule to move the default list to e-x (fermatumx) by Jan 2018
 #Schedule is as follows:
 #move ~3/4 to e-x by 1.4.17
 #then gradually switch remaining nodes to e-x nodes
@@ -164,7 +164,7 @@ def serialize_server(host, port, protocol):
     return str(':'.join([host, port, protocol]))
 
 class Network(util.DaemonThread):
-    """The Network class manages a set of connections to remote electrum
+    """The Network class manages a set of connections to remote fermatum
     servers, each connected socket is handled by an Interface() object.
     Connections are initiated by a Connection() thread which stops once
     the connection succeeds or fails.
@@ -682,7 +682,7 @@ class Network(util.DaemonThread):
             if interface.has_timed_out():
                 self.connection_down(interface.server)
             elif interface.ping_required():
-                params = [ELECTRUM_VERSION, PROTOCOL_VERSION]
+                params = [FERMATUM_VERSION, PROTOCOL_VERSION]
                 self.queue_request('server.version', params, interface)
 
         now = time.time()

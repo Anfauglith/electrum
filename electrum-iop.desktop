@@ -1,14 +1,14 @@
-# If you want electrum to appear in a linux app launcher ("start menu"), install this by doing:
-# sudo desktop-file-install electrum.desktop
+# If you want fermatum to appear in a linux app launcher ("start menu"), install this by doing:
+# sudo desktop-file-install fermatum.desktop
 
 [Desktop Entry]
 Comment=Lightweight Bitcoin Client
-Exec=electrum-iop %u
-GenericName[en_US]=Electrum-IOP
-GenericName=Electrum-IOP
-Icon=electrum-iop
-Name[en_US]=Electrum IoP Wallet
-Name=Electrum IoP Wallet
+Exec=fermatum %u
+GenericName[en_US]=Fermatum
+GenericName=Fermatum
+Icon=fermatum
+Name[en_US]=Fermatum IoP Wallet
+Name=Fermatum IoP Wallet
 Categories=Network;
 StartupNotify=false
 Terminal=false

@@ -3,18 +3,18 @@ from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 
-from electrum_iop.util import base_units
-from electrum_iop.i18n import languages
-from electrum_iop_gui.kivy.i18n import _
-from electrum_iop.plugins import run_hook
-from electrum_iop import coinchooser
-from electrum_iop.util import fee_levels
+from fermatum.util import base_units
+from fermatum.i18n import languages
+from fermatum_gui.kivy.i18n import _
+from fermatum.plugins import run_hook
+from fermatum import coinchooser
+from fermatum.util import fee_levels
 
 from choice_dialog import ChoiceDialog
 
 Builder.load_string('''
 #:import partial functools.partial
-#:import _ electrum_gui.kivy.i18n._
+#:import _ fermatum_gui.kivy.i18n._
 
 <SettingsItem@ButtonBehavior+BoxLayout>
     orientation: 'vertical'
@@ -47,7 +47,7 @@ Builder.load_string('''
 
 <SettingsDialog@Popup>
     id: settings
-    title: _('Electrum-IOP Settings')
+    title: _('Fermatum Settings')
     disable_pin: False
     use_encryption: False
     BoxLayout:
@@ -122,7 +122,7 @@ class SettingsDialog(Factory.Popup):
     def __init__(self, app):
         self.app = app
         self.plugins = self.app.plugins
-        self.config = self.app.electrum_config
+        self.config = self.app.fermatum_config
         Factory.Popup.__init__(self)
         layout = self.ids.scrollviewlayout
         layout.bind(minimum_height=layout.setter('height'))
@@ -165,7 +165,7 @@ class SettingsDialog(Factory.Popup):
         self._unit_dialog.open()
 
     def coinselect_status(self):
-        return coinchooser.get_name(self.app.electrum_config)
+        return coinchooser.get_name(self.app.fermatum_config)
 
     def coinselect_dialog(self, item, dt):
         if self._coinselect_dialog is None:

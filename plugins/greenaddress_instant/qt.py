@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2014 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -30,8 +30,8 @@ import requests
 
 from PyQt4.QtGui import QApplication, QPushButton
 
-from electrum_iop.plugins import BasePlugin, hook
-from electrum_iop.i18n import _
+from fermatum.plugins import BasePlugin, hook
+from fermatum.i18n import _
 
 
 
@@ -86,7 +86,7 @@ class Plugin(BasePlugin):
 
             # 2. send the request
             response = requests.request("GET", ("https://greenaddress.it/verify/?signature=%s&txhash=%s" % (urllib.quote(sig), tx.hash())),
-                                        headers = {'User-Agent': 'Electrum'})
+                                        headers = {'User-Agent': 'Fermatum'})
             response = response.json()
 
             # 3. display the result

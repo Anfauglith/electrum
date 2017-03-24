@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- mode: python -*-
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2011 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -89,22 +89,22 @@ def check_imports():
 if not is_android:
     check_imports()
 
-# load local module as electrum
+# load local module as fermatum
 if is_bundle or is_local or is_android:
     import imp
-    imp.load_module('electrum_iop', *imp.find_module('lib'))
-    imp.load_module('electrum_iop_gui', *imp.find_module('gui'))
+    imp.load_module('fermatum', *imp.find_module('lib'))
+    imp.load_module('fermatum_gui', *imp.find_module('gui'))
 
-from electrum_iop import bitcoin, network
-from electrum_iop import SimpleConfig, Network
-from electrum_iop.wallet import Wallet, Imported_Wallet
-from electrum_iop.storage import WalletStorage
-from electrum_iop.util import print_msg, print_stderr, json_encode, json_decode
-from electrum_iop.util import set_verbosity, InvalidPassword, check_www_dir
-from electrum_iop.commands import get_parser, known_commands, Commands, config_variables
-from electrum_iop import daemon
-from electrum_iop import keystore
-from electrum_iop.mnemonic import Mnemonic
+from fermatum import bitcoin, network
+from fermatum import SimpleConfig, Network
+from fermatum.wallet import Wallet, Imported_Wallet
+from fermatum.storage import WalletStorage
+from fermatum.util import print_msg, print_stderr, json_encode, json_decode
+from fermatum.util import set_verbosity, InvalidPassword, check_www_dir
+from fermatum.commands import get_parser, known_commands, Commands, config_variables
+from fermatum import daemon
+from fermatum import keystore
+from fermatum.mnemonic import Mnemonic
 
 # get password routine
 def prompt_password(prompt, confirm=True):
@@ -189,7 +189,7 @@ def init_daemon(config_options):
     storage = WalletStorage(config.get_wallet_path())
     if not storage.file_exists():
         print_msg("Error: Wallet file not found.")
-        print_msg("Type 'electrum-iop create' to create a new wallet, or provide a path to a wallet with the -w option")
+        print_msg("Type 'fermatum create' to create a new wallet, or provide a path to a wallet with the -w option")
         sys.exit(0)
     if storage.is_encrypted():
         if config.get('password'):
@@ -224,7 +224,7 @@ def init_cmdline(config_options, server):
 
     if cmd.requires_wallet and not storage.file_exists():
         print_msg("Error: Wallet file not found.")
-        print_msg("Type 'electrum-iop create' to create a new wallet, or provide a path to a wallet with the -w option")
+        print_msg("Type 'fermatum create' to create a new wallet, or provide a path to a wallet with the -w option")
         sys.exit(0)
 
     # important warning
@@ -292,7 +292,7 @@ def run_offline_command(config, config_options):
     return result
 
 def init_plugins(config, gui_name):
-    from electrum_iop.plugins import Plugins
+    from fermatum.plugins import Plugins
     return Plugins(config, is_bundle or is_local or is_android, gui_name)
 
 if __name__ == '__main__':
@@ -340,7 +340,7 @@ if __name__ == '__main__':
     config_options['cwd'] = os.getcwd()
 
     if config_options.get('portable'):
-        config_options['electrum_path'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'electrum-iop_data')
+        config_options['fermatum_path'] = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'fermatum_data')
 
     # kivy sometimes freezes when we write to sys.stderr
     set_verbosity(config_options.get('verbose') and config_options.get('gui')!='kivy')
@@ -398,7 +398,7 @@ if __name__ == '__main__':
                 d = daemon.Daemon(config, fd)
                 d.start()
                 if config.get('websocket_server'):
-                    from electrum_iop import websockets
+                    from fermatum import websockets
                     websockets.WebSocketServer(config, d.network).start()
                 if config.get('requests_dir'):
                     check_www_dir(config.get('requests_dir'))
@@ -422,7 +422,7 @@ if __name__ == '__main__':
         else:
             cmd = known_commands[cmdname]
             if cmd.requires_network:
-                print_msg("Daemon not running; try 'electrum-iop daemon start'")
+                print_msg("Daemon not running; try 'fermatum daemon start'")
                 sys.exit(1)
             else:
                 init_plugins(config, 'cmdline')

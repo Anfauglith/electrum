@@ -1,3 +1,3 @@
-electrum_iop
-electrum_iop_gui
-electrum_iop_plugins
+fermatum
+fermatum_gui
+fermatum_plugins

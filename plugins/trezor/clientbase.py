@@ -1,10 +1,10 @@
 import time
 from struct import pack
 
-from electrum_iop.i18n import _
-from electrum_iop.util import PrintError, UserCancelled
-from electrum_iop.keystore import bip39_normalize_passphrase
-from electrum_iop.bitcoin import serialize_xpub
+from fermatum.i18n import _
+from fermatum.util import PrintError, UserCancelled
+from fermatum.keystore import bip39_normalize_passphrase
+from fermatum.bitcoin import serialize_xpub
 
 
 class GuiMixin(object):

@@ -1,9 +1,9 @@
-import select, time, electrum_iop as electrum, Queue
-from electrum_iop import Connection, Interface, SimpleConfig
-from electrum_iop.network import filter_protocol, parse_servers
+import select, time, fermatum as fermatum, Queue
+from fermatum import Connection, Interface, SimpleConfig
+from fermatum.network import filter_protocol, parse_servers
 from collections import defaultdict
 
-# electrum.util.set_verbosity(1)
+# fermatum.util.set_verbosity(1)
 def get_interfaces(servers, timeout=10):
     '''Returns a map of servers to connected interfaces.  If any
     connections fail or timeout, they will be missing from the map.

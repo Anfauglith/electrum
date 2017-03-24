@@ -1,12 +1,12 @@
 from PyQt4.QtGui import *
-from electrum_iop.i18n import _
+from fermatum.i18n import _
 
 
 import datetime
 from collections import defaultdict
 
-from electrum_iop.util import format_satoshis
-from electrum_iop.bitcoin import COIN
+from fermatum.util import format_satoshis
+from fermatum.bitcoin import COIN
 
 import matplotlib
 matplotlib.use('Qt4Agg')

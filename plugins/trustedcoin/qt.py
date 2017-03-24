@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - Lightweight Bitcoin Client
+# Fermatum - Lightweight Bitcoin Client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -31,12 +31,12 @@ from decimal import Decimal
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from electrum_iop_gui.qt.util import *
-from electrum_iop_gui.qt.qrcodewidget import QRCodeWidget
-from electrum_iop_gui.qt.amountedit import AmountEdit
-from electrum_iop_gui.qt.main_window import StatusBarButton
-from electrum_iop.i18n import _
-from electrum_iop.plugins import hook
+from fermatum_gui.qt.util import *
+from fermatum_gui.qt.qrcodewidget import QRCodeWidget
+from fermatum_gui.qt.amountedit import AmountEdit
+from fermatum_gui.qt.main_window import StatusBarButton
+from fermatum.i18n import _
+from fermatum.plugins import hook
 from trustedcoin import TrustedCoinPlugin, server
 
 
@@ -129,7 +129,7 @@ class Plugin(TrustedCoinPlugin):
         logo = QLabel()
         logo.setPixmap(QPixmap(":icons/trustedcoin-status.png"))
         msg = _('This wallet is protected by TrustedCoin\'s two-factor authentication.') + '<br/>'\
-              + _("For more information, visit") + " <a href=\"https://api.trustedcoin.com/#/electrum-help\">https://api.trustedcoin.com/#/electrum-help</a>"
+              + _("For more information, visit") + " <a href=\"https://api.trustedcoin.com/#/fermatum-help\">https://api.trustedcoin.com/#/fermatum-help</a>"
         label = QLabel(msg)
         label.setOpenExternalLinks(1)
 

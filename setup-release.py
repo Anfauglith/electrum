@@ -1,5 +1,5 @@
 """
-py2app/py2exe build script for Electrum
+py2app/py2exe build script for Fermatum
 
 Usage (Mac OS X):
      python setup.py py2app
@@ -15,11 +15,11 @@ import shutil
 import sys
 
 from lib.util import print_error
-from lib.version import ELECTRUM_VERSION as version
+from lib.version import FERMATUM_VERSION as version
 
 
-name = "Electrum-IOP"
-mainscript = 'electrum-iop'
+name = "Fermatum"
+mainscript = 'fermatum'
 
 if sys.version_info[:3] < (2, 6, 0):
     print_error("Error: " + name + " requires Python version >= 2.6.0...")
@@ -28,7 +28,7 @@ if sys.version_info[:3] < (2, 6, 0):
 if sys.platform == 'darwin':
     from plistlib import Plist
     plist = Plist.fromFile('Info.plist')
-    plist.update(dict(CFBundleIconFile='electrum.icns'))
+    plist.update(dict(CFBundleIconFile='fermatum.icns'))
 
     shutil.copy(mainscript, mainscript + '.py')
     mainscript += '.py'
@@ -38,7 +38,7 @@ if sys.platform == 'darwin':
         options=dict(py2app=dict(argv_emulation=False,
                                  includes=['PyQt4.QtCore', 'PyQt4.QtGui', 'PyQt4.QtWebKit', 'PyQt4.QtNetwork', 'sip'],
                                  packages=['lib', 'gui', 'plugins', 'packages'],
-                                 iconfile='electrum.icns',
+                                 iconfile='fermatum.icns',
                                  plist=plist,
                                  resources=["icons"])),
     )

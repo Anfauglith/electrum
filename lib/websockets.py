@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -35,7 +35,7 @@ import util
 
 request_queue = Queue.Queue()
 
-class ElectrumWebSocket(WebSocket):
+class FermatumWebSocket(WebSocket):
 
     def handleMessage(self):
         assert self.data[0:3] == 'id:'
@@ -128,7 +128,7 @@ class WebSocketServer(threading.Thread):
         port = self.config.get('websocket_port', 9999)
         certfile = self.config.get('ssl_chain')
         keyfile = self.config.get('ssl_privkey')
-        self.server = SimpleSSLWebSocketServer(host, port, ElectrumWebSocket, certfile, keyfile)
+        self.server = SimpleSSLWebSocketServer(host, port, FermatumWebSocket, certfile, keyfile)
         self.server.serveforever()
 
 

@@ -3,8 +3,8 @@ from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 
-from electrum_iop.util import fee_levels
-from electrum_iop_gui.kivy.i18n import _
+from fermatum.util import fee_levels
+from fermatum_gui.kivy.i18n import _
 
 Builder.load_string('''
 <BumpFeeDialog@Popup>
@@ -71,7 +71,7 @@ class BumpFeeDialog(Factory.Popup):
         self.init_fee = fee
         self.tx_size = size
         self.callback = callback
-        self.config = app.electrum_config
+        self.config = app.fermatum_config
         self.fee_step = self.config.max_fee_rate() / 10
         self.dynfees = self.config.get('dynamic_fees', True) and self.app.network
         self.ids.old_fee.value = self.app.format_amount_and_units(self.init_fee)

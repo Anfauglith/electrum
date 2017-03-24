@@ -1,7 +1,7 @@
-#:import VERSION electrum_iop.version.ELECTRUM_VERSION
+#:import VERSION fermatum.version.FERMATUM_VERSION
 
 Popup:
-    title: _("About Electrum-IOP")
+    title: _("About Fermatum")
     BoxLayout:
         orientation: 'vertical'
         spacing: '10dp'
@@ -26,10 +26,10 @@ Popup:
                 size_hint_x: 0.4
             TopLabel:
                 markup: True
-                text: '[color=6666ff][ref=x]https://electrum.org[/ref][/color]'
+                text: '[color=6666ff][ref=x]https://fermatum.org[/ref][/color]'
                 on_ref_press:
                     import webbrowser
-                    webbrowser.open("https://electrum-iop.org")
+                    webbrowser.open("https://fermatum.org")
                 size_hint_x: 0.6
             TopLabel:
                 text: _('Developers')

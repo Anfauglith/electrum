@@ -3,8 +3,8 @@ from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 
-from electrum_iop_gui.kivy.i18n import _
-from electrum_iop.util import base_units
+from fermatum_gui.kivy.i18n import _
+from fermatum.util import base_units
 
 import os
 from label_dialog import LabelDialog

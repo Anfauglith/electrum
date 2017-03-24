@@ -1,5 +1,5 @@
 from labels import LabelsPlugin
-from electrum_iop.plugins import hook
+from fermatum.plugins import hook
 
 class Plugin(LabelsPlugin):
 
