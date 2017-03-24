@@ -58,7 +58,7 @@ def set_testnet():
     #ADDRTYPE_P2WPKH = 3 # Segwit Addresses
     XPRV_HEADER = 0x2B7FA42A
     XPUB_HEADER = 0xBB8F4852
-    HEADERS_URL = "https://headers.electrum.org/testnet_headers"
+    HEADERS_URL = "https://headers.electrum_iop.org/testnet_headers"
 
 #def set_nolnet():
 #    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH, ADDRTYPE_P2WPKH
@@ -70,7 +70,7 @@ def set_testnet():
 #    ADDRTYPE_P2WPKH = 6
 #    XPRV_HEADER = 0x0488ade4
 #    XPUB_HEADER = 0x0488b21e
-#    HEADERS_URL = "https://headers.electrum.org/nolnet_headers"
+#    HEADERS_URL = "https://headers.electrum_iop.org/nolnet_headers"
 
 
 
