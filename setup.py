@@ -55,7 +55,7 @@ setup(
         #'electrum_iop_plugins.cosigner_pool',
         #'electrum_iop_plugins.email_requests',
         #'electrum_iop_plugins.greenaddress_instant',
-        #'electrum_iop_plugins.hw_wallet',
+        'electrum_iop_plugins.hw_wallet',
         #'electrum_iop_plugins.keepkey',
         'electrum_iop_plugins.labels',
         #'electrum_iop_plugins.ledger',
