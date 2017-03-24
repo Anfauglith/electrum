@@ -5,14 +5,14 @@ import time
 import sys
 import traceback
 
-import electrum
-from electrum import bitcoin
-from electrum.bitcoin import TYPE_ADDRESS, int_to_hex, var_int
-from electrum.i18n import _
-from electrum.plugins import BasePlugin, hook
-from electrum.keystore import Hardware_KeyStore, parse_xpubkey
+import fermatum
+from fermatum import bitcoin
+from fermatum.bitcoin import TYPE_ADDRESS, int_to_hex, var_int
+from fermatum.i18n import _
+from fermatum.plugins import BasePlugin, hook
+from fermatum.keystore import Hardware_KeyStore, parse_xpubkey
 from ..hw_wallet import HW_PluginBase
-from electrum.util import format_satoshis_plain, print_error, is_verbose
+from fermatum.util import format_satoshis_plain, print_error, is_verbose
 
 try:
     import hid
@@ -183,7 +183,7 @@ class Ledger_KeyStore(Hardware_KeyStore):
     def get_client(self):
         return self.plugin.get_client(self).dongleObject
     
-    def get_client_electrum(self):
+    def get_client_fermatum(self):
         return self.plugin.get_client(self)
     
     def give_error(self, message, clear_client = False):
@@ -312,7 +312,7 @@ class Ledger_KeyStore(Hardware_KeyStore):
 
         # Recognize outputs - only one output and one change is authorized
         if not p2shTransaction:
-            if not self.get_client_electrum().supports_multi_output():
+            if not self.get_client_fermatum().supports_multi_output():
                 if len(tx.outputs()) > 2:
                     self.give_error("Transaction with more than 2 outputs not supported")
             for _type, address, amount in tx.outputs():

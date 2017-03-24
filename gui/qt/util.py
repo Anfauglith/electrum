@@ -8,7 +8,7 @@ import Queue
 from collections import namedtuple
 from functools import partial
 
-from electrum.i18n import _
+from fermatum.i18n import _
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
@@ -27,7 +27,7 @@ BLACK_FG = "QWidget {color:black;}"
 
 dialogs = []
 
-from electrum.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
+from fermatum.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
 
 pr_icons = {
     PR_UNPAID:":icons/unpaid.png",
@@ -363,7 +363,7 @@ def filename_field(parent, config, defaultname, select_msg):
 
     return vbox, filename_e, b1
 
-class ElectrumItemDelegate(QStyledItemDelegate):
+class FermatumItemDelegate(QStyledItemDelegate):
     def createEditor(self, parent, option, index):
         return self.parent().createEditor(parent, option, index)
 
@@ -388,7 +388,7 @@ class MyTreeWidget(QTreeWidget):
         if editable_columns is None:
             editable_columns = [stretch_column]
         self.editable_columns = editable_columns
-        self.setItemDelegate(ElectrumItemDelegate(self))
+        self.setItemDelegate(FermatumItemDelegate(self))
         self.itemDoubleClicked.connect(self.on_doubleclick)
         self.update_headers(headers)
         self.current_filter = ""

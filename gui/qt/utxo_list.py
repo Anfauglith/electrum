@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -24,8 +24,8 @@
 # SOFTWARE.
 
 from util import *
-from electrum.i18n import _
-from electrum.bitcoin import is_address
+from fermatum.i18n import _
+from fermatum.bitcoin import is_address
 
 
 class UTXOList(MyTreeWidget):

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - Lightweight Bitcoin Client
+# Fermatum - Lightweight Bitcoin Client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -32,16 +32,16 @@ from hashlib import sha256
 from urlparse import urljoin
 from urllib import quote
 
-import electrum
-from electrum import bitcoin
-from electrum import keystore
-from electrum.bitcoin import *
-from electrum.mnemonic import Mnemonic
-from electrum import version
-from electrum.wallet import Multisig_Wallet, Deterministic_Wallet, Wallet
-from electrum.i18n import _
-from electrum.plugins import BasePlugin, run_hook, hook
-from electrum.util import NotEnoughFunds
+import fermatum as fermatum
+from fermatum import bitcoin
+from fermatum import keystore
+from fermatum.bitcoin import *
+from fermatum.mnemonic import Mnemonic
+from fermatum import version
+from fermatum.wallet import Multisig_Wallet, Deterministic_Wallet, Wallet
+from fermatum.i18n import _
+from fermatum.plugins import BasePlugin, run_hook, hook
+from fermatum.util import NotEnoughFunds
 
 # signing_xpub is hardcoded so that the wallet can be restored from seed, without TrustedCoin's server
 signing_xpub = "xpub661MyMwAqRbcGnMkaTx2594P9EDuiEqMq25PM2aeG6UmwzaohgA6uDmNsvSUV8ubqwA3Wpste1hg69XHgjUuCD5HLcEp2QPzyV1HMrPppsL"
@@ -107,7 +107,7 @@ class TrustedCoinCosignerClient(object):
         else:
             return response.text
 
-    def get_terms_of_service(self, billing_plan='electrum-per-tx-otp'):
+    def get_terms_of_service(self, billing_plan='fermatum-per-tx-otp'):
         """
         Returns the TOS for the given billing plan as a plain/text unicode string.
         :param billing_plan: the plan to return the terms for
@@ -115,7 +115,7 @@ class TrustedCoinCosignerClient(object):
         payload = {'billing_plan': billing_plan}
         return self.send_request('get', 'tos', payload)
 
-    def create(self, xpubkey1, xpubkey2, email, billing_plan='electrum-per-tx-otp'):
+    def create(self, xpubkey1, xpubkey2, email, billing_plan='fermatum-per-tx-otp'):
         """
         Creates a new cosigner resource.
         :param xpubkey1: a bip32 extended public key (customarily the hot key)
@@ -188,7 +188,7 @@ class TrustedCoinCosignerClient(object):
         return self.send_request('post', relative_url, payload, headers)
 
 
-server = TrustedCoinCosignerClient(user_agent="Electrum/" + version.ELECTRUM_VERSION)
+server = TrustedCoinCosignerClient(user_agent="Fermatum/" + version.FERMATUM_VERSION)
 
 class Wallet_2fa(Multisig_Wallet):
 
@@ -205,7 +205,7 @@ class Wallet_2fa(Multisig_Wallet):
         return get_user_id(self.storage)
 
     def get_max_amount(self, config, inputs, recipient, fee):
-        from electrum.transaction import Transaction
+        from fermatum.transaction import Transaction
         sendable = sum(map(lambda x:x['value'], inputs))
         for i in inputs:
             self.add_input_info(i)
@@ -391,7 +391,7 @@ class TrustedCoinPlugin(BasePlugin):
               "your wallet.  If you generated your seed on an offline "
               'computer, click on "%s" to close this window, move your '
               "wallet file to an online computer, and reopen it with "
-              "Electrum.") % _('Cancel'),
+              "Fermatum.") % _('Cancel'),
             _('If you are online, click on "%s" to continue.') % _('Next')
         ]
         msg = '\n\n'.join(msg)

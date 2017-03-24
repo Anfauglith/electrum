@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2011 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -38,37 +38,39 @@ import pyaes
 
 # Bitcoin network constants
 TESTNET = False
-NOLNET = False
-ADDRTYPE_P2PKH = 0
-ADDRTYPE_P2SH = 5
-ADDRTYPE_P2WPKH = 6
-XPRV_HEADER = 0x0488ade4
-XPUB_HEADER = 0x0488b21e
-HEADERS_URL = "https://headers.electrum.org/blockchain_headers"
+# NOLNET = False
+ADDRTYPE_P2PKH = 0x75
+ADDRTYPE_P2SH = 0xAE
+WIF_BYTE = 0x31
+#ADDRTYPE_P2WPKH = 6 # Segwit Addresses
+XPRV_HEADER = 0xAE3416F6
+XPUB_HEADER = 0x2780915F
+HEADERS_URL = "https://headers.fermatum.org/blockchain_headers" # TODO Change this
 
 def set_testnet():
-    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH, ADDRTYPE_P2WPKH
+    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH#, ADDRTYPE_P2WPKH
     global XPRV_HEADER, XPUB_HEADER
     global TESTNET, HEADERS_URL
     TESTNET = True
-    ADDRTYPE_P2PKH = 111
-    ADDRTYPE_P2SH = 196
-    ADDRTYPE_P2WPKH = 3
-    XPRV_HEADER = 0x04358394
-    XPUB_HEADER = 0x043587cf
-    HEADERS_URL = "https://headers.electrum.org/testnet_headers"
+    ADDRTYPE_P2PKH = 0x82
+    ADDRTYPE_P2SH = 0x31
+    WIF_BYTE = 0x4C
+    #ADDRTYPE_P2WPKH = 3 # Segwit Addresses
+    XPRV_HEADER = 0x2B7FA42A
+    XPUB_HEADER = 0xBB8F4852
+    HEADERS_URL = "https://headers.fermatum.org/testnet_headers"
 
-def set_nolnet():
-    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH, ADDRTYPE_P2WPKH
-    global XPRV_HEADER, XPUB_HEADER
-    global NOLNET, HEADERS_URL
-    NOLNET = True
-    ADDRTYPE_P2PKH = 0
-    ADDRTYPE_P2SH = 5
-    ADDRTYPE_P2WPKH = 6
-    XPRV_HEADER = 0x0488ade4
-    XPUB_HEADER = 0x0488b21e
-    HEADERS_URL = "https://headers.electrum.org/nolnet_headers"
+#def set_nolnet():
+#    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH, ADDRTYPE_P2WPKH
+#    global XPRV_HEADER, XPUB_HEADER
+#    global NOLNET, HEADERS_URL
+#    NOLNET = True
+#    ADDRTYPE_P2PKH = 0
+#    ADDRTYPE_P2SH = 5
+#    ADDRTYPE_P2WPKH = 6
+#    XPRV_HEADER = 0x0488ade4
+#    XPUB_HEADER = 0x0488b21e
+#    HEADERS_URL = "https://headers.fermatum.org/nolnet_headers"
 
 
 
@@ -209,15 +211,15 @@ def is_old_seed(seed):
     words = seed.strip().split()
     try:
         old_mnemonic.mn_decode(words)
-        uses_electrum_words = True
+        uses_fermatum_words = True
     except Exception:
-        uses_electrum_words = False
+        uses_fermatum_words = False
     try:
         seed.decode('hex')
         is_hex = (len(seed) == 32 or len(seed) == 64)
     except Exception:
         is_hex = False
-    return is_hex or (uses_electrum_words and (len(words) == 12 or len(words) == 24))
+    return is_hex or (uses_fermatum_words and (len(words) == 12 or len(words) == 24))
 
 
 def seed_type(x):
@@ -269,8 +271,8 @@ def hash_160(public_key):
 
 def hash_160_to_bc_address(h160, addrtype, witness_program_version=1):
     s = chr(addrtype)
-    if addrtype == ADDRTYPE_P2WPKH:
-        s += chr(witness_program_version) + chr(0)
+    #if addrtype == ADDRTYPE_P2WPKH:
+    #    s += chr(witness_program_version) + chr(0)
     s += h160
     return base_encode(s+Hash(s)[0:4], base=58)
 
@@ -371,15 +373,15 @@ def PrivKeyToSecret(privkey):
 
 
 def SecretToASecret(secret, compressed=False):
-    addrtype = ADDRTYPE_P2PKH
-    vchIn = chr((addrtype+128)&255) + secret
+    #addrtype = ADDRTYPE_P2PKH
+    vchIn = chr(WIF_BYTE&255) + secret
     if compressed: vchIn += '\01'
     return EncodeBase58Check(vchIn)
 
 def ASecretToSecret(key):
-    addrtype = ADDRTYPE_P2PKH
+    #addrtype = ADDRTYPE_P2PKH
     vch = DecodeBase58Check(key)
-    if vch and vch[0] == chr((addrtype+128)&255):
+    if vch and vch[0] == chr(WIF_BYTE&255):
         return vch[1:]
     elif is_minikey(key):
         return minikey_to_private_key(key)

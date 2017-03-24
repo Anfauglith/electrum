@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - Lightweight Bitcoin Client
+# Fermatum - Lightweight Bitcoin Client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -42,11 +42,11 @@ from PyQt4.QtCore import *
 import PyQt4.QtCore as QtCore
 import PyQt4.QtGui as QtGui
 
-from electrum.plugins import BasePlugin, hook
-from electrum.paymentrequest import PaymentRequest
-from electrum.i18n import _
-from electrum_gui.qt.util import EnterButton, Buttons, CloseButton
-from electrum_gui.qt.util import OkButton, WindowModalDialog
+from fermatum.plugins import BasePlugin, hook
+from fermatum.paymentrequest import PaymentRequest
+from fermatum.i18n import _
+from fermatum_gui.qt.util import EnterButton, Buttons, CloseButton
+from fermatum_gui.qt.util import OkButton, WindowModalDialog
 
 
 
@@ -142,7 +142,7 @@ class Plugin(BasePlugin):
         menu.addAction(_("Send via e-mail"), lambda: self.send(window, addr))
 
     def send(self, window, addr):
-        from electrum import paymentrequest
+        from fermatum import paymentrequest
         r = window.wallet.receive_requests.get(addr)
         message = r.get('memo', '')
         if r.get('signature'):

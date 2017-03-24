@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -85,7 +85,7 @@ class Abstract_Wallet(PrintError):
     max_change_outputs = 3
 
     def __init__(self, storage):
-        self.electrum_version = ELECTRUM_VERSION
+        self.fermatum_version = FERMATUM_VERSION
         self.storage = storage
         self.network = None
         # verifier (SPV) and synchronizer are started in start_threads
@@ -1756,7 +1756,7 @@ class Wallet(object):
         WalletClass = Wallet.wallet_class(wallet_type)
         wallet = WalletClass(storage)
         # Convert hardware wallets restored with older versions of
-        # Electrum to BIP44 wallets.  A hardware wallet does not have
+        # Fermatum to BIP44 wallets.  A hardware wallet does not have
         # a seed and plugins do not need to handle having one.
         rwc = getattr(wallet, 'restore_wallet_class', None)
         if rwc and storage.get('seed', ''):

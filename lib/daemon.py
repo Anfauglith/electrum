@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -31,7 +31,7 @@ import time
 import jsonrpclib
 from jsonrpclib.SimpleJSONRPCServer import SimpleJSONRPCServer, SimpleJSONRPCRequestHandler
 
-from version import ELECTRUM_VERSION
+from version import FERMATUM_VERSION
 from network import Network
 from util import json_decode, DaemonThread
 from util import print_msg, print_error, print_stderr, UserCancelled
@@ -173,7 +173,7 @@ class Daemon(DaemonThread):
                     'spv_nodes': len(self.network.get_interfaces()),
                     'connected': self.network.is_connected(),
                     'auto_connect': p[4],
-                    'version': ELECTRUM_VERSION,
+                    'version': FERMATUM_VERSION,
                     'wallets': {k: w.is_up_to_date()
                                 for k, w in self.wallets.items()},
                     'fee_per_kb': self.config.fee_per_kb(),
@@ -195,7 +195,7 @@ class Daemon(DaemonThread):
             else:
                 response = "error: current GUI does not support multiple windows"
         else:
-            response = "Error: Electrum is running in daemon mode. Please stop the daemon first."
+            response = "Error: Fermatum is running in daemon mode. Please stop the daemon first."
         return response
 
     def load_wallet(self, path, password):
@@ -244,7 +244,7 @@ class Daemon(DaemonThread):
             path = config.get_wallet_path()
             wallet = self.wallets.get(path)
             if wallet is None:
-                return {'error': 'Wallet not open. Use "electrum daemon load_wallet"'}
+                return {'error': 'Wallet not open. Use "fermatum daemon load_wallet"'}
         else:
             wallet = None
         # arguments passed to function
@@ -278,6 +278,6 @@ class Daemon(DaemonThread):
         gui_name = config.get('gui', 'qt')
         if gui_name in ['lite', 'classic']:
             gui_name = 'qt'
-        gui = __import__('electrum_gui.' + gui_name, fromlist=['electrum_gui'])
-        self.gui = gui.ElectrumGui(config, self, plugins)
+        gui = __import__('fermatum_gui.' + gui_name, fromlist=['fermatum_gui'])
+        self.gui = gui.FermatumGui(config, self, plugins)
         self.gui.main()

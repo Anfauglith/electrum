@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2013 ecdsa@github
 #
 # Permission is hereby granted, free of charge, to any person
@@ -25,12 +25,12 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-from electrum.i18n import _
+from fermatum.i18n import _
 from util import *
 import re
 import math
 
-from electrum.plugins import run_hook
+from fermatum.plugins import run_hook
 
 def check_password_strength(password):
 

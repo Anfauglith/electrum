@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2011 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -283,7 +283,7 @@ class Commands:
     @command('')
     def dumpprivkeys(self):
         """Deprecated."""
-        return "This command is deprecated. Use a pipe instead: 'electrum listaddresses | electrum getprivatekeys - '"
+        return "This command is deprecated. Use a pipe instead: 'fermatum listaddresses | fermatum getprivatekeys - '"
 
     @command('')
     def validateaddress(self, address):
@@ -327,7 +327,7 @@ class Commands:
 
     @command('n')
     def getmerkle(self, txid, height):
-        """Get Merkle branch of a transaction included in a block. Electrum
+        """Get Merkle branch of a transaction included in a block. Fermatum
         uses this to verify transactions (Simple Payment Verification)."""
         return self.network.synchronous_get(('blockchain.transaction.get_merkle', [txid, int(height)]))
 
@@ -338,9 +338,9 @@ class Commands:
 
     @command('')
     def version(self):
-        """Return the version of electrum."""
-        from version import ELECTRUM_VERSION
-        return ELECTRUM_VERSION
+        """Return the version of fermatum."""
+        from version import FERMATUM_VERSION
+        return FERMATUM_VERSION
 
     @command('w')
     def getmpk(self):
@@ -536,7 +536,7 @@ class Commands:
             PR_PAID: 'Paid',
             PR_EXPIRED: 'Expired',
         }
-        out['amount (BTC)'] = format_satoshis(out.get('amount'))
+        out['amount (IOP)'] = format_satoshis(out.get('amount'))
         out['status'] = pr_str[out.get('status', PR_UNKNOWN)]
         return out
 
@@ -657,8 +657,8 @@ param_descriptions = {
     'pubkey': 'Public key',
     'message': 'Clear text message. Use quotes if it contains spaces.',
     'encrypted': 'Encrypted message',
-    'amount': 'Amount to be sent (in BTC). Type \'!\' to send the maximum available.',
-    'requested_amount': 'Requested amount (in BTC).',
+    'amount': 'Amount to be sent (in IOP). Type \'!\' to send the maximum available.',
+    'requested_amount': 'Requested amount (in IOP).',
     'outputs': 'list of ["address", amount]',
 }
 
@@ -673,7 +673,7 @@ command_options = {
     'show_labels': ("-l", "--labels",      "Show the labels of listed addresses"),
     'nocheck':     (None, "--nocheck",     "Do not verify aliases"),
     'imax':        (None, "--imax",        "Maximum number of inputs"),
-    'tx_fee':      ("-f", "--fee",         "Transaction fee (in BTC)"),
+    'tx_fee':      ("-f", "--fee",         "Transaction fee (in IOP)"),
     'from_addr':   ("-F", "--from",        "Source address. If it isn't in the wallet, it will ask for the private key unless supplied in the format public_key:private_key. It's not saved in the wallet."),
     'change_addr': ("-c", "--change",      "Change address. Default is a spare address, or the source address if it's not in the wallet"),
     'nbits':       (None, "--nbits",       "Number of bits of entropy"),
@@ -717,10 +717,10 @@ config_variables = {
         'requests_dir': 'directory where a bip70 file will be written.',
         'ssl_privkey': 'Path to your SSL private key, needed to sign the request.',
         'ssl_chain': 'Chain of SSL certificates, needed for signed requests. Put your certificate at the top and the root CA at the end',
-        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of bitcoin: URIs. Example: \"(\'file:///var/www/\',\'https://electrum.org/\')\"',
+        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of bitcoin: URIs. Example: \"(\'file:///var/www/\',\'https://fermatum.org/\')\"',
     },
     'listrequests':{
-        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of bitcoin: URIs. Example: \"(\'file:///var/www/\',\'https://electrum.org/\')\"',
+        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of bitcoin: URIs. Example: \"(\'file:///var/www/\',\'https://fermatum.org/\')\"',
     }
 }
 
@@ -784,21 +784,21 @@ def add_network_options(parser):
 def add_global_options(parser):
     group = parser.add_argument_group('global options')
     group.add_argument("-v", "--verbose", action="store_true", dest="verbose", default=False, help="Show debugging information")
-    group.add_argument("-D", "--dir", dest="electrum_path", help="electrum directory")
-    group.add_argument("-P", "--portable", action="store_true", dest="portable", default=False, help="Use local 'electrum_data' directory")
+    group.add_argument("-D", "--dir", dest="fermatum_path", help="fermatum directory")
+    group.add_argument("-P", "--portable", action="store_true", dest="portable", default=False, help="Use local 'fermatum_data' directory")
     group.add_argument("-w", "--wallet", dest="wallet_path", help="wallet path")
     group.add_argument("--testnet", action="store_true", dest="testnet", default=False, help="Use Testnet")
     group.add_argument("--segwit", action="store_true", dest="segwit", default=False, help="The Wizard will create Segwit seed phrases (Testnet only).")
-    group.add_argument("--nolnet", action="store_true", dest="nolnet", default=False, help="Use Nolnet")
+#    group.add_argument("--nolnet", action="store_true", dest="nolnet", default=False, help="Use Nolnet")
 
 def get_parser():
     # create main parser
     parser = argparse.ArgumentParser(
-        epilog="Run 'electrum help <command>' to see the help for a command")
+        epilog="Run 'fermatum help <command>' to see the help for a command")
     add_global_options(parser)
     subparsers = parser.add_subparsers(dest='cmd', metavar='<command>')
     # gui
-    parser_gui = subparsers.add_parser('gui', description="Run Electrum's Graphical User Interface.", help="Run GUI (default)")
+    parser_gui = subparsers.add_parser('gui', description="Run Fermatum's Graphical User Interface.", help="Run GUI (default)")
     parser_gui.add_argument("url", nargs='?', default=None, help="bitcoin URI (or bip70 file)")
     parser_gui.add_argument("-g", "--gui", dest="gui", help="select graphical user interface", choices=['qt', 'kivy', 'text', 'stdio'])
     parser_gui.add_argument("-o", "--offline", action="store_true", dest="offline", default=False, help="Run offline")

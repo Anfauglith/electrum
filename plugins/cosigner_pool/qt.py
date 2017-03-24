@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2014 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -31,20 +31,20 @@ import xmlrpclib
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from electrum import bitcoin, util
-from electrum import transaction
-from electrum.plugins import BasePlugin, hook
-from electrum.i18n import _
-from electrum.wallet import Multisig_Wallet
+from fermatum import bitcoin, util
+from fermatum import transaction
+from fermatum.plugins import BasePlugin, hook
+from fermatum.i18n import _
+from fermatum.wallet import Multisig_Wallet
 
-from electrum_gui.qt.transaction_dialog import show_transaction
+from fermatum_gui.qt.transaction_dialog import show_transaction
 
 import sys
 import traceback
 
 
 PORT = 12344
-HOST = 'cosigner.electrum.org'
+HOST = 'cosigner.fermatum.org'
 server = xmlrpclib.ServerProxy('http://%s:%d'%(HOST,PORT), allow_none=True)
 
 
@@ -158,7 +158,7 @@ class Plugin(BasePlugin):
             d.cosigner_send_button.hide()
 
     def cosigner_can_sign(self, tx, cosigner_xpub):
-        from electrum.keystore import is_xpubkey, parse_xpubkey
+        from fermatum.keystore import is_xpubkey, parse_xpubkey
         xpub_set = set([])
         for txin in tx.inputs():
             for x_pubkey in txin['x_pubkeys']:

@@ -1,0 +1,16 @@
+# If you want fermatum to appear in a linux app launcher ("start menu"), install this by doing:
+# sudo desktop-file-install fermatum.desktop
+
+[Desktop Entry]
+Comment=Lightweight Bitcoin Client
+Exec=fermatum %u
+GenericName[en_US]=Fermatum
+GenericName=Fermatum
+Icon=fermatum
+Name[en_US]=Fermatum IoP Wallet
+Name=Fermatum IoP Wallet
+Categories=Network;
+StartupNotify=false
+Terminal=false
+Type=Application
+MimeType=x-scheme-handler/IoP;

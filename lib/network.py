@@ -1,4 +1,4 @@
-# Electrum - Lightweight Bitcoin Client
+# Fermatum - Lightweight Bitcoin Client
 # Copyright (c) 2011-2016 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -41,54 +41,32 @@ import bitcoin
 from bitcoin import *
 from interface import Connection, Interface
 from blockchain import Blockchain
-from version import ELECTRUM_VERSION, PROTOCOL_VERSION
+from version import FERMATUM_VERSION, PROTOCOL_VERSION
 
 DEFAULT_PORTS = {'t':'50001', 's':'50002'}
 
-#There is a schedule to move the default list to e-x (electrumx) by Jan 2018
+#There is a schedule to move the default list to e-x (fermatumx) by Jan 2018
 #Schedule is as follows:
 #move ~3/4 to e-x by 1.4.17
 #then gradually switch remaining nodes to e-x nodes
 
 DEFAULT_SERVERS = {
-    'erbium1.sytes.net':DEFAULT_PORTS,                  # core, e-x
-    'ecdsa.net':{'t':'50001', 's':'110'},               # core, e-x
-    'gh05.geekhosters.com':DEFAULT_PORTS,               # core, e-s
-    'VPS.hsmiths.com':DEFAULT_PORTS,                    # core, e-x
-    'electrum.anduck.net':DEFAULT_PORTS,                # core, e-s; banner with version pending
-    'electrum.no-ip.org':DEFAULT_PORTS,                 # core, e-s
-    'electrum.be':DEFAULT_PORTS,                        # core, e-x
-    'helicarrier.bauerj.eu':DEFAULT_PORTS,              # core, e-x
-    'elex01.blackpole.online':DEFAULT_PORTS,            # core, e-x
-    'electrumx.not.fyi':DEFAULT_PORTS,                  # core, e-x
-    'node.xbt.eu':DEFAULT_PORTS,                        # core, e-x
-    'kirsche.emzy.de':DEFAULT_PORTS,                    # core, e-x
-    'electrum.villocq.com':DEFAULT_PORTS,               # core?, e-s; banner with version recommended
-    'us11.einfachmalnettsein.de':DEFAULT_PORTS,         # core, e-x
-    'electrum.trouth.net':DEFAULT_PORTS,                # BU, e-s
-    'Electrum.hsmiths.com':{'t':'8080', 's':'995'},     # core, e-x
-    'electrum3.hachre.de':DEFAULT_PORTS,                # core, e-x
-    'b.1209k.com':DEFAULT_PORTS,                        # XT, jelectrum
-    'elec.luggs.co':{ 's':'443'},                       # core, e-x
-    'btc.smsys.me':{'t':'110', 's':'995'},              # BU, e-x
+    '127.0.0.1': DEFAULT_PORTS,
+    '163.172.128.134': DEFAULT_PORTS,
 }
 
 def set_testnet():
     global DEFAULT_PORTS, DEFAULT_SERVERS
     DEFAULT_PORTS = {'t':'51001', 's':'51002'}
     DEFAULT_SERVERS = {
-        '14.3.140.101': DEFAULT_PORTS,
-        'testnet.hsmiths.com': {'t':'53011', 's':'53012'},
-        'electrum.akinbo.org': DEFAULT_PORTS,
-        'ELEX05.blackpole.online': {'t':'52011', 's':'52002'},
     }
 
-def set_nolnet():
-    global DEFAULT_PORTS, DEFAULT_SERVERS
-    DEFAULT_PORTS = {'t':'52001', 's':'52002'}
-    DEFAULT_SERVERS = {
-        '14.3.140.101': DEFAULT_PORTS,
-    }
+#def set_nolnet():
+#    global DEFAULT_PORTS, DEFAULT_SERVERS
+#    DEFAULT_PORTS = {'t':'52001', 's':'52002'}
+#    DEFAULT_SERVERS = {
+#        '14.3.140.101': DEFAULT_PORTS,
+#    }
 
 NODES_RETRY_INTERVAL = 60
 SERVER_RETRY_INTERVAL = 10
@@ -186,7 +164,7 @@ def serialize_server(host, port, protocol):
     return str(':'.join([host, port, protocol]))
 
 class Network(util.DaemonThread):
-    """The Network class manages a set of connections to remote electrum
+    """The Network class manages a set of connections to remote fermatum
     servers, each connected socket is handled by an Interface() object.
     Connections are initiated by a Connection() thread which stops once
     the connection succeeds or fails.
@@ -704,7 +682,7 @@ class Network(util.DaemonThread):
             if interface.has_timed_out():
                 self.connection_down(interface.server)
             elif interface.ping_required():
-                params = [ELECTRUM_VERSION, PROTOCOL_VERSION]
+                params = [FERMATUM_VERSION, PROTOCOL_VERSION]
                 self.queue_request('server.version', params, interface)
 
         now = time.time()

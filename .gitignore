@@ -4,9 +4,9 @@
 build/
 dist/
 *.egg/
-/electrum.py
+/fermatum.py
 contrib/pyinstaller/
-Electrum.egg-info/
+Fermatum.egg-info/
 gui/qt/icons_rc.py
 locale/
 .devlocaltmp/

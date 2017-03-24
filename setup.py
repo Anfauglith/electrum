@@ -12,7 +12,7 @@ import argparse
 version = imp.load_source('version', 'lib/version.py')
 
 if sys.version_info[:3] < (2, 7, 0):
-    sys.exit("Error: Electrum requires Python version >= 2.7.0...")
+    sys.exit("Error: Fermatum requires Python version >= 2.7.0...")
 
 data_files = []
 
@@ -28,13 +28,13 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
         else:
             usr_share = os.path.expanduser('~/.local/share')
     data_files += [
-        (os.path.join(usr_share, 'applications/'), ['electrum.desktop']),
-        (os.path.join(usr_share, 'pixmaps/'), ['icons/electrum.png'])
+        (os.path.join(usr_share, 'applications/'), ['fermatum.desktop']),
+        (os.path.join(usr_share, 'pixmaps/'), ['icons/fermatum.png'])
     ]
 
 setup(
-    name="Electrum",
-    version=version.ELECTRUM_VERSION,
+    name="Fermatum",
+    version=version.FERMATUM_VERSION,
     install_requires=[
         'pyaes',
         'ecdsa>=0.9',
@@ -47,42 +47,42 @@ setup(
         'PySocks>=1.6.6',
     ],
     packages=[
-        'electrum',
-        'electrum_gui',
-        'electrum_gui.qt',
-        'electrum_plugins',
-        'electrum_plugins.audio_modem',
-        'electrum_plugins.cosigner_pool',
-        'electrum_plugins.email_requests',
-        'electrum_plugins.greenaddress_instant',
-        'electrum_plugins.hw_wallet',
-        'electrum_plugins.keepkey',
-        'electrum_plugins.labels',
-        'electrum_plugins.ledger',
-        'electrum_plugins.trezor',
-        'electrum_plugins.digitalbitbox',
-        'electrum_plugins.trustedcoin',
-        'electrum_plugins.virtualkeyboard',
+        'fermatum',
+        'fermatum_gui',
+        'fermatum_gui.qt',
+        'fermatum_plugins',
+        'fermatum_plugins.audio_modem',
+        'fermatum_plugins.cosigner_pool',
+        'fermatum_plugins.email_requests',
+        'fermatum_plugins.greenaddress_instant',
+        'fermatum_plugins.hw_wallet',
+        'fermatum_plugins.keepkey',
+        'fermatum_plugins.labels',
+        'fermatum_plugins.ledger',
+        'fermatum_plugins.trezor',
+        'fermatum_plugins.digitalbitbox',
+        'fermatum_plugins.trustedcoin',
+        'fermatum_plugins.virtualkeyboard',
     ],
     package_dir={
-        'electrum': 'lib',
-        'electrum_gui': 'gui',
-        'electrum_plugins': 'plugins',
+        'fermatum': 'lib',
+        'fermatum_gui': 'gui',
+        'fermatum_plugins': 'plugins',
     },
     package_data={
-        'electrum': [
+        'fermatum': [
             'currencies.json',
             'www/index.html',
             'wordlist/*.txt',
-            'locale/*/LC_MESSAGES/electrum.mo',
+            'locale/*/LC_MESSAGES/fermatum.mo',
         ]
     },
-    scripts=['electrum'],
+    scripts=['fermatum'],
     data_files=data_files,
-    description="Lightweight Bitcoin Wallet",
+    description="Lightweight IoP Wallet",
     author="Thomas Voegtlin",
-    author_email="thomasv@electrum.org",
+    author_email="thomasv@fermatum.org",
     license="MIT Licence",
-    url="https://electrum.org",
-    long_description="""Lightweight Bitcoin Wallet"""
+    url="https://fermatum.org",
+    long_description="""Lightweight IoP Wallet"""
 )

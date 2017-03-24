@@ -1,4 +1,4 @@
-# Electrum - Lightweight Bitcoin Client
+# Fermatum - Lightweight Bitcoin Client
 # Copyright (c) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -95,7 +95,7 @@ class Contacts(dict):
         # support email-style addresses, per the OA standard
         url = url.replace('@', '.')
         records, validated = dnssec.query(url, dns.rdatatype.TXT)
-        prefix = 'btc'
+        prefix = 'iop'
         for record in records:
             string = record.strings[0]
             if string.startswith('oa1:' + prefix):
@@ -113,4 +113,3 @@ class Contacts(dict):
             return regex.search(haystack).groups()[0]
         except AttributeError:
             return None
-

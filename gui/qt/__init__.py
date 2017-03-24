@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -36,13 +36,13 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import PyQt4.QtCore as QtCore
 
-from electrum.i18n import _, set_language
-from electrum.plugins import run_hook
-from electrum import SimpleConfig, Wallet, WalletStorage
-from electrum.synchronizer import Synchronizer
-from electrum.verifier import SPV
-from electrum.util import DebugMem, UserCancelled, InvalidPassword
-from electrum.wallet import Abstract_Wallet
+from fermatum.i18n import _, set_language
+from fermatum.plugins import run_hook
+from fermatum import SimpleConfig, Wallet, WalletStorage
+from fermatum.synchronizer import Synchronizer
+from fermatum.verifier import SPV
+from fermatum.util import DebugMem, UserCancelled, InvalidPassword
+from fermatum.wallet import Abstract_Wallet
 from installwizard import InstallWizard, GoBack
 
 
@@ -50,11 +50,11 @@ try:
     import icons_rc
 except Exception:
     print "Error: Could not find icons file."
-    print "Please run 'pyrcc4 icons.qrc -o gui/qt/icons_rc.py', and reinstall Electrum"
+    print "Please run 'pyrcc4 icons.qrc -o gui/qt/icons_rc.py', and reinstall Fermatum"
     sys.exit(1)
 
 from util import *   # * needed for plugins
-from main_window import ElectrumWindow
+from main_window import FermatumWindow
 
 
 class OpenFileEventFilter(QObject):
@@ -71,14 +71,14 @@ class OpenFileEventFilter(QObject):
 
 
 
-class ElectrumGui:
+class FermatumGui:
 
     def __init__(self, config, daemon, plugins):
         set_language(config.get('language'))
         # Uncomment this call to verify objects are being properly
         # GC-ed when windows are closed
         #network.add_jobs([DebugMem([Abstract_Wallet, SPV, Synchronizer,
-        #                            ElectrumWindow], interval=5)])
+        #                            FermatumWindow], interval=5)])
         self.config = config
         self.daemon = daemon
         self.plugins = plugins
@@ -90,7 +90,7 @@ class ElectrumGui:
         # init tray
         self.dark_icon = self.config.get("dark_icon", False)
         self.tray = QSystemTrayIcon(self.tray_icon(), None)
-        self.tray.setToolTip('Electrum')
+        self.tray.setToolTip('Fermatum')
         self.tray.activated.connect(self.tray_activated)
         self.build_tray_menu()
         self.tray.show()
@@ -107,14 +107,14 @@ class ElectrumGui:
             submenu.addAction(_("Close"), window.close)
         m.addAction(_("Dark/Light"), self.toggle_tray_icon)
         m.addSeparator()
-        m.addAction(_("Exit Electrum"), self.close)
+        m.addAction(_("Exit Fermatum"), self.close)
         self.tray.setContextMenu(m)
 
     def tray_icon(self):
         if self.dark_icon:
-            return QIcon(':icons/electrum_dark_icon.png')
+            return QIcon(':icons/fermatum_dark_icon.png')
         else:
-            return QIcon(':icons/electrum_light_icon.png')
+            return QIcon(':icons/fermatum_light_icon.png')
 
     def toggle_tray_icon(self):
         self.dark_icon = not self.dark_icon
@@ -139,7 +139,7 @@ class ElectrumGui:
         self.app.emit(SIGNAL('new_window'), path, uri)
 
     def create_window_for_wallet(self, wallet):
-        w = ElectrumWindow(self, wallet)
+        w = FermatumWindow(self, wallet)
         self.windows.append(w)
         self.build_tray_menu()
         # FIXME: Remove in favour of the load_wallet hook

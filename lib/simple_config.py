@@ -8,7 +8,7 @@ from util import user_dir, print_error, print_msg, print_stderr, PrintError
 
 from bitcoin import MAX_FEE_RATE, FEE_TARGETS
 
-SYSTEM_CONFIG_PATH = "/etc/electrum.conf"
+SYSTEM_CONFIG_PATH = "/etc/fermatum.conf"
 
 config = None
 
@@ -65,25 +65,25 @@ class SimpleConfig(PrintError):
             self.system_config = read_system_config_function()
 
         # Set self.path and read the user config
-        self.user_config = {}  # for self.get in electrum_path()
-        self.path = self.electrum_path()
+        self.user_config = {}  # for self.get in fermatum_path()
+        self.path = self.fermatum_path()
         self.user_config = read_user_config_function(self.path)
         # Upgrade obsolete keys
         self.fixup_keys({'auto_cycle': 'auto_connect'})
         # Make a singleton instance of 'self'
         set_config(self)
 
-    def electrum_path(self):
-        # Read electrum_path from command line / system configuration
+    def fermatum_path(self):
+        # Read fermatum_path from command line / system configuration
         # Otherwise use the user's default data directory.
-        path = self.get('electrum_path')
+        path = self.get('fermatum_path')
         if path is None:
             path = self.user_dir()
 
         if self.get('testnet'):
             path = os.path.join(path, 'testnet')
-        elif self.get('nolnet'):
-            path = os.path.join(path, 'nolnet')
+        #elif self.get('nolnet'):
+        #    path = os.path.join(path, 'nolnet')
 
         # Make directory if it does not yet exist.
         if not os.path.exists(path):
@@ -91,7 +91,7 @@ class SimpleConfig(PrintError):
                 raise BaseException('Dangling link: ' + path)
             os.mkdir(path)
 
-        self.print_error("electrum directory", path)
+        self.print_error("fermatum directory", path)
         return path
 
     def fixup_config_keys(self, config, keypairs):
@@ -168,7 +168,7 @@ class SimpleConfig(PrintError):
         new_path = os.path.join(self.path, "wallets", "default_wallet")
 
         # default path in pre 1.9 versions
-        old_path = os.path.join(self.path, "electrum.dat")
+        old_path = os.path.join(self.path, "fermatum.dat")
         if os.path.exists(old_path) and not os.path.exists(new_path):
             os.rename(old_path, new_path)
 
@@ -245,13 +245,13 @@ class SimpleConfig(PrintError):
 
 
 def read_system_config(path=SYSTEM_CONFIG_PATH):
-    """Parse and return the system config settings in /etc/electrum.conf."""
+    """Parse and return the system config settings in /etc/fermatum.conf."""
     result = {}
     if os.path.exists(path):
         try:
             import ConfigParser
         except ImportError:
-            print "cannot parse electrum.conf. please install ConfigParser"
+            print "cannot parse fermatum.conf. please install ConfigParser"
             return
 
         p = ConfigParser.ConfigParser()
@@ -265,7 +265,7 @@ def read_system_config(path=SYSTEM_CONFIG_PATH):
     return result
 
 def read_user_config(path):
-    """Parse and store the user config settings in electrum.conf into user_config[]."""
+    """Parse and store the user config settings in fermatum.conf into user_config[]."""
     if not path:
         return {}
     config_path = os.path.join(path, "config")

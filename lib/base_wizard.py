@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Electrum - lightweight Bitcoin client
+# Fermatum - lightweight Bitcoin client
 # Copyright (C) 2016 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -395,5 +395,5 @@ class BaseWizard(object):
             self.wallet.synchronize()
             self.wallet.storage.write()
             self.terminate()
-        msg = _("Electrum is generating your addresses, please wait.")
+        msg = _("Fermatum is generating your addresses, please wait.")
         self.waiting_dialog(task, msg)

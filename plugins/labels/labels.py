@@ -7,9 +7,9 @@ import traceback
 
 import base64
 
-import electrum
-from electrum.plugins import BasePlugin, hook
-from electrum.i18n import _
+import fermatum as fermatum
+from fermatum.plugins import BasePlugin, hook
+from fermatum.i18n import _
 
 
 
@@ -23,14 +23,14 @@ class LabelsPlugin(BasePlugin):
 
     def encode(self, wallet, msg):
         password, iv, wallet_id = self.wallets[wallet]
-        encrypted = electrum.bitcoin.aes_encrypt_with_iv(password, iv,
+        encrypted = fermatum.bitcoin.aes_encrypt_with_iv(password, iv,
                                                          msg.encode('utf8'))
         return base64.b64encode(encrypted)
 
     def decode(self, wallet, message):
         password, iv, wallet_id = self.wallets[wallet]
         decoded = base64.b64decode(message)
-        decrypted = electrum.bitcoin.aes_decrypt_with_iv(password, iv, decoded)
+        decrypted = fermatum.bitcoin.aes_decrypt_with_iv(password, iv, decoded)
         return decrypted.decode('utf8')
 
     def get_nonce(self, wallet):
