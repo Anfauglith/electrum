@@ -20,7 +20,7 @@ from password_dialog import PasswordLayout, PW_NEW
 class GoBack(Exception):
     pass
 
-MSG_GENERATING_WAIT = _("Electrum is generating your addresses, please wait...")
+MSG_GENERATING_WAIT = _("Electrum-IOP is generating your addresses, please wait...")
 MSG_ENTER_ANYTHING = _("Please enter a seed phrase, a master key, a list of "
                        "Bitcoin addresses, or a list of private keys")
 MSG_ENTER_SEED_OR_MPK = _("Please enter a seed phrase or a master key (xpub or xprv):")
@@ -169,7 +169,7 @@ class InstallWizard(QDialog, MessageBoxMixin, BaseWizard):
 
             if not self.storage.file_exists():
                 msg = _("This file does not exist.") + '\n' \
-                      + _("Press 'Next' to create this wallet, or chose another file.")
+                      + _("Press 'Next' to create this wallet, or choose another file.")
                 vbox.addWidget(QLabel(msg))
 
             elif self.storage.file_exists() and self.storage.is_encrypted():
@@ -187,7 +187,7 @@ class InstallWizard(QDialog, MessageBoxMixin, BaseWizard):
                 msg = _("Press 'Next' to open this wallet.")
                 vbox.addWidget(QLabel(msg))
 
-            self.set_layout(vbox, title=_('Electrum wallet'))
+            self.set_layout(vbox, title=_('Electrum-IOP wallet'))
             if self.pw_e:
                 self.pw_e.show()
                 self.pw_e.setFocus()

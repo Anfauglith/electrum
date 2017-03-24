@@ -58,6 +58,7 @@ gui/qt/console.py
 gui/qt/contact_list.py
 gui/qt/fee_slider.py
 gui/qt/history_list.py
+gui/qt/icons_rc.py
 gui/qt/installwizard.py
 gui/qt/invoice_list.py
 gui/qt/main_window.py
