@@ -45,7 +45,7 @@ WIF_BYTE = 0x31
 #ADDRTYPE_P2WPKH = 6 # Segwit Addresses
 XPRV_HEADER = 0xAE3416F6
 XPUB_HEADER = 0x2780915F
-HEADERS_URL = "https://headers.electrum.org/blockchain_headers" # TODO Change this
+HEADERS_URL = "https://headers.electrum-iop.org/blockchain_headers" # TODO Change this
 
 def set_testnet():
     global ADDRTYPE_P2PKH, ADDRTYPE_P2SH#, ADDRTYPE_P2WPKH
