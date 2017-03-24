@@ -27,8 +27,8 @@
 import threading
 
 from PyQt4.Qt import QVBoxLayout, QLabel, SIGNAL
-from electrum_gui.qt.password_dialog import PasswordDialog, PW_PASSPHRASE
-from electrum_gui.qt.util import *
+from electrum_iop_gui.qt.password_dialog import PasswordDialog, PW_PASSPHRASE
+from electrum_iop_gui.qt.util import *
 
 from electrum_iop.i18n import _
 from electrum_iop.util import PrintError

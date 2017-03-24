@@ -4,7 +4,7 @@
 #
 
 try:
-    import electrum
+    import electrum_iop as electrum
     from electrum_iop.bitcoin import TYPE_ADDRESS, var_int, msg_magic, Hash, verify_message, public_key_to_p2pkh, EncodeAES, DecodeAES
     from electrum_iop.i18n import _
     from electrum_iop.keystore import Hardware_KeyStore
@@ -526,4 +526,3 @@ class DigitalBitboxPlugin(HW_PluginBase):
         if client <> None:
             client.check_device_dialog()
         return client
-

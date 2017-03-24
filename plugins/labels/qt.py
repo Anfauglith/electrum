@@ -5,9 +5,9 @@ from PyQt4.QtCore import *
 
 from electrum_iop.plugins import hook
 from electrum_iop.i18n import _
-from electrum_gui.qt import EnterButton
-from electrum_gui.qt.util import ThreadedButton, Buttons
-from electrum_gui.qt.util import WindowModalDialog, OkButton
+from electrum_iop_gui.qt import EnterButton
+from electrum_iop_gui.qt.util import ThreadedButton, Buttons
+from electrum_iop_gui.qt.util import WindowModalDialog, OkButton
 
 from labels import LabelsPlugin
 
