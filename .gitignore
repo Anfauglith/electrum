@@ -21,3 +21,4 @@ fermatumenv
 .eggs
 .python-version
 lib/paymentrequest_pb2.py
+fenv

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -25,7 +25,7 @@
 
 
 from fermatum.i18n import _
-from fermatum.bitcoin import is_address
+from fermatum.iop import is_address
 from fermatum.util import block_explorer_URL, format_satoshis, format_time, age
 from fermatum.plugins import run_hook
 from fermatum.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED

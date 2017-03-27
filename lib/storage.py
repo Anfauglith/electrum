@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -40,7 +40,7 @@ from i18n import _
 from util import NotEnoughFunds, PrintError, profiler
 from plugins import run_hook, plugin_loaders
 from keystore import bip44_derivation
-import bitcoin
+import iop
 
 
 # seed_version is now used for the version of the wallet file
@@ -97,7 +97,7 @@ class WalletStorage(PrintError):
 
     def get_key(self, password):
         secret = pbkdf2.PBKDF2(password, '', iterations = 1024, macmodule = hmac, digestmodule = hashlib.sha512).read(64)
-        ec_key = bitcoin.EC_KEY(secret)
+        ec_key = iop.EC_KEY(secret)
         return ec_key
 
     def decrypt(self, password):
@@ -154,7 +154,7 @@ class WalletStorage(PrintError):
             return
         s = json.dumps(self.data, indent=4, sort_keys=True)
         if self.pubkey:
-            s = bitcoin.encrypt_message(zlib.compress(s), self.pubkey)
+            s = iop.encrypt_message(zlib.compress(s), self.pubkey)
 
         temp_path = "%s.tmp.%s" % (self.path, os.getpid())
         with open(temp_path, "w") as f:

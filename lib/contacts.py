@@ -1,4 +1,4 @@
-# Fermatum - Lightweight Bitcoin Client
+# Fermatum - Lightweight IoP Client
 # Copyright (c) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -27,7 +27,7 @@ import dns
 import os
 import json
 
-import bitcoin
+import iop
 import dnssec
 from util import print_error
 from i18n import _
@@ -42,7 +42,7 @@ class Contacts(dict):
         # backward compatibility
         for k, v in self.items():
             _type, n = v
-            if _type == 'address' and bitcoin.is_address(n):
+            if _type == 'address' and iop.is_address(n):
                 self.pop(k)
                 self[n] = ('address', k)
 
@@ -68,7 +68,7 @@ class Contacts(dict):
             self.save()
 
     def resolve(self, k):
-        if bitcoin.is_address(k):
+        if iop.is_address(k):
             return {
                 'address': k,
                 'type': 'address'
@@ -89,7 +89,7 @@ class Contacts(dict):
                 'type': 'openalias',
                 'validated': validated
             }
-        raise Exception("Invalid Bitcoin address or alias", k)
+        raise Exception("Invalid IoP address or alias", k)
 
     def resolve_openalias(self, url):
         # support email-style addresses, per the OA standard

@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- mode: python -*-
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2016  The Fermatum developers
 #
 # Permission is hereby granted, free of charge, to any person

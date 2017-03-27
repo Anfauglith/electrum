@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -47,7 +47,7 @@ from collections import namedtuple, defaultdict
 from i18n import _
 from util import NotEnoughFunds, PrintError, UserCancelled, profiler
 
-from bitcoin import *
+from iop import *
 from version import *
 from keystore import load_keystore, Hardware_KeyStore
 from storage import multisig_type
@@ -55,7 +55,7 @@ from storage import multisig_type
 import transaction
 from transaction import Transaction
 from plugins import run_hook
-import bitcoin
+import iop
 import coinchooser
 from synchronizer import Synchronizer
 from verifier import SPV
@@ -510,7 +510,7 @@ class Abstract_Wallet(PrintError):
         received, sent = self.get_addr_io(address)
         return sum([v for height, v, is_cb in received.values()])
 
-    # return the balance of a bitcoin address: confirmed and matured, unconfirmed, unmatured
+    # return the balance of a iop address: confirmed and matured, unconfirmed, unmatured
     def get_addr_balance(self, address):
         received, sent = self.get_addr_io(address)
         c = u = x = 0
@@ -614,7 +614,7 @@ class Abstract_Wallet(PrintError):
                 if _type == TYPE_ADDRESS:
                     addr = x
                 elif _type == TYPE_PUBKEY:
-                    addr = bitcoin.public_key_to_p2pkh(x.decode('hex'))
+                    addr = iop.public_key_to_p2pkh(x.decode('hex'))
                 else:
                     addr = None
                 if addr and self.is_mine(addr):
@@ -797,7 +797,7 @@ class Abstract_Wallet(PrintError):
             _type, data, value = o
             if _type == TYPE_ADDRESS:
                 if not is_address(data):
-                    raise BaseException("Invalid bitcoin address:" + data)
+                    raise BaseException("Invalid iop address:" + data)
             if value == '!':
                 if i_max is not None:
                     raise BaseException("More than one output set to spend max")
@@ -1171,7 +1171,7 @@ class Abstract_Wallet(PrintError):
         if not r:
             return
         out = copy.copy(r)
-        out['URI'] = 'bitcoin:' + addr + '?amount=' + util.format_satoshis(out.get('amount'))
+        out['URI'] = 'IoP:' + addr + '?amount=' + util.format_satoshis(out.get('amount'))
         status, conf = self.get_request_status(addr)
         out['status'] = status
         if conf is not None:
@@ -1627,7 +1627,7 @@ class P2SH:
 
     def pubkeys_to_address(self, pubkey):
         redeem_script = self.pubkeys_to_redeem_script(pubkey)
-        return bitcoin.hash160_to_p2sh(hash_160(redeem_script.decode('hex')))
+        return iop.hash160_to_p2sh(hash_160(redeem_script.decode('hex')))
 
 
 class Standard_Wallet(Simple_Deterministic_Wallet):
@@ -1639,10 +1639,10 @@ class Standard_Wallet(Simple_Deterministic_Wallet):
 
     def pubkeys_to_address(self, pubkey):
         if not self.is_segwit:
-            return bitcoin.public_key_to_p2pkh(pubkey.decode('hex'))
-        elif bitcoin.TESTNET:
+            return iop.public_key_to_p2pkh(pubkey.decode('hex'))
+        elif iop.TESTNET:
             redeem_script = self.pubkeys_to_redeem_script(pubkey)
-            return bitcoin.hash160_to_p2sh(hash_160(redeem_script.decode('hex')))
+            return iop.hash160_to_p2sh(hash_160(redeem_script.decode('hex')))
         else:
             raise NotImplementedError()
 

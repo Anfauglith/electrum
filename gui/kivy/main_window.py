@@ -8,7 +8,7 @@ from decimal import Decimal
 import threading
 
 import fermatum as fermatum
-from fermatum.bitcoin import TYPE_ADDRESS
+from fermatum.iop import TYPE_ADDRESS
 from fermatum import WalletStorage, Wallet
 from fermatum_gui.kivy.i18n import _
 from fermatum.paymentrequest import InvoiceStore
@@ -231,7 +231,7 @@ class FermatumWindow(App):
             self.send_screen.do_clear()
 
     def on_qr(self, data):
-        from fermatum.bitcoin import base_decode, is_address
+        from fermatum.iop import base_decode, is_address
         data = data.strip()
         if is_address(data):
             self.set_URI(data)
@@ -391,7 +391,7 @@ class FermatumWindow(App):
 
         # default tab
         self.switch_to('history')
-        # bind intent for bitcoin: URI scheme
+        # bind intent for IoP: URI scheme
         if platform == 'android':
             from android import activity
             from jnius import autoclass

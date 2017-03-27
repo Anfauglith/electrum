@@ -1,6 +1,6 @@
 import unittest
 from lib import transaction
-from lib.bitcoin import TYPE_ADDRESS
+from lib.iop import TYPE_ADDRESS
 
 import pprint
 from lib.keystore import xpubkey_to_address

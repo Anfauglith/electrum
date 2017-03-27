@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2014 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -31,7 +31,7 @@ import xmlrpclib
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from fermatum import bitcoin, util
+from fermatum import iop, util
 from fermatum import transaction
 from fermatum.plugins import BasePlugin, hook
 from fermatum.i18n import _
@@ -129,8 +129,8 @@ class Plugin(BasePlugin):
         self.cosigner_list = []
         for key, keystore in wallet.keystores.items():
             xpub = keystore.get_master_public_key()
-            K = bitcoin.deserialize_xpub(xpub)[-1].encode('hex')
-            _hash = bitcoin.Hash(K).encode('hex')
+            K = iop.deserialize_xpub(xpub)[-1].encode('hex')
+            _hash = iop.Hash(K).encode('hex')
             if not keystore.is_watching_only():
                 self.keys.append((key, _hash, window))
             else:
@@ -171,7 +171,7 @@ class Plugin(BasePlugin):
         for window, xpub, K, _hash in self.cosigner_list:
             if not self.cosigner_can_sign(tx, xpub):
                 continue
-            message = bitcoin.encrypt_message(tx.raw, K)
+            message = iop.encrypt_message(tx.raw, K)
             try:
                 server.put(_hash, message)
             except Exception as e:
@@ -203,8 +203,8 @@ class Plugin(BasePlugin):
         if not xprv:
             return
         try:
-            k = bitcoin.deserialize_xprv(xprv)[-1].encode('hex')
-            EC = bitcoin.EC_KEY(k.decode('hex'))
+            k = iop.deserialize_xprv(xprv)[-1].encode('hex')
+            EC = iop.EC_KEY(k.decode('hex'))
             message = EC.decrypt_message(message)
         except Exception as e:
             traceback.print_exc(file=sys.stdout)

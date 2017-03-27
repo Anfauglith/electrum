@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- mode: python -*-
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2016  The Fermatum developers
 #
 # Permission is hereby granted, free of charge, to any person
@@ -28,12 +28,12 @@
 from unicodedata import normalize
 
 from version import *
-import bitcoin
-from bitcoin import pw_encode, pw_decode, bip32_root, bip32_private_derivation, bip32_public_derivation, bip32_private_key, deserialize_xprv, deserialize_xpub
-from bitcoin import public_key_from_private_key, public_key_to_p2pkh
-from bitcoin import *
+import iop
+from iop import pw_encode, pw_decode, bip32_root, bip32_private_derivation, bip32_public_derivation, bip32_private_key, deserialize_xprv, deserialize_xpub
+from iop import public_key_from_private_key, public_key_to_p2pkh
+from iop import *
 
-from bitcoin import is_old_seed, is_new_seed, is_seed
+from iop import is_old_seed, is_new_seed, is_seed
 from util import PrintError, InvalidPassword
 from mnemonic import Mnemonic
 
@@ -249,19 +249,19 @@ class Xpub:
         return cK.encode('hex')
 
     def get_xpubkey(self, c, i):
-        s = ''.join(map(lambda x: bitcoin.int_to_hex(x,2), (c, i)))
-        return 'ff' + bitcoin.DecodeBase58Check(self.xpub).encode('hex') + s
+        s = ''.join(map(lambda x: iop.int_to_hex(x,2), (c, i)))
+        return 'ff' + iop.DecodeBase58Check(self.xpub).encode('hex') + s
 
     @classmethod
     def parse_xpubkey(self, pubkey):
         assert pubkey[0:2] == 'ff'
         pk = pubkey.decode('hex')
         pk = pk[1:]
-        xkey = bitcoin.EncodeBase58Check(pk[0:78])
+        xkey = iop.EncodeBase58Check(pk[0:78])
         dd = pk[78:]
         s = []
         while dd:
-            n = int(bitcoin.rev_hex(dd[0:2].encode('hex')), 16)
+            n = int(iop.rev_hex(dd[0:2].encode('hex')), 16)
             dd = dd[2:]
             s.append(n)
         assert len(s) == 2
@@ -322,7 +322,7 @@ class BIP32_KeyStore(Deterministic_KeyStore, Xpub):
 
     def add_xprv(self, xprv):
         self.xprv = xprv
-        self.xpub = bitcoin.xpub_from_xprv(xprv)
+        self.xpub = iop.xpub_from_xprv(xprv)
 
     def add_xprv_from_seed(self, bip32_seed, xtype, derivation):
         xprv, xpub = bip32_root(bip32_seed, xtype)
@@ -447,7 +447,7 @@ class Old_KeyStore(Deterministic_KeyStore):
         return self.mpk
 
     def get_xpubkey(self, for_change, n):
-        s = ''.join(map(lambda x: bitcoin.int_to_hex(x,2), (for_change, n)))
+        s = ''.join(map(lambda x: iop.int_to_hex(x,2), (for_change, n)))
         return 'fe' + self.mpk + s
 
     @classmethod
@@ -458,7 +458,7 @@ class Old_KeyStore(Deterministic_KeyStore):
         dd = pk[128:]
         s = []
         while dd:
-            n = int(bitcoin.rev_hex(dd[0:4]), 16)
+            n = int(iop.rev_hex(dd[0:4]), 16)
             dd = dd[4:]
             s.append(n)
         assert len(s) == 2
@@ -570,7 +570,7 @@ def xpubkey_to_address(x_pubkey):
     if x_pubkey[0:2] == 'fd':
         addrtype = ord(x_pubkey[2:4].decode('hex'))
         hash160 = x_pubkey[4:].decode('hex')
-        address = bitcoin.hash_160_to_bc_address(hash160, addrtype)
+        address = iop.hash_160_to_bc_address(hash160, addrtype)
         return x_pubkey, address
     if x_pubkey[0:2] in ['02','03','04']:
         pubkey = x_pubkey
@@ -631,13 +631,13 @@ def is_old_mpk(mpk):
 
 def is_address_list(text):
     parts = text.split()
-    return bool(parts) and all(bitcoin.is_address(x) for x in parts)
+    return bool(parts) and all(iop.is_address(x) for x in parts)
 
 def get_private_keys(text):
     parts = text.split('\n')
     parts = map(lambda x: ''.join(x.split()), parts)
     parts = filter(bool, parts)
-    if bool(parts) and all(bitcoin.is_private_key(x) for x in parts):
+    if bool(parts) and all(iop.is_private_key(x) for x in parts):
         return parts
 
 def is_private_key_list(text):
@@ -686,7 +686,7 @@ def from_xpub(xpub):
     return k
 
 def from_xprv(xprv):
-    xpub = bitcoin.xpub_from_xprv(xprv)
+    xpub = iop.xpub_from_xprv(xprv)
     k = BIP32_KeyStore({})
     k.xprv = xprv
     k.xpub = xpub

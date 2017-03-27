@@ -18,7 +18,7 @@ from kivy.factory import Factory
 from kivy.utils import platform
 
 from fermatum.util import profiler, parse_URI, format_time, InvalidPassword, NotEnoughFunds
-from fermatum import bitcoin
+from fermatum import iop
 from fermatum.util import timestamp_to_datetime
 from fermatum.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
 
@@ -180,7 +180,7 @@ class SendScreen(CScreen):
         try:
             uri = fermatum.util.parse_URI(text, self.app.on_pr)
         except:
-            self.app.show_info(_("Not a Bitcoin URI"))
+            self.app.show_info(_("Not a IoP URI"))
             return
         amount = uri.get('amount')
         self.screen.address = uri.get('address', '')
@@ -250,17 +250,17 @@ class SendScreen(CScreen):
         else:
             address = str(self.screen.address)
             if not address:
-                self.app.show_error(_('Recipient not specified.') + ' ' + _('Please scan a Bitcoin address or a payment request'))
+                self.app.show_error(_('Recipient not specified.') + ' ' + _('Please scan a IoP address or a payment request'))
                 return
-            if not bitcoin.is_address(address):
-                self.app.show_error(_('Invalid Bitcoin Address') + ':\n' + address)
+            if not iop.is_address(address):
+                self.app.show_error(_('Invalid IoP Address') + ':\n' + address)
                 return
             try:
                 amount = self.app.get_amount(self.screen.amount)
             except:
                 self.app.show_error(_('Invalid amount') + ':\n' + self.screen.amount)
                 return
-            outputs = [(bitcoin.TYPE_ADDRESS, address, amount)]
+            outputs = [(iop.TYPE_ADDRESS, address, amount)]
         message = unicode(self.screen.message)
         amount = sum(map(lambda x:x[2], outputs))
         if self.app.fermatum_config.get('use_rbf'):
@@ -368,7 +368,7 @@ class ReceiveScreen(CScreen):
 
     def do_share(self):
         uri = self.get_URI()
-        self.app.do_share(uri, _("Share Bitcoin Request"))
+        self.app.do_share(uri, _("Share IoP Request"))
 
     def do_copy(self):
         uri = self.get_URI()

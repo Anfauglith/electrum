@@ -4,7 +4,7 @@ from struct import pack
 from fermatum.i18n import _
 from fermatum.util import PrintError, UserCancelled
 from fermatum.keystore import bip39_normalize_passphrase
-from fermatum.bitcoin import serialize_xpub
+from fermatum.iop import serialize_xpub
 
 
 class GuiMixin(object):
@@ -59,7 +59,7 @@ class GuiMixin(object):
             msg = _("Enter a passphrase to generate this wallet.  Each time "
                     "you use this wallet your %s will prompt you for the "
                     "passphrase.  If you forget the passphrase you cannot "
-                    "access the bitcoins in the wallet.") % self.device
+                    "access the iops in the wallet.") % self.device
         else:
             msg = _("Enter the passphrase to unlock this wallet:")
         passphrase = self.handler.get_passphrase(msg, self.creating_wallet)
@@ -154,7 +154,7 @@ class TrezorClientBase(GuiMixin, PrintError):
         return serialize_xpub(0, node.chain_code, node.public_key, node.depth, self.i4b(node.fingerprint), self.i4b(node.child_num))
 
     #def address_from_derivation(self, derivation):
-    #    return self.get_address('Bitcoin', self.expand_path(derivation))
+    #    return self.get_address('IoP', self.expand_path(derivation))
 
     def toggle_passphrase(self):
         if self.features.passphrase_protection:

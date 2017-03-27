@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -42,7 +42,7 @@ import PyQt4.QtCore as QtCore
 import icons_rc
 
 from fermatum import keystore
-from fermatum.bitcoin import COIN, is_valid, TYPE_ADDRESS
+from fermatum.iop import COIN, is_valid, TYPE_ADDRESS
 from fermatum.plugins import run_hook
 from fermatum.i18n import _
 from fermatum.util import (block_explorer, block_explorer_info, format_time,
@@ -50,7 +50,7 @@ from fermatum.util import (block_explorer, block_explorer_info, format_time,
                            format_satoshis_plain, NotEnoughFunds,
                            UserCancelled)
 from fermatum import Transaction, mnemonic
-from fermatum import util, bitcoin, commands, coinchooser
+from fermatum import util, iop, commands, coinchooser
 from fermatum import SimpleConfig, paymentrequest
 from fermatum.wallet import Wallet, Multisig_Wallet
 
@@ -356,8 +356,8 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
         if self.wallet.is_watching_only():
             msg = ' '.join([
                 _("This wallet is watching-only."),
-                _("This means you will not be able to spend Bitcoins with it."),
-                _("Make sure you own the seed phrase or the private keys, before you request Bitcoins to be sent to this wallet.")
+                _("This means you will not be able to spend IoPs with it."),
+                _("Make sure you own the seed phrase or the private keys, before you request IoPs to be sent to this wallet.")
             ])
             self.show_warning(msg, title=_('Information'))
 
@@ -498,13 +498,13 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
         d = self.network.get_donation_address()
         if d:
             host = self.network.get_parameters()[0]
-            self.pay_to_URI('bitcoin:%s?message=donation for %s'%(d, host))
+            self.pay_to_URI('IoP:%s?message=donation for %s'%(d, host))
         else:
             self.show_error(_('No donation address for this server'))
 
     def show_about(self):
         QMessageBox.about(self, "Fermatum",
-            _("Version")+" %s" % (self.wallet.fermatum_version) + "\n\n" + _("Fermatum's focus is speed, with low resource usage and simplifying Bitcoin. You do not need to perform regular backups, because your wallet can be recovered from a secret phrase that you can memorize or write on paper. Startup times are instant because it operates in conjunction with high-performance servers that handle the most complicated parts of the Bitcoin system."))
+            _("Version")+" %s" % (self.wallet.fermatum_version) + "\n\n" + _("Fermatum's focus is speed, with low resource usage and simplifying the IoP system. You do not need to perform regular backups, because your wallet can be recovered from a secret phrase that you can memorize or write on paper. Startup times are instant because it operates in conjunction with high-performance servers that handle the most complicated parts of the IoP Token system."))
 
     def show_report_bug(self):
         msg = ' '.join([
@@ -719,7 +719,7 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self.receive_address_e = ButtonsLineEdit()
         self.receive_address_e.addCopyButton(self.app)
         self.receive_address_e.setReadOnly(True)
-        msg = _('Bitcoin address where the payment should be received. Note that each payment request uses a different Bitcoin address.')
+        msg = _('IoP address where the payment should be received. Note that each payment request uses a different IoP address.')
         self.receive_address_label = HelpLabel(_('Receiving address'), msg)
         self.receive_address_e.textChanged.connect(self.update_receive_qr)
         self.receive_address_e.setFocusPolicy(Qt.NoFocus)
@@ -749,8 +749,8 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
         msg = ' '.join([
             _('Expiration date of your request.'),
             _('This information is seen by the recipient if you send them a signed payment request.'),
-            _('Expired requests have to be deleted manually from your list, in order to free the corresponding Bitcoin addresses.'),
-            _('The bitcoin address never expires and will always be part of this fermatum wallet.'),
+            _('Expired requests have to be deleted manually from your list, in order to free the corresponding IoP addresses.'),
+            _('The IoP address never expires and will always be part of this fermatum wallet.'),
         ])
         grid.addWidget(HelpLabel(_('Request expires'), msg), 3, 0)
         grid.addWidget(self.expires_combo, 3, 1)
@@ -819,7 +819,7 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
             URI += "&exp=%d"%req.get('exp')
         if req.get('name') and req.get('sig'):
             sig = req.get('sig').decode('hex')
-            sig = bitcoin.base_encode(sig, base=58)
+            sig = iop.base_encode(sig, base=58)
             URI += "&name=" + req['name'] + "&sig="+sig
         return str(URI)
 
@@ -941,7 +941,7 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self.tabs.setCurrentIndex(self.tabs.indexOf(self.receive_tab))
 
     def receive_at(self, addr):
-        if not bitcoin.is_address(addr):
+        if not iop.is_address(addr):
             return
         self.show_receive_tab()
         self.receive_address_e.setText(addr)
@@ -968,7 +968,7 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self.amount_e = BTCAmountEdit(self.get_decimal_point)
         self.payto_e = PayToEdit(self)
         msg = _('Recipient of the funds.') + '\n\n'\
-              + _('You may enter a Bitcoin address, a label from your list of contacts (a list of completions will be proposed), or an alias (email-like address that forwards to a Bitcoin address)')
+              + _('You may enter an IoP address, a label from your list of contacts (a list of completions will be proposed), or an alias (email-like address that forwards to an IoP address)')
         payto_label = HelpLabel(_('Pay to'), msg)
         grid.addWidget(payto_label, 1, 0)
         grid.addWidget(self.payto_e, 1, 1, 1, -1)
@@ -1015,7 +1015,7 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
         hbox.addStretch(1)
         grid.addLayout(hbox, 4, 4)
 
-        msg = _('Bitcoin transactions are in general not free. A transaction fee is paid by the sender of the funds.') + '\n\n'\
+        msg = _('IoP transactions are in general not free. A transaction fee is paid by the sender of the funds.') + '\n\n'\
               + _('The amount of fee can be decided freely by the sender. However, transactions with low fees take more time to be processed.') + '\n\n'\
               + _('A suggested fee is automatically added to this field. You may override it. The suggested fee increases with the size of the transaction.')
         self.fee_e_label = HelpLabel(_('Fee'), msg)
@@ -1267,10 +1267,10 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
         for _type, addr, amount in outputs:
             if addr is None:
-                self.show_error(_('Bitcoin Address is None'))
+                self.show_error(_('IoP Address is None'))
                 return
-            if _type == TYPE_ADDRESS and not bitcoin.is_address(addr):
-                self.show_error(_('Invalid Bitcoin Address'))
+            if _type == TYPE_ADDRESS and not iop.is_address(addr):
+                self.show_error(_('Invalid IoP Address'))
                 return
             if amount is None:
                 self.show_error(_('Invalid Amount'))
@@ -1477,7 +1477,7 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
         try:
             out = util.parse_URI(unicode(URI), self.on_pr)
         except BaseException as e:
-            self.show_error(_('Invalid bitcoin URI:') + '\n' + str(e))
+            self.show_error(_('Invalid IoP URI:') + '\n' + str(e))
             return
         self.show_send_tab()
         r = out.get('r')
@@ -1675,7 +1675,7 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
                                  'network' : self.network,
                                  'plugins' : self.gui_object.plugins,
                                  'window': self})
-        console.updateNamespace({'util' : util, 'bitcoin':bitcoin})
+        console.updateNamespace({'util' : util, 'iop':iop})
 
         c = commands.Commands(self.config, self.wallet, self.network, lambda: self.console.set_json(True))
         methods = {}
@@ -1871,10 +1871,10 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
     def do_sign(self, address, message, signature, password):
         address  = str(address.text()).strip()
         message = unicode(message.toPlainText()).encode('utf-8').strip()
-        if not bitcoin.is_address(address):
-            self.show_message('Invalid Bitcoin address.')
+        if not iop.is_address(address):
+            self.show_message('Invalid IoP address.')
             return
-        if not bitcoin.is_p2pkh(address):
+        if not iop.is_p2pkh(address):
             self.show_message('Cannot sign messages with this type of address.')
             return
         if not self.wallet.is_mine(address):
@@ -1888,16 +1888,16 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
     def do_verify(self, address, message, signature):
         address  = str(address.text()).strip()
         message = unicode(message.toPlainText()).encode('utf-8').strip()
-        if not bitcoin.is_address(address):
-            self.show_message('Invalid Bitcoin address.')
+        if not iop.is_address(address):
+            self.show_message('Invalid IoP address.')
             return
-        if not bitcoin.is_p2pkh(address):
+        if not iop.is_p2pkh(address):
             self.show_message('Cannot verify messages with this type of address.')
             return
         try:
             # This can throw on invalid base64
             sig = base64.b64decode(str(signature.toPlainText()))
-            verified = bitcoin.verify_message(address, sig, message)
+            verified = iop.verify_message(address, sig, message)
         except:
             verified = False
         if verified:
@@ -1954,7 +1954,7 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
         message = unicode(message_e.toPlainText())
         message = message.encode('utf-8')
         try:
-            encrypted = bitcoin.encrypt_message(message, str(pubkey_e.text()))
+            encrypted = iop.encrypt_message(message, str(pubkey_e.text()))
             encrypted_e.setText(encrypted)
         except BaseException as e:
             traceback.print_exc(file=sys.stdout)
@@ -2026,14 +2026,14 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
             return
         if not data:
             return
-        # if the user scanned a bitcoin URI
-        if data.startswith("bitcoin:"):
+        # if the user scanned a IoP URI
+        if data.startswith("IoP:"):
             self.pay_to_URI(data)
             return
         # else if the user scanned an offline signed tx
         # transactions are binary, but qrcode seems to return utf8...
         data = data.decode('utf8')
-        z = bitcoin.base_decode(data, length=None, base=43)
+        z = iop.base_decode(data, length=None, base=43)
         data = ''.join(chr(ord(b)) for b in z).encode('hex')
         tx = self.tx_from_text(data)
         if not tx:
@@ -2291,7 +2291,7 @@ class FermatumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
         def get_address():
             addr = str(address_e.text()).strip()
-            if bitcoin.is_address(addr):
+            if iop.is_address(addr):
                 return addr
 
         def get_pk():

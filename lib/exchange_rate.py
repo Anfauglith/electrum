@@ -8,7 +8,7 @@ import traceback
 import csv
 from decimal import Decimal
 
-from bitcoin import COIN
+from iop import COIN
 from i18n import _
 from util import PrintError, ThreadJob
 from util import format_satoshis
@@ -87,9 +87,9 @@ class ExchangeBase(PrintError):
         return [str(a) for (a, b) in rates.iteritems() if b is not None]
 
 
-class BitcoinAverage(ExchangeBase):
+class IoPAverage(ExchangeBase):
     def get_rates(self, ccy):
-        json = self.get_json('api.bitcoinaverage.com', '/ticker/global/all')
+        json = self.get_json('api.iopaverage.com', '/ticker/global/all')
         return dict([(r, Decimal(json[r]['last']))
                      for r in json if r != 'timestamp'])
 
@@ -99,15 +99,15 @@ class BitcoinAverage(ExchangeBase):
                 'ZAR']
 
     def historical_rates(self, ccy):
-        history = self.get_csv('api.bitcoinaverage.com',
+        history = self.get_csv('api.iopaverage.com',
                                "/history/%s/per_day_all_time_history.csv" % ccy)
         return dict([(h['DateTime'][:10], h['Average'])
                      for h in history])
 # 
-# class BitcoinVenezuela(ExchangeBase):
+# class IoPVenezuela(ExchangeBase):
 # 
 #     def get_rates(self, ccy):
-#         json = self.get_json('api.bitcoinvenezuela.com', '/')
+#         json = self.get_json('api.iopvenezuela.com', '/')
 #         rates = [(r, json['IOP'][r]) for r in json['IOP']
 #                  if json['IOP'][r] is not None]  # Giving NULL for LTC
 #         return dict(rates)
@@ -116,7 +116,7 @@ class BitcoinAverage(ExchangeBase):
 #         return ['ARS', 'EUR', 'USD', 'VEF']
 # 
 #     def historical_rates(self, ccy):
-#         return self.get_json('api.bitcoinvenezuela.com',
+#         return self.get_json('api.iopvenezuela.com',
 #                              "/historical/index.php?coin=IOP")[ccy +'_IOP']
 # 
 # class BTCParalelo(ExchangeBase):
@@ -218,10 +218,10 @@ class BitcoinAverage(ExchangeBase):
 #         return dict((k[-3:], Decimal(float(v['c'][0])))
 #                      for k, v in json['result'].items())
 # 
-# class LocalBitcoins(ExchangeBase):
+# class LocalIoPs(ExchangeBase):
 #     def get_rates(self, ccy):
-#         json = self.get_json('localbitcoins.com',
-#                              '/bitcoinaverage/ticker-all-currencies/')
+#         json = self.get_json('localiops.com',
+#                              '/iopaverage/ticker-all-currencies/')
 #         return dict([(r, Decimal(json[r]['rates']['last'])) for r in json])
 # 
 # class Winkdex(ExchangeBase):
@@ -239,14 +239,14 @@ class BitcoinAverage(ExchangeBase):
 #         return dict([(h['timestamp'][:10], h['price'] / 100.0)
 #                      for h in history])
 # 
-# class MercadoBitcoin(ExchangeBase):
+# class MercadoIoP(ExchangeBase):
 #     def get_rates(self, ccy):
 # 	json = self.get_json('api.bitvalor.com', '/v1/ticker.json')
 #         return {'BRL': Decimal(json['ticker_1h']['exchanges']['MBT']['last'])}
 # 
-# class Bitcointoyou(ExchangeBase):
+# class IoPtoyou(ExchangeBase):
 #     def get_rates(self, ccy):
-#         json = self.get_json('bitcointoyou.com', "/API/ticker.aspx")
+#         json = self.get_json('ioptoyou.com', "/API/ticker.aspx")
 #         return {'BRL': Decimal(json['ticker']['last'])}
 # 
 #     def history_ccys(self):
@@ -369,7 +369,7 @@ class FxThread(ThreadJob):
         return self.config.get("currency", "EUR")
 
     def config_exchange(self):
-        return self.config.get('use_exchange', 'BitcoinAverage')
+        return self.config.get('use_exchange', 'IoPAverage')
 
     def show_history(self):
         return self.is_enabled() and self.get_history_config() and self.ccy in self.exchange.history_ccys()
@@ -381,7 +381,7 @@ class FxThread(ThreadJob):
         self.on_quotes()
 
     def set_exchange(self, name):
-        class_ = globals().get(name, BitcoinAverage)
+        class_ = globals().get(name, IoPAverage)
         self.print_error("using exchange", name)
         if self.config_exchange() != name:
             self.config.set_key('use_exchange', name, True)

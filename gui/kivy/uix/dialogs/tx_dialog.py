@@ -171,7 +171,7 @@ class TxDialog(Factory.Popup):
         self.app.broadcast(self.tx)
 
     def show_qr(self):
-        from fermatum.bitcoin import base_encode
+        from fermatum.iop import base_encode
         text = str(self.tx).decode('hex')
         text = base_encode(text, base=43)
         self.app.qr_dialog(_("Raw Transaction"), text)

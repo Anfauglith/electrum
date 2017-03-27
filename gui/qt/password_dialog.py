@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2013 ecdsa@github
 #
 # Permission is hereby granted, free of charge, to any person
@@ -172,7 +172,7 @@ class ChangePasswordDialog(WindowModalDialog):
             msg += ' ' + _('Use this dialog to add a password to your wallet.')
         else:
             if not is_encrypted:
-                msg = _('Your bitcoins are password protected. However, your wallet file is not encrypted.')
+                msg = _('Your IoPs are password protected. However, your wallet file is not encrypted.')
             else:
                 msg = _('Your wallet is password protected and encrypted.')
             msg += ' ' + _('Use this dialog to change your password.')

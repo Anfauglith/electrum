@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- mode: python -*-
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2011 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -95,7 +95,7 @@ if is_bundle or is_local or is_android:
     imp.load_module('fermatum', *imp.find_module('lib'))
     imp.load_module('fermatum_gui', *imp.find_module('gui'))
 
-from fermatum import bitcoin, network
+from fermatum import iop, network
 from fermatum import SimpleConfig, Network
 from fermatum.wallet import Wallet, Imported_Wallet
 from fermatum.storage import WalletStorage
@@ -348,7 +348,7 @@ if __name__ == '__main__':
     # check uri
     uri = config_options.get('url')
     if uri:
-        if not uri.startswith('bitcoin:'):
+        if not uri.startswith('IoP:'):
             print_stderr('unknown command:', uri)
             sys.exit(1)
         config_options['url'] = uri
@@ -358,11 +358,11 @@ if __name__ == '__main__':
     cmdname = config.get('cmd')
 
     if config.get('testnet'):
-        bitcoin.set_testnet()
+        iop.set_testnet()
         network.set_testnet()
 
 #    if config.get('nolnet'):
-#        bitcoin.set_nolnet()
+#        iop.set_nolnet()
 #        network.set_nolnet()
 
     # run non-RPC commands separately

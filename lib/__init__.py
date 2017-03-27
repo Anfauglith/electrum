@@ -6,7 +6,7 @@ from coinchooser import COIN_CHOOSERS
 from network import Network, pick_random_server
 from interface import Connection, Interface
 from simple_config import SimpleConfig, get_config, set_config
-import bitcoin
+import iop
 import transaction
 import daemon
 from transaction import Transaction

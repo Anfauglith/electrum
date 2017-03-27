@@ -2,7 +2,7 @@ import unittest
 import sys
 from ecdsa.util import number_to_string
 
-from lib.bitcoin import (
+from lib.iop import (
     generator_secp256k1, point_to_ser, public_key_to_p2pkh, EC_KEY,
     bip32_root, bip32_public_derivation, bip32_private_derivation, pw_encode,
     pw_decode, Hash, public_key_from_private_key, address_from_private_key,
@@ -15,7 +15,7 @@ except ImportError:
     sys.exit("Error: python-ecdsa does not seem to be installed. Try 'sudo pip install ecdsa'")
 
 
-class Test_bitcoin(unittest.TestCase):
+class Test_iop(unittest.TestCase):
 
     def test_crypto(self):
         for message in ["Chancellor on brink of second bailout for banks", chr(255)*512]:
@@ -50,7 +50,7 @@ class Test_bitcoin(unittest.TestCase):
         EC_KEY.verify_message(eck, signature, message)
 
     def test_bip32(self):
-        # see https://en.bitcoin.it/wiki/BIP_0032_TestVectors
+        # see https://en.iop.it/wiki/BIP_0032_TestVectors
         xpub, xprv = self._do_test_bip32("000102030405060708090a0b0c0d0e0f", "m/0'/1/2'/2/1000000000")
         assert xpub == "xpub6H1LXWLaKsWFhvm6RVpEL9P4KfRZSW7abD2ttkWP3SSQvnyA8FSVqNTEcYFgJS2UaFcxupHiYkro49S8yGasTvXEYBVPamhGW6cFJodrTHy"
         assert xprv == "xprvA41z7zogVVwxVSgdKUHDy1SKmdb533PjDz7J6N6mV6uS3ze1ai8FHa8kmHScGpWmj4WggLyQjgPie1rFSruoUihUZREPSL39UNdE3BBDu76"
@@ -113,7 +113,7 @@ class Test_bitcoin(unittest.TestCase):
 
     def test_xpub_from_xprv(self):
         """We can derive the xpub key from a xprv."""
-        # Taken from test vectors in https://en.bitcoin.it/wiki/BIP_0032_TestVectors
+        # Taken from test vectors in https://en.iop.it/wiki/BIP_0032_TestVectors
         xpub = "xpub6H1LXWLaKsWFhvm6RVpEL9P4KfRZSW7abD2ttkWP3SSQvnyA8FSVqNTEcYFgJS2UaFcxupHiYkro49S8yGasTvXEYBVPamhGW6cFJodrTHy"
         xprv = "xprvA41z7zogVVwxVSgdKUHDy1SKmdb533PjDz7J6N6mV6uS3ze1ai8FHa8kmHScGpWmj4WggLyQjgPie1rFSruoUihUZREPSL39UNdE3BBDu76"
 
@@ -152,7 +152,7 @@ class Test_bitcoin(unittest.TestCase):
 
 class Test_keyImport(unittest.TestCase):
     """ The keys used in this class are TEST keys from
-        https://en.bitcoin.it/wiki/BIP_0032_TestVectors"""
+        https://en.iop.it/wiki/BIP_0032_TestVectors"""
 
     private_key = "L52XzL2cMkHxqxBXRyEpnPQZGUs3uKiL3R11XbAdHigRzDozKZeW"
     public_key_hex = "0339a36013301597daef41fbe593a02cc513d0b55527ec2df1050e2e8ff49c85c2"

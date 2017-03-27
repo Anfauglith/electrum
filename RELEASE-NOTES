@@ -139,7 +139,7 @@
    wallet that has several accounts. Make sure that you have saved
    your seed phrase before you upgrade Fermatum.
  * This version introduces a separation between wallets types and
-   keystores types. 'Wallet type' defines the type of Bitcoin contract
+   keystores types. 'Wallet type' defines the type of IoP contract
    used in the wallet, while 'keystore type' refers to the method used
    to store private keys. Therefore, so-called 'hardware wallets' will
    be referred to as 'hardware keystores'.
@@ -276,17 +276,17 @@
  * Various GUI improvements
 
 # Release 2.4
- * Payment to DNS names storing a Bitcoin addresses (OpenAlias) is
+ * Payment to DNS names storing a IoP addresses (OpenAlias) is
    supported directly, without activating a plugin. The verification
    uses DNSSEC.
  * The DNSSEC verification code was rewritten. The previous code,
    which was part of the OpenAlias plugin, is vulnerable and should
    not be trusted (Fermatum 2.0 to 2.3).
- * Payment requests can be signed using Bitcoin addresses stored
+ * Payment requests can be signed using IoP addresses stored
    in DNS (OpenAlias). The identity of the requestor is verified using
    DNSSEC.
  * Payment requests signed with OpenAlias keys can be shared as
-   bitcoin: URIs, if they are simple (a single address-type
+   IoP: URIs, if they are simple (a single address-type
    output). The BIP21 URI scheme is extended with 'name', 'sig',
    'time', 'exp'.
  * Arbitrary m-of-n multisig wallets are supported (n<=15).
@@ -360,7 +360,7 @@
  * A Search Box is available in the GUI (Ctrl-S)
  * Payment requests have an expiration date and can be exported to
    BIP70 files.
- * file: scheme support in BIP72 URIs: "bitcoin:?r=file:///..."
+ * file: scheme support in BIP72 URIs: "IoP:?r=file:///..."
  * Own addresses are shown in green in the Transaction dialog.
  * Address History dialog.
  * The OpenAlias plugin was improved.
@@ -449,7 +449,7 @@
 
  * Audio Modem plugin: send and receive transactions by sound.
 
- * OpenAlias plugin: send bitcoins to aliases verified using DNSSEC.
+ * OpenAlias plugin: send iops to aliases verified using DNSSEC.
 
  * New 'Receive' tab in the GUI:
    - create and manage payment requests, with QR Codes
@@ -492,7 +492,7 @@
 
 * Fermatum servers were upgraded to version 0.9. The new server stores
   a Patrica tree of all UTXOs, an idea proposed by Alan Reiner in the
-  bitcointalk forum. This property allows the client to directly
+  ioptalk forum. This property allows the client to directly
   request the balance of any address. The new commands are:
      1. getaddressbalance <address>
      2. getaddressunspent <address>
@@ -616,7 +616,7 @@ command. Tab-completions are available.
 
 * The location of the Fermatum folder in Windows changed from
 LOCALAPPDATA to APPDATA. Discussion on this topic can be found here:
-https://bitcointalk.org/index.php?topic=144575.0
+https://ioptalk.org/index.php?topic=144575.0
 
 * Private keys can be exported from within the classic GUI:
   For a single address, use the address menu (right-click).
@@ -625,7 +625,7 @@ https://bitcointalk.org/index.php?topic=144575.0
 * It is possible to create, sign and redeem multisig transaction using the
 command line interface.  This is made possible by the following new commands:
     dumpprivkey, listunspent, createmultisig, createrawtransaction, decoderawtransaction, signrawtransaction
-The syntax of these commands is similar to their bitcoind counterpart.
+The syntax of these commands is similar to their iopd counterpart.
 For an example, see Gavin's tutorial: https://gist.github.com/gavinandresen/3966071
 
 * Offline wallets now work in a way similar to Armory:
@@ -634,7 +634,7 @@ For an example, see Gavin's tutorial: https://gist.github.com/gavinandresen/3966
   3. signed transaction is copied to the online computer, broadcasted by the online client.
   4. All these steps can be done via the command line interface or the classic GUI.
 
-* Many command line commands have been renamed in order to make the syntax consistent with bitcoind.
+* Many command line commands have been renamed in order to make the syntax consistent with iopd.
 
 # Release 1.6.2
 
@@ -649,7 +649,7 @@ For an example, see Gavin's tutorial: https://gist.github.com/gavinandresen/3966
 
 == Classic GUI
 * Seed and MPK help dialogs were rewritten
-* Point of Sale: requested amounts can be expressed in other currencies and are converted to bitcoin.
+* Point of Sale: requested amounts can be expressed in other currencies and are converted to iop.
 
 == Lite GUI
 * The receiving button was removed in favor of a menu item to keep it consistent with the history toggle.

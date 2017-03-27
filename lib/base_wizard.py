@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2016 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -24,7 +24,7 @@
 # SOFTWARE.
 
 import os
-import bitcoin
+import iop
 import keystore
 from keystore import bip44_derivation
 from wallet import Wallet, Imported_Wallet, Standard_Wallet, Multisig_Wallet, wallet_types
@@ -81,7 +81,7 @@ class BaseWizard(object):
             ('standard',  _("Standard wallet")),
             ('2fa', _("Wallet with two-factor authentication")),
             ('multisig',  _("Multi-signature wallet")),
-            ('imported',  _("Watch Bitcoin addresses")),
+            ('imported',  _("Watch IoP addresses")),
         ]
         choices = [pair for pair in wallet_kinds if pair[0] in wallet_types]
         self.choice_dialog(title=title, message=message, choices=choices, run_next=self.on_wallet_type)
@@ -138,8 +138,8 @@ class BaseWizard(object):
 
     def import_addresses(self):
         v = keystore.is_address_list
-        title = _("Import Bitcoin Addresses")
-        message = _("Enter a list of Bitcoin addresses. This will create a watching-only wallet.")
+        title = _("Import IoP Addresses")
+        message = _("Enter a list of IoP addresses. This will create a watching-only wallet.")
         self.add_xpub_dialog(title=title, message=message, run_next=self.on_import_addresses, is_valid=v)
 
     def on_import_addresses(self, text):
@@ -155,7 +155,7 @@ class BaseWizard(object):
             title = _("Create keystore from keys")
             message = ' '.join([
                 _("To create a watching-only wallet, please enter your master public key (xpub)."),
-                _("To create a spending wallet, please enter a master private key (xprv), or a list of Bitcoin private keys.")
+                _("To create a spending wallet, please enter a master private key (xprv), or a list of IoP private keys.")
             ])
             self.add_xpub_dialog(title=title, message=message, run_next=self.on_restore_from_key, is_valid=v)
         else:
@@ -269,11 +269,11 @@ class BaseWizard(object):
     def restore_from_seed(self):
         self.opt_bip39 = True
         self.opt_ext = True
-        test = bitcoin.is_seed if self.wallet_type == 'standard' else bitcoin.is_new_seed
+        test = iop.is_seed if self.wallet_type == 'standard' else iop.is_new_seed
         self.restore_seed_dialog(run_next=self.on_restore_seed, test=test)
 
     def on_restore_seed(self, seed, is_bip39, is_ext):
-        self.seed_type = 'bip39' if is_bip39 else bitcoin.seed_type(seed)
+        self.seed_type = 'bip39' if is_bip39 else iop.seed_type(seed)
         if self.seed_type == 'bip39':
             f = lambda passphrase: self.on_restore_bip39(seed, passphrase)
             self.passphrase_dialog(run_next=f) if is_ext else f('')
@@ -361,7 +361,7 @@ class BaseWizard(object):
 
     def create_seed(self):
         import mnemonic
-        self.seed_type = 'segwit' if bitcoin.TESTNET and self.config.get('segwit') else 'standard'
+        self.seed_type = 'segwit' if iop.TESTNET and self.config.get('segwit') else 'standard'
         seed = mnemonic.Mnemonic('en').make_seed(self.seed_type)
         self.opt_bip39 = False
         f = lambda x: self.request_passphrase(seed, x)

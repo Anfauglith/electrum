@@ -125,7 +125,7 @@ Section
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\Uninstall.lnk" "$INSTDIR\Uninstall.exe" "" "$INSTDIR\Uninstall.exe" 0
   CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\${PRODUCT_NAME}.lnk" "$INSTDIR\fermatum-${PRODUCT_VERSION}.exe" "" "$INSTDIR\fermatum-${PRODUCT_VERSION}.exe" 0
 
-  ;Links bitcoin: URI's to Fermatum
+  ;Links IoP: URI's to Fermatum
   WriteRegStr HKCU "Software\Classes\IoP" "" "URL:IoP Protocol"
   WriteRegStr HKCU "Software\Classes\IoP" "URL Protocol" ""
   WriteRegStr HKCU "Software\Classes\IoP" "DefaultIcon" "$\"$INSTDIR\fermatum.ico, 0$\""
@@ -160,7 +160,7 @@ Section "Uninstall"
   Delete "$SMPROGRAMS\${PRODUCT_NAME}\*.*"
   RMDir  "$SMPROGRAMS\${PRODUCT_NAME}"
   
-  DeleteRegKey HKCU "Software\Classes\bitcoin"
+  DeleteRegKey HKCU "Software\Classes\iop"
   DeleteRegKey HKCU "Software\${PRODUCT_NAME}"
   DeleteRegKey HKCU "${PRODUCT_UNINST_KEY}"
 SectionEnd

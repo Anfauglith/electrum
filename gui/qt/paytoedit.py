@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -29,7 +29,7 @@ from qrtextedit import ScanQRTextEdit
 
 import re
 from decimal import Decimal
-from fermatum import bitcoin
+from fermatum import iop
 
 import util
 
@@ -81,10 +81,10 @@ class PayToEdit(ScanQRTextEdit):
     def parse_output(self, x):
         try:
             address = self.parse_address(x)
-            return bitcoin.TYPE_ADDRESS, address
+            return iop.TYPE_ADDRESS, address
         except:
             script = self.parse_script(x)
-            return bitcoin.TYPE_SCRIPT, script
+            return iop.TYPE_SCRIPT, script
 
     def parse_script(self, x):
         from fermatum.transaction import opcodes, push_script
@@ -107,7 +107,7 @@ class PayToEdit(ScanQRTextEdit):
         r = line.strip()
         m = re.match('^'+RE_ALIAS+'$', r)
         address = str(m.group(2) if m else r)
-        assert bitcoin.is_address(address)
+        assert iop.is_address(address)
         return address
 
     def check_text(self):
@@ -121,7 +121,7 @@ class PayToEdit(ScanQRTextEdit):
         self.payto_address = None
         if len(lines) == 1:
             data = lines[0]
-            if data.startswith("bitcoin:"):
+            if data.startswith("IoP:"):
                 self.scan_f(data)
                 return
             try:
@@ -259,7 +259,7 @@ class PayToEdit(ScanQRTextEdit):
 
     def qr_input(self):
         data = super(PayToEdit,self).qr_input()
-        if data.startswith("bitcoin:"):
+        if data.startswith("IoP:"):
             self.scan_f(data)
             # TODO: update fee
 

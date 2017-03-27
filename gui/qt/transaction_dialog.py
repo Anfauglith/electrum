@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -33,7 +33,7 @@ from PyQt4.QtCore import *
 import PyQt4.QtCore as QtCore
 
 from fermatum import transaction
-from fermatum.bitcoin import base_encode
+from fermatum.iop import base_encode
 from fermatum.i18n import _
 from fermatum.plugins import run_hook
 

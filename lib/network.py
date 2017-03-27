@@ -1,4 +1,4 @@
-# Fermatum - Lightweight Bitcoin Client
+# Fermatum - Lightweight IoP Client
 # Copyright (c) 2011-2016 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -37,8 +37,8 @@ import socket
 import json
 
 import util
-import bitcoin
-from bitcoin import *
+import iop
+from iop import *
 from interface import Connection, Interface
 from blockchain import Blockchain
 from version import FERMATUM_VERSION, PROTOCOL_VERSION
@@ -325,7 +325,7 @@ class Network(util.DaemonThread):
         self.queue_request('server.banner', [])
         self.queue_request('server.donation_address', [])
         self.queue_request('server.peers.subscribe', [])
-        for i in bitcoin.FEE_TARGETS:
+        for i in iop.FEE_TARGETS:
             self.queue_request('blockchain.estimatefee', [i])
         self.queue_request('blockchain.relayfee', [])
         for addr in self.subscribed_addresses:

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2014 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -34,7 +34,7 @@ import ecdsa
 import pbkdf2
 
 from util import print_error
-from bitcoin import is_old_seed, is_new_seed
+from iop import is_old_seed, is_new_seed
 import version
 import i18n
 

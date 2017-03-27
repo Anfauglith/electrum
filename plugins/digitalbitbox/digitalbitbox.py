@@ -5,7 +5,7 @@
 
 try:
     import fermatum as fermatum
-    from fermatum.bitcoin import TYPE_ADDRESS, var_int, msg_magic, Hash, verify_message, public_key_to_p2pkh, EncodeAES, DecodeAES
+    from fermatum.iop import TYPE_ADDRESS, var_int, msg_magic, Hash, verify_message, public_key_to_p2pkh, EncodeAES, DecodeAES
     from fermatum.i18n import _
     from fermatum.keystore import Hardware_KeyStore
     from ..hw_wallet import HW_PluginBase

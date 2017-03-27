@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2011 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -28,16 +28,16 @@
 # Note: The deserialization code originally comes from ABE.
 
 
-import bitcoin
-from bitcoin import *
-from bitcoin import hash160_to_p2sh, hash160_to_p2pkh
+import iop
+from iop import *
+from iop import hash160_to_p2sh, hash160_to_p2pkh
 from util import print_error, profiler
 import time
 import sys
 import struct
 
 #
-# Workalike python implementation of Bitcoin's CDataStream class.
+# Workalike python implementation of IoP's CDataStream class.
 #
 import struct
 import StringIO
@@ -70,7 +70,7 @@ class BCDataStream(object):
         # 0 to 252 :  1-byte-length followed by bytes (if any)
         # 253 to 65,535 : byte'253' 2-byte-length followed by bytes
         # 65,536 to 4,294,967,295 : byte '254' 4-byte-length followed by bytes
-        # ... and the Bitcoin client is coded to understand:
+        # ... and the IoP client is coded to understand:
         # greater than 4,294,967,295 : byte '255' 8-byte-length followed by bytes of string
         # ... but I don't think it actually handles any strings that big.
         if self.input is None:
@@ -192,11 +192,11 @@ class Enumeration:
         return self.reverseLookup[value]
 
 
-# This function comes from bitcointools, bct-LICENSE.txt.
+# This function comes from ioptools, bct-LICENSE.txt.
 def long_hex(bytes):
     return bytes.encode('hex_codec')
 
-# This function comes from bitcointools, bct-LICENSE.txt.
+# This function comes from ioptools, bct-LICENSE.txt.
 def short_hex(bytes):
     t = bytes.encode('hex_codec')
     if len(t) < 11:
@@ -308,7 +308,7 @@ def parse_scriptSig(d, bytes):
         item = decoded[0][1]
         if item[0] == chr(0):
             redeemScript = item.encode('hex')
-            d['address'] = bitcoin.hash160_to_p2sh(bitcoin.hash_160(redeemScript.decode('hex')))
+            d['address'] = iop.hash160_to_p2sh(iop.hash_160(redeemScript.decode('hex')))
             d['type'] = 'p2wpkh-p2sh'
             d['redeemScript'] = redeemScript
             d['x_pubkeys'] = ["(witness)"]
@@ -387,7 +387,7 @@ def get_address_from_output_script(bytes):
     if match_decoded(decoded, match):
         return TYPE_PUBKEY, decoded[0][1].encode('hex')
 
-    # Pay-by-Bitcoin-address TxOuts look like:
+    # Pay-by-IoP-address TxOuts look like:
     # DUP HASH160 20 BYTES:... EQUALVERIFY CHECKSIG
     match = [ opcodes.OP_DUP, opcodes.OP_HASH160, opcodes.OP_PUSHDATA4, opcodes.OP_EQUALVERIFY, opcodes.OP_CHECKSIG ]
     if match_decoded(decoded, match):
@@ -467,11 +467,11 @@ def push_script(x):
 
 def get_scriptPubKey(addr):
     addrtype, hash_160 = bc_address_to_hash_160(addr)
-    if addrtype == bitcoin.ADDRTYPE_P2PKH:
+    if addrtype == iop.ADDRTYPE_P2PKH:
         script = '76a9'                                      # op_dup, op_hash_160
         script += push_script(hash_160.encode('hex'))
         script += '88ac'                                     # op_equalverify, op_checksig
-    elif addrtype == bitcoin.ADDRTYPE_P2SH:
+    elif addrtype == iop.ADDRTYPE_P2SH:
         script = 'a9'                                        # op_hash_160
         script += push_script(hash_160.encode('hex'))
         script += '87'                                       # op_equal
@@ -715,10 +715,10 @@ class Transaction:
             hashOutputs = Hash(''.join(self.serialize_output(o) for o in outputs).decode('hex')).encode('hex')
             outpoint = self.serialize_outpoint(txin)
             pubkey = txin['pubkeys'][0]
-            pkh = bitcoin.hash_160(pubkey.decode('hex')).encode('hex')
+            pkh = iop.hash_160(pubkey.decode('hex')).encode('hex')
             redeemScript = '00' + push_script(pkh)
             scriptCode = push_script('76a9' + push_script(pkh) + '88ac')
-            script_hash = bitcoin.hash_160(redeemScript.decode('hex')).encode('hex')
+            script_hash = iop.hash_160(redeemScript.decode('hex')).encode('hex')
             scriptPubKey = 'a9' + push_script(script_hash) + '87'
             amount = int_to_hex(txin['value'], 8)
             nSequence = int_to_hex(txin.get('sequence', 0xffffffff), 4)
@@ -825,7 +825,7 @@ class Transaction:
                     pre_hash = Hash(self.serialize_preimage(i).decode('hex'))
                     pkey = regenerate_key(sec)
                     secexp = pkey.secret
-                    private_key = bitcoin.MySigningKey.from_secret_exponent(secexp, curve = SECP256k1)
+                    private_key = iop.MySigningKey.from_secret_exponent(secexp, curve = SECP256k1)
                     public_key = private_key.get_verifying_key()
                     sig = private_key.sign_digest_deterministic(pre_hash, hashfunc=hashlib.sha256, sigencode = ecdsa.util.sigencode_der)
                     assert public_key.verify_digest(sig, pre_hash, sigdecode = ecdsa.util.sigdecode_der)
@@ -842,7 +842,7 @@ class Transaction:
             if type == TYPE_ADDRESS:
                 addr = x
             elif type == TYPE_PUBKEY:
-                addr = bitcoin.public_key_to_p2pkh(x.decode('hex'))
+                addr = iop.public_key_to_p2pkh(x.decode('hex'))
             else:
                 addr = 'SCRIPT ' + x.encode('hex')
             o.append((addr,v))      # consider using yield (addr, v)
@@ -868,7 +868,7 @@ class Transaction:
 
 
     def requires_fee(self, wallet):
-        # see https://en.bitcoin.it/wiki/Transaction_fees
+        # see https://en.iop.it/wiki/Transaction_fees
         #
         # size must be smaller than 1 kbyte for free tx
         size = len(self.serialize(-1))/2

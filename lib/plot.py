@@ -6,7 +6,7 @@ import datetime
 from collections import defaultdict
 
 from fermatum.util import format_satoshis
-from fermatum.bitcoin import COIN
+from fermatum.iop import COIN
 
 import matplotlib
 matplotlib.use('Qt4Agg')

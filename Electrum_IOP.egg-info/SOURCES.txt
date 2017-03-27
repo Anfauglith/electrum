@@ -125,7 +125,7 @@ icons/warning.png
 icons/zoom.png
 lib/__init__.py
 lib/base_wizard.py
-lib/bitcoin.py
+lib/iop.py
 lib/blockchain.py
 lib/coinchooser.py
 lib/commands.py
@@ -160,7 +160,7 @@ lib/websockets.py
 lib/x509.py
 lib/tests/__init__.py
 lib/tests/test_account.py
-lib/tests/test_bitcoin.py
+lib/tests/test_iop.py
 lib/tests/test_interface.py
 lib/tests/test_mnemonic.py
 lib/tests/test_simple_config.py

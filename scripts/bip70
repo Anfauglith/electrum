@@ -5,7 +5,7 @@ import time
 import hashlib
 
 from fermatum.transaction import Transaction
-from fermatum import bitcoin
+from fermatum import iop
 from fermatum import x509
 from fermatum import paymentrequest
 from fermatum import paymentrequest_pb2 as pb2

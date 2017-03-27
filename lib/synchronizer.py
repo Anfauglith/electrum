@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2014 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -27,7 +27,7 @@
 from threading import Lock
 import hashlib
 
-from bitcoin import Hash, hash_encode
+from iop import Hash, hash_encode
 from transaction import Transaction
 from util import print_error, print_msg, ThreadJob
 

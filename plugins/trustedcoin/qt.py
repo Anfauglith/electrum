@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - Lightweight Bitcoin Client
+# Fermatum - Lightweight IoP Client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -189,7 +189,7 @@ class Plugin(TrustedCoinPlugin):
         if window.pluginsdialog:
             window.pluginsdialog.close()
         wallet = window.wallet
-        uri = "bitcoin:" + wallet.billing_info['billing_address'] + "?message=TrustedCoin %d Prepaid Transactions&amount="%k + str(Decimal(v)/100000000)
+        uri = "IoP:" + wallet.billing_info['billing_address'] + "?message=TrustedCoin %d Prepaid Transactions&amount="%k + str(Decimal(v)/100000000)
         wallet.is_billing = True
         window.pay_to_URI(uri)
         window.payto_e.setFrozen(True)

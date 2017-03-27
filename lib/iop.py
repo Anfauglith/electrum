@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2011 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -36,7 +36,7 @@ from util import print_error, InvalidPassword
 import ecdsa
 import pyaes
 
-# Bitcoin network constants
+# IoP network constants
 TESTNET = False
 # NOLNET = False
 ADDRTYPE_P2PKH = 0x75
@@ -165,7 +165,7 @@ def int_to_hex(i, length=1):
 
 
 def var_int(i):
-    # https://en.bitcoin.it/wiki/Protocol_specification#Variable_length_integer
+    # https://en.iop.it/wiki/Protocol_specification#Variable_length_integer
     if i<0xfd:
         return int_to_hex(i)
     elif i<=0xffff:
@@ -317,7 +317,7 @@ def base_encode(v, base):
         result = chars[mod] + result
         long_value = div
     result = chars[long_value] + result
-    # Bitcoin does a little leading-zero-compression:
+    # IoP does a little leading-zero-compression:
     # leading 0-bytes in the input become leading-1s
     nPad = 0
     for c in v:
@@ -478,7 +478,7 @@ from ecdsa.util import string_to_number, number_to_string
 def msg_magic(message):
     varint = var_int(len(message))
     encoded_varint = "".join([chr(int(varint[i:i+2], 16)) for i in xrange(0, len(varint), 2)])
-    return "\x18Bitcoin Signed Message:\n" + encoded_varint + message
+    return "\x18IoP Signed Message:\n" + encoded_varint + message
 
 
 def verify_message(address, sig, message):
@@ -805,7 +805,7 @@ def xpub_from_xprv(xprv):
 
 
 def bip32_root(seed, xtype):
-    I = hmac.new("Bitcoin seed", seed, hashlib.sha512).digest()
+    I = hmac.new("IoP seed", seed, hashlib.sha512).digest()
     master_k = I[0:32]
     master_c = I[32:]
     K, cK = get_pubkeys_from_secret(master_k)

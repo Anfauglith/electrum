@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2011 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -375,11 +375,11 @@ def block_explorer_URL(config, kind, item):
 #urldecode = lambda x: _ud.sub(lambda m: chr(int(m.group(1), 16)), x)
 
 def parse_URI(uri, on_pr=None):
-    import bitcoin
-    from bitcoin import COIN
+    import iop
+    from iop import COIN
 
     if ':' not in uri:
-        if not bitcoin.is_address(uri):
+        if not iop.is_address(uri):
             raise BaseException("Not an IoP address")
         return {'address': uri}
 
@@ -401,7 +401,7 @@ def parse_URI(uri, on_pr=None):
 
     out = {k: v[0] for k, v in pq.items()}
     if address:
-        if not bitcoin.is_address(address):
+        if not iop.is_address(address):
             raise BaseException("Invalid IoP address:" + address)
         out['address'] = address
     if 'amount' in out:
@@ -421,7 +421,7 @@ def parse_URI(uri, on_pr=None):
     if 'exp' in out:
         out['exp'] = int(out['exp'])
     if 'sig' in out:
-        out['sig'] = bitcoin.base_decode(out['sig'], None, base=58).encode('hex')
+        out['sig'] = iop.base_decode(out['sig'], None, base=58).encode('hex')
 
     r = out.get('r')
     sig = out.get('sig')
@@ -443,8 +443,8 @@ def parse_URI(uri, on_pr=None):
 
 
 def create_URI(addr, amount, message):
-    import bitcoin
-    if not bitcoin.is_address(addr):
+    import iop
+    if not iop.is_address(addr):
         return ""
     query = []
     if amount:

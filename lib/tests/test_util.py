@@ -36,7 +36,7 @@ class TestUtil(unittest.TestCase):
                                 {'address': 'pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv', 'label': 'fermatum test'})
 
     def test_parse_URI_address_message(self):
-        self._do_test_parse_URI('bitcoin:pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv?message=fermatum%20test',
+        self._do_test_parse_URI('IoP:pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv?message=fermatum%20test',
                                 {'address': 'pGrFzLKTWFUAu9qvVCqWXJ7k4h7tUauugv', 'message': 'fermatum test', 'memo': 'fermatum test'})
 
     def test_parse_URI_address_amount(self):

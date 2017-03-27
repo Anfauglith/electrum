@@ -5,7 +5,7 @@ import threading
 from binascii import hexlify, unhexlify
 from functools import partial
 
-from fermatum.bitcoin import (bc_address_to_hash_160, xpub_from_pubkey,
+from fermatum.iop import (bc_address_to_hash_160, xpub_from_pubkey,
                               public_key_to_p2pkh, EncodeBase58Check,
                               TYPE_ADDRESS, TYPE_SCRIPT,
                               TESTNET, ADDRTYPE_P2PKH, ADDRTYPE_P2SH)

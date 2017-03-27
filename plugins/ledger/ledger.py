@@ -6,8 +6,8 @@ import sys
 import traceback
 
 import fermatum
-from fermatum import bitcoin
-from fermatum.bitcoin import TYPE_ADDRESS, int_to_hex, var_int
+from fermatum import iop
+from fermatum.iop import TYPE_ADDRESS, int_to_hex, var_int
 from fermatum.i18n import _
 from fermatum.plugins import BasePlugin, hook
 from fermatum.keystore import Hardware_KeyStore, parse_xpubkey
@@ -19,7 +19,7 @@ try:
     from btchip.btchipComm import HIDDongleHIDAPI, DongleWait
     from btchip.btchip import btchip
     from btchip.btchipUtils import compress_public_key,format_transaction, get_regular_input_script, get_p2sh_input_script
-    from btchip.bitcoinTransaction import bitcoinTransaction
+    from btchip.iopTransaction import iopTransaction
     from btchip.btchipFirmwareWizard import checkFirmware, updateFirmware
     from btchip.btchipException import BTChipException
     BTCHIP = True
@@ -79,7 +79,7 @@ class Ledger_Client():
                 childnum = int(lastChild[0])
             else:
                 childnum = 0x80000000 | int(lastChild[0])
-            xpub = bitcoin.serialize_xpub(0, str(nodeData['chainCode']), str(publicKey), depth, self.i4b(fingerprint), self.i4b(childnum))
+            xpub = iop.serialize_xpub(0, str(nodeData['chainCode']), str(publicKey), depth, self.i4b(fingerprint), self.i4b(childnum))
             return xpub
         except Exception as e:
             print_error(e)
@@ -148,7 +148,7 @@ class Ledger_Client():
                 self.perform_hw1_preflight()
             except BTChipException as e:
                 if (e.sw == 0x6d00):
-                    raise BaseException("Device not in Bitcoin mode")
+                    raise BaseException("Device not in IoP mode")
                 raise e
             self.preflightDone = True
 
@@ -331,7 +331,7 @@ class Ledger_KeyStore(Hardware_KeyStore):
             # Get trusted inputs from the original transactions
             for utxo in inputs:                
                 if not p2shTransaction:
-                    txtmp = bitcoinTransaction(bytearray(utxo[0].decode('hex')))             
+                    txtmp = iopTransaction(bytearray(utxo[0].decode('hex')))             
                     chipInputs.append(self.get_client().getTrustedInput(txtmp, utxo[1]))
                     redeemScripts.append(txtmp.outputs[utxo[1]].script)                    
                 else:

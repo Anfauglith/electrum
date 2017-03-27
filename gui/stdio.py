@@ -3,7 +3,7 @@ _ = lambda x:x
 #from i18n import _
 from fermatum import WalletStorage, Wallet
 from fermatum.util import format_satoshis, set_verbosity
-from fermatum.bitcoin import is_valid, COIN, TYPE_ADDRESS
+from fermatum.iop import is_valid, COIN, TYPE_ADDRESS
 from fermatum.network import filter_protocol
 import sys, getpass, datetime
 
@@ -164,7 +164,7 @@ class FermatumGui:
 
     def do_send(self):
         if not is_valid(self.str_recipient):
-            print(_('Invalid Bitcoin address'))
+            print(_('Invalid IoP address'))
             return
         try:
             amount = int(Decimal(self.str_amount) * COIN)

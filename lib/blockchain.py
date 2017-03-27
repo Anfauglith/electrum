@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight Bitcoin client
+# Fermatum - lightweight IoP client
 # Copyright (C) 2012 thomasv@ecdsa.org
 #
 # Permission is hereby granted, free of charge, to any person
@@ -27,8 +27,8 @@
 
 import os
 import util
-import bitcoin
-from bitcoin import *
+import iop
+from iop import *
 
 MAX_TARGET = 0x00000000FFFF0000000000000000000000000000000000000000000000000000
 
@@ -56,7 +56,7 @@ class Blockchain(util.PrintError):
     def verify_header(self, header, prev_header, bits, target):
         prev_hash = self.hash_header(prev_header)
         assert prev_hash == header.get('prev_block_hash'), "prev hash mismatch: %s vs %s" % (prev_hash, header.get('prev_block_hash'))
-        if bitcoin.TESTNET or bitcoin.NOLNET: return
+        if iop.TESTNET or iop.NOLNET: return
         assert bits == header.get('bits'), "bits mismatch: %s vs %s" % (bits, header.get('bits'))
         _hash = self.hash_header(header)
         assert int('0x' + _hash, 16) <= target, "insufficient proof of work: %s vs target %s" % (int('0x' + _hash, 16), target)
@@ -115,8 +115,8 @@ class Blockchain(util.PrintError):
         try:
             import urllib, socket
             socket.setdefaulttimeout(30)
-            self.print_error("downloading ", bitcoin.HEADERS_URL)
-            urllib.urlretrieve(bitcoin.HEADERS_URL, filename + '.tmp')
+            self.print_error("downloading ", iop.HEADERS_URL)
+            urllib.urlretrieve(iop.HEADERS_URL, filename + '.tmp')
             os.rename(filename + '.tmp', filename)
             self.print_error("done.")
         except Exception:
