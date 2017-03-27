@@ -17,3 +17,7 @@ env/
 .buildozer/
 bin/
 Fermatum.egg-info
+fermatumenv
+.eggs
+.python-version
+lib/paymentrequest_pb2.py

@@ -49,8 +49,8 @@ import rsakey
 
 from bitcoin import TYPE_ADDRESS
 
-REQUEST_HEADERS = {'Accept': 'application/bitcoin-paymentrequest', 'User-Agent': 'Fermatum'}
-ACK_HEADERS = {'Content-Type':'application/bitcoin-payment','Accept':'application/bitcoin-paymentack','User-Agent':'Fermatum'}
+REQUEST_HEADERS = {'Accept': 'application/IoP-paymentrequest', 'User-Agent': 'Fermatum'}
+ACK_HEADERS = {'Content-Type':'application/IoP-payment','Accept':'application/IoP-paymentack','User-Agent':'Fermatum'}
 
 ca_path = requests.certs.where()
 ca_list = None
@@ -78,9 +78,9 @@ def get_payment_request(url):
         try:
             response = requests.request('GET', url, headers=REQUEST_HEADERS)
             response.raise_for_status()
-            # Guard against `bitcoin:`-URIs with invalid payment request URLs
+            # Guard against `IoP:`-URIs with invalid payment request URLs
             if "Content-Type" not in response.headers \
-            or response.headers["Content-Type"] != "application/bitcoin-paymentrequest":
+            or response.headers["Content-Type"] != "application/IoP-paymentrequest":
                 data = None
                 error = "payment URL not pointing to a payment request handling server"
             else:

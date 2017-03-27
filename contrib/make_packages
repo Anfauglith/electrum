@@ -23,7 +23,7 @@ if __name__ == '__main__':
         'dns',
         'six',
         'jsonrpclib',
-	'socks',
+        'socks',
     ]
     for module in deps:
         f, pathname, descr = imp.find_module(module)
@@ -58,5 +58,3 @@ if __name__ == '__main__':
     os.system("python setup.py sdist --format=zip,gztar")
 
     print "Packages are ready in dist"
-
-
