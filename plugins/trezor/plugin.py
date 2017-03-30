@@ -148,7 +148,7 @@ class TrezorCompatiblePlugin(HW_PluginBase):
         if TESTNET:
             return "IoP Testnet"
         else:
-            return "Internet Of People"
+            return "IoP"
 
     def initialize_device(self, device_id, wizard, handler):
         # Initialization method
