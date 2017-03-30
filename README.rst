@@ -1,4 +1,4 @@
-Fermatum - Lightweight IoP client
+Electrum-IOP - Lightweight IoP client
 =====================================
 
 ::
@@ -7,34 +7,34 @@ Fermatum - Lightweight IoP client
   Original Author: Thomas Voegtlin
   Port Maintainer: Amon Engemann
   Language: Python
-  Homepage: https://fermatum.org/
+  Homepage: https://electrum-iop.org/
 
 
 
 Getting started
 ===============
 
-Fermatum is a pure python application. However, if you want to use the
+Electrum-IOP is a pure python application. However, if you want to use the
 Qt interface, then you need to install the Qt dependencies::
 
     sudo apt-get install python-qt4
 
 If you downloaded the official package (tar.gz), then you can run
-Fermatum from its root directory, without installing it on your
+Electrum-IOP from its root directory, without installing it on your
 system; all the python dependencies are included in the 'packages'
-directory. To run Fermatum from its root directory, just do::
+directory. To run Electrum-IOP from its root directory, just do::
 
-    ./fermatum
+    ./electrum-iop
 
-You can also install Fermatum on your system, by running this command::
+You can also install Electrum-IOP on your system, by running this command::
 
     python setup.py install
 
 This will download and install the Python dependencies used by
-Fermatum, instead of using the 'packages' directory.
+Electrum-IOP, instead of using the 'packages' directory.
 
 If you cloned the git repository, then you need to compile extra files
-before you can run Fermatum. Read the next section, "Development
+before you can run Electrum-IOP. Read the next section, "Development
 Version".
 
 
@@ -44,8 +44,8 @@ Development version
 
 Check out the code from Github::
 
-    git clone git://github.com/Anfauglith/fermatum.git
-    cd fermatum
+    git clone git://github.com/Anfauglith/electrum-iop.git
+    cd electrum-iop
 
 Run install (this should install dependencies)::
 
@@ -77,7 +77,7 @@ In order to create binaries, you must create the 'packages' directory::
 
     ./contrib/make_packages
 
-This directory contains the python dependencies used by Fermatum.
+This directory contains the python dependencies used by Electrum-IOP.
 
 Mac OS X
 --------
@@ -90,7 +90,7 @@ Mac OS X
     # On Homebrew installs: 
     ARCHFLAGS="-arch i386 -arch x86_64" sudo python setup-release.py py2app --includes sip
     
-    sudo hdiutil create -fs HFS+ -volname "Fermatum" -srcfolder dist/Fermatum.app dist/fermatum-ltc-VERSION-macosx.dmg
+    sudo hdiutil create -fs HFS+ -volname "Electrum-IOP" -srcfolder dist/Electrum-IOP.app dist/electrum-iop-VERSION-macosx.dmg
 
 Windows
 -------

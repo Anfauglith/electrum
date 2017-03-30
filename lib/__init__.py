@@ -1,4 +1,4 @@
-from version import FERMATUM_VERSION
+from version import ELECTRUM_IOP_VERSION
 from util import format_satoshis, print_msg, print_error, set_verbosity
 from wallet import Synchronizer, Wallet, Imported_Wallet
 from storage import WalletStorage

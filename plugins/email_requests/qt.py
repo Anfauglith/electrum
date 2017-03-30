@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - Lightweight IoP Client
+# Electrum-IOP - Lightweight IoP Client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -42,11 +42,11 @@ from PyQt4.QtCore import *
 import PyQt4.QtCore as QtCore
 import PyQt4.QtGui as QtGui
 
-from fermatum.plugins import BasePlugin, hook
-from fermatum.paymentrequest import PaymentRequest
-from fermatum.i18n import _
-from fermatum_gui.qt.util import EnterButton, Buttons, CloseButton
-from fermatum_gui.qt.util import OkButton, WindowModalDialog
+from electrum_iop.plugins import BasePlugin, hook
+from electrum_iop.paymentrequest import PaymentRequest
+from electrum_iop.i18n import _
+from electrum_iop_gui.qt.util import EnterButton, Buttons, CloseButton
+from electrum_iop_gui.qt.util import OkButton, WindowModalDialog
 
 
 
@@ -142,7 +142,7 @@ class Plugin(BasePlugin):
         menu.addAction(_("Send via e-mail"), lambda: self.send(window, addr))
 
     def send(self, window, addr):
-        from fermatum import paymentrequest
+        from electrum_iop import paymentrequest
         r = window.wallet.receive_requests.get(addr)
         message = r.get('memo', '')
         if r.get('signature'):

@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python
 
 import sys, re, shutil, os, hashlib
 import imp
@@ -9,7 +9,7 @@ if __name__ == '__main__':
     d = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), os.pardir))
     os.chdir(d)
     v = imp.load_source('version', 'lib/version.py')
-    version = v.FERMATUM_VERSION
+    version = v.ELECTRUM_IOP_VERSION
     print "version", version
 
     # copy dependencies into 'packages' directory
@@ -19,11 +19,11 @@ if __name__ == '__main__':
         'pbkdf2',
         'requests', # note: requests-2.5.1 is needed to build with pyinstaller
         'qrcode',
-        'google/protobuf',
         'dns',
         'six',
         'jsonrpclib',
         'socks',
+        'google',
     ]
     for module in deps:
         f, pathname, descr = imp.find_module(module)

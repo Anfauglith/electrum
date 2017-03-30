@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -26,7 +26,7 @@
 import gettext, os
 
 LOCALE_DIR = os.path.join(os.path.dirname(__file__), 'locale')
-language = gettext.translation('fermatum', LOCALE_DIR, fallback = True)
+language = gettext.translation('electrum-iop', LOCALE_DIR, fallback = True)
 
 
 def _(x):
@@ -35,7 +35,7 @@ def _(x):
 
 def set_language(x):
     global language
-    if x: language = gettext.translation('fermatum', LOCALE_DIR, fallback = True, languages=[x])
+    if x: language = gettext.translation('electrum-iop', LOCALE_DIR, fallback = True, languages=[x])
 
 
 languages = {

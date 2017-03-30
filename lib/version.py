@@ -1,9 +1,9 @@
-FERMATUM_VERSION = '2.8.2'  # version of the client package
+ELECTRUM_IOP_VERSION = '2.8.2'  # version of the client package
 PROTOCOL_VERSION = '0.10'   # protocol version requested
 
 # The hash of the mnemonic seed must begin with this
-SEED_PREFIX      = '01'      # Fermatum standard wallet
-SEED_PREFIX_SW   = '02'      # Fermatum segwit wallet
+SEED_PREFIX      = '01'      # Electrum-IOP standard wallet
+SEED_PREFIX_SW   = '02'      # Electrum-IOP segwit wallet
 SEED_PREFIX_2FA  = '101'     # extended seed for two-factor authentication
 
 

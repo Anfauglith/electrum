@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -27,9 +27,9 @@ import socket
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 
-from fermatum.i18n import _
-from fermatum.network import DEFAULT_PORTS
-from fermatum.network import serialize_server, deserialize_server
+from electrum_iop.i18n import _
+from electrum_iop.network import DEFAULT_PORTS
+from electrum_iop.network import serialize_server, deserialize_server
 
 from util import *
 
@@ -85,8 +85,8 @@ class NetworkChoiceLayout(object):
         hbox.addWidget(l)
         hbox.addWidget(QLabel(status))
         hbox.addStretch(50)
-        msg = _("Fermatum sends your wallet addresses to a single server, in order to receive your transaction history.") + "\n\n" \
-            + _("In addition, Fermatum connects to several nodes in order to download block headers and find out the longest blockchain.") + " " \
+        msg = _("Electrum-IOP sends your wallet addresses to a single server, in order to receive your transaction history.") + "\n\n" \
+            + _("In addition, Electrum-IOP connects to several nodes in order to download block headers and find out the longest blockchain.") + " " \
             + _("This blockchain is used to verify the transactions sent by the address server.")
         hbox.addWidget(HelpButton(msg))
         vbox.addLayout(hbox)
@@ -118,8 +118,8 @@ class NetworkChoiceLayout(object):
         self.autoconnect_cb.setChecked(auto_connect)
         grid.addWidget(self.autoconnect_cb, 1, 1, 1, 3)
         self.autoconnect_cb.setEnabled(self.config.is_modifiable('auto_connect'))
-        msg = _("If auto-connect is enabled, Fermatum will always use a server that is on the longest blockchain.") + "\n" \
-            + _("If it is disabled, Fermatum will warn you if your server is lagging.")
+        msg = _("If auto-connect is enabled, Electrum-IOP will always use a server that is on the longest blockchain.") + "\n" \
+            + _("If it is disabled, Electrum-IOP will warn you if your server is lagging.")
         self.autoconnect_cb.setToolTip(msg)
 
         label = _('Active Servers') if network.is_connected() else _('Default Servers')

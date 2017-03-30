@@ -1,4 +1,4 @@
-from fermatum.i18n import _
+from electrum_iop.i18n import _
 
 fullname = 'Ledger Wallet'
 description = 'Provides support for Ledger hardware wallet'

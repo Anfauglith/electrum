@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -85,7 +85,7 @@ class Abstract_Wallet(PrintError):
     max_change_outputs = 3
 
     def __init__(self, storage):
-        self.fermatum_version = FERMATUM_VERSION
+        self.electrum_iop_version = ELECTRUM_IOP_VERSION
         self.storage = storage
         self.network = None
         # verifier (SPV) and synchronizer are started in start_threads
@@ -1756,7 +1756,7 @@ class Wallet(object):
         WalletClass = Wallet.wallet_class(wallet_type)
         wallet = WalletClass(storage)
         # Convert hardware wallets restored with older versions of
-        # Fermatum to BIP44 wallets.  A hardware wallet does not have
+        # Electrum-IOP to BIP44 wallets.  A hardware wallet does not have
         # a seed and plugins do not need to handle having one.
         rwc = getattr(wallet, 'restore_wallet_class', None)
         if rwc and storage.get('seed', ''):
@@ -1772,4 +1772,3 @@ class Wallet(object):
         if wallet_type in wallet_constructors:
             return wallet_constructors[wallet_type]
         raise RuntimeError("Unknown wallet type: " + wallet_type)
-

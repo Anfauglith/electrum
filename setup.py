@@ -12,7 +12,7 @@ import argparse
 version = imp.load_source('version', 'lib/version.py')
 
 if sys.version_info[:3] < (2, 7, 0):
-    sys.exit("Error: Fermatum requires Python version >= 2.7.0...")
+    sys.exit("Error: Electrum-IOP requires Python version >= 2.7.0...")
 
 data_files = []
 
@@ -28,13 +28,13 @@ if platform.system() in ['Linux', 'FreeBSD', 'DragonFly']:
         else:
             usr_share = os.path.expanduser('~/.local/share')
     data_files += [
-        (os.path.join(usr_share, 'applications/'), ['fermatum.desktop']),
-        (os.path.join(usr_share, 'pixmaps/'), ['icons/fermatum.png'])
+        (os.path.join(usr_share, 'applications/'), ['electrum-iop.desktop']),
+        (os.path.join(usr_share, 'pixmaps/'), ['icons/electrum-iop.png'])
     ]
 
 setup(
-    name="Fermatum",
-    version=version.FERMATUM_VERSION,
+    name="Electrum-IOP",
+    version=version.ELECTRUM_IOP_VERSION,
     install_requires=[
         'pyaes',
         'ecdsa>=0.9',
@@ -47,42 +47,42 @@ setup(
         'PySocks>=1.6.6',
     ],
     packages=[
-        'fermatum',
-        'fermatum_gui',
-        'fermatum_gui.qt',
-        'fermatum_plugins',
-        #'fermatum_plugins.audio_modem',
-        #'fermatum_plugins.cosigner_pool',
-        'fermatum_plugins.email_requests',
-        #'fermatum_plugins.greenaddress_instant',
-        'fermatum_plugins.hw_wallet',
-        #'fermatum_plugins.keepkey',
-        'fermatum_plugins.labels',
-        #'fermatum_plugins.ledger',
-        'fermatum_plugins.trezor',
-        #'fermatum_plugins.digitalbitbox',
-        #'fermatum_plugins.trustedcoin',
-        'fermatum_plugins.virtualkeyboard',
+        'electrum-iop',
+        'electrum-iop_gui',
+        'electrum-iop_gui.qt',
+        'electrum-iop_plugins',
+        #'electrum-iop_plugins.audio_modem',
+        #'electrum-iop_plugins.cosigner_pool',
+        'electrum-iop_plugins.email_requests',
+        #'electrum-iop_plugins.greenaddress_instant',
+        'electrum-iop_plugins.hw_wallet',
+        #'electrum-iop_plugins.keepkey',
+        'electrum-iop_plugins.labels',
+        #'electrum-iop_plugins.ledger',
+        'electrum-iop_plugins.trezor',
+        #'electrum-iop_plugins.digitalbitbox',
+        #'electrum-iop_plugins.trustedcoin',
+        'electrum-iop_plugins.virtualkeyboard',
     ],
     package_dir={
-        'fermatum': 'lib',
-        'fermatum_gui': 'gui',
-        'fermatum_plugins': 'plugins',
+        'electrum-iop': 'lib',
+        'electrum-iop_gui': 'gui',
+        'electrum-iop_plugins': 'plugins',
     },
     package_data={
-        'fermatum': [
+        'electrum-iop': [
             'currencies.json',
             'www/index.html',
             'wordlist/*.txt',
-            'locale/*/LC_MESSAGES/fermatum.mo',
+            'locale/*/LC_MESSAGES/electrum-iop.mo',
         ]
     },
-    scripts=['fermatum'],
+    scripts=['electrum-iop'],
     data_files=data_files,
     description="Lightweight IoP Wallet",
     author="Thomas Voegtlin",
     author_email="thomasv@electrum.org",
     license="MIT Licence",
-    url="https://fermatum.org",
+    url="https://electrum-iop.org",
     long_description="""Lightweight IoP Wallet"""
 )

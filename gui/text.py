@@ -3,15 +3,15 @@ import curses, datetime, locale
 from decimal import Decimal
 import getpass
 
-from fermatum.util import format_satoshis, set_verbosity
-from fermatum.iop import is_valid, COIN, TYPE_ADDRESS
-from fermatum import Wallet, WalletStorage
+from electrum_iop.util import format_satoshis, set_verbosity
+from electrum_iop.iop import is_valid, COIN, TYPE_ADDRESS
+from electrum_iop import Wallet, WalletStorage
 
 _ = lambda x:x
 
 
 
-class FermatumGui:
+class ElectrumGui:
 
     def __init__(self, config, daemon, plugins):
 
@@ -19,7 +19,7 @@ class FermatumGui:
         self.network = daemon.network
         storage = WalletStorage(config.get_wallet_path())
         if not storage.file_exists:
-            print "Wallet not found. try 'fermatum create'"
+            print "Wallet not found. try 'electrum-iop create'"
             exit()
         if storage.is_encrypted():
             password = getpass.getpass('Password:', stream=None)

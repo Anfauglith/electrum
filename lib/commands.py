@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2011 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -283,7 +283,7 @@ class Commands:
     @command('')
     def dumpprivkeys(self):
         """Deprecated."""
-        return "This command is deprecated. Use a pipe instead: 'fermatum listaddresses | fermatum getprivatekeys - '"
+        return "This command is deprecated. Use a pipe instead: 'electrum-iop listaddresses | electrum-iop getprivatekeys - '"
 
     @command('')
     def validateaddress(self, address):
@@ -327,7 +327,7 @@ class Commands:
 
     @command('n')
     def getmerkle(self, txid, height):
-        """Get Merkle branch of a transaction included in a block. Fermatum
+        """Get Merkle branch of a transaction included in a block. Electrum-IOP
         uses this to verify transactions (Simple Payment Verification)."""
         return self.network.synchronous_get(('blockchain.transaction.get_merkle', [txid, int(height)]))
 
@@ -338,9 +338,9 @@ class Commands:
 
     @command('')
     def version(self):
-        """Return the version of fermatum."""
-        from version import FERMATUM_VERSION
-        return FERMATUM_VERSION
+        """Return the version of electrum-iop."""
+        from version import ELECTRUM_IOP_VERSION
+        return ELECTRUM_IOP_VERSION
 
     @command('w')
     def getmpk(self):
@@ -717,10 +717,10 @@ config_variables = {
         'requests_dir': 'directory where a bip70 file will be written.',
         'ssl_privkey': 'Path to your SSL private key, needed to sign the request.',
         'ssl_chain': 'Chain of SSL certificates, needed for signed requests. Put your certificate at the top and the root CA at the end',
-        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of IoP: URIs. Example: \"(\'file:///var/www/\',\'https://fermatum.org/\')\"',
+        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of IoP: URIs. Example: \"(\'file:///var/www/\',\'https://electrum-iop.org/\')\"',
     },
     'listrequests':{
-        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of IoP: URIs. Example: \"(\'file:///var/www/\',\'https://fermatum.org/\')\"',
+        'url_rewrite': 'Parameters passed to str.replace(), in order to create the r= part of IoP: URIs. Example: \"(\'file:///var/www/\',\'https://electrum-iop.org/\')\"',
     }
 }
 
@@ -784,8 +784,8 @@ def add_network_options(parser):
 def add_global_options(parser):
     group = parser.add_argument_group('global options')
     group.add_argument("-v", "--verbose", action="store_true", dest="verbose", default=False, help="Show debugging information")
-    group.add_argument("-D", "--dir", dest="fermatum_path", help="fermatum directory")
-    group.add_argument("-P", "--portable", action="store_true", dest="portable", default=False, help="Use local 'fermatum_data' directory")
+    group.add_argument("-D", "--dir", dest="electrum_iop_path", help="electrum-iop directory")
+    group.add_argument("-P", "--portable", action="store_true", dest="portable", default=False, help="Use local 'electrum_iop_data' directory")
     group.add_argument("-w", "--wallet", dest="wallet_path", help="wallet path")
     group.add_argument("--testnet", action="store_true", dest="testnet", default=False, help="Use Testnet")
     group.add_argument("--segwit", action="store_true", dest="segwit", default=False, help="The Wizard will create Segwit seed phrases (Testnet only).")
@@ -794,11 +794,11 @@ def add_global_options(parser):
 def get_parser():
     # create main parser
     parser = argparse.ArgumentParser(
-        epilog="Run 'fermatum help <command>' to see the help for a command")
+        epilog="Run 'electrum-iop help <command>' to see the help for a command")
     add_global_options(parser)
     subparsers = parser.add_subparsers(dest='cmd', metavar='<command>')
     # gui
-    parser_gui = subparsers.add_parser('gui', description="Run Fermatum's Graphical User Interface.", help="Run GUI (default)")
+    parser_gui = subparsers.add_parser('gui', description="Run Electrum-IOP's Graphical User Interface.", help="Run GUI (default)")
     parser_gui.add_argument("url", nargs='?', default=None, help="iop URI (or bip70 file)")
     parser_gui.add_argument("-g", "--gui", dest="gui", help="select graphical user interface", choices=['qt', 'kivy', 'text', 'stdio'])
     parser_gui.add_argument("-o", "--offline", action="store_true", dest="offline", default=False, help="Run offline")

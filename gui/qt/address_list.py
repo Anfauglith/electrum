@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -27,10 +27,10 @@
 import webbrowser
 
 from util import *
-from fermatum.i18n import _
-from fermatum.util import block_explorer_URL, format_satoshis, format_time
-from fermatum.plugins import run_hook
-from fermatum.iop import is_address
+from electrum_iop.i18n import _
+from electrum_iop.util import block_explorer_URL, format_satoshis, format_time
+from electrum_iop.plugins import run_hook
+from electrum_iop.iop import is_address
 
 
 class AddressList(MyTreeWidget):
@@ -87,7 +87,7 @@ class AddressList(MyTreeWidget):
                         self.setCurrentItem(address_item)
 
     def create_menu(self, position):
-        from fermatum.wallet import Multisig_Wallet
+        from electrum_iop.wallet import Multisig_Wallet
         is_multisig = isinstance(self.wallet, Multisig_Wallet)
         can_delete = self.wallet.can_delete_address()
         selected = self.selectedItems()

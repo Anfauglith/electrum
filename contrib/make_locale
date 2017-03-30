@@ -15,8 +15,8 @@ os.system(cmd)
 
 os.chdir('lib')
 
-crowdin_identifier = 'fermatum'
-crowdin_file_name = 'fermatum-client/messages.pot'
+crowdin_identifier = 'electrum-iop'
+crowdin_file_name = 'electrum-iop-client/messages.pot'
 locale_file_name = 'locale/messages.pot'
 
 if os.path.exists('../contrib/crowdin_api_key.txt'):
@@ -41,7 +41,7 @@ zfobj = zipfile.ZipFile(StringIO(requests.request('GET', 'http://crowdin.com/dow
 
 print 'Unzip translations'
 for name in zfobj.namelist():
-    if not name.startswith('fermatum-client/locale'):
+    if not name.startswith('electrum-iop-client/locale'):
         continue
     if name.endswith('/'):
         if not os.path.exists(name[16:]):
@@ -60,6 +60,6 @@ for lang in os.listdir('locale'):
     mo_dir = 'locale/%s/LC_MESSAGES' % lang
     if not os.path.exists(mo_dir):
         os.mkdir(mo_dir)
-    cmd = 'msgfmt --output-file="%s/fermatum.mo" "locale/%s/fermatum.po"' % (mo_dir,lang)
+    cmd = 'msgfmt --output-file="%s/electrum-iop.mo" "locale/%s/electrum-iop.po"' % (mo_dir,lang)
     print 'Installing',lang
     os.system(cmd)

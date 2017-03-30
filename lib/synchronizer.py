@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2014 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -171,7 +171,7 @@ class Synchronizer(ThreadJob):
         we don't have.
         '''
         for history in self.wallet.history.values():
-            # Old fermatum servers returned ['*'] when all history for
+            # Old electrum-iop servers returned ['*'] when all history for
             # the address was pruned.  This no longer happens but may
             # remain in old wallets.
             if history == ['*']:

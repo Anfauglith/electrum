@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2015 kyuupichan@gmail
 #
 # Permission is hereby granted, free of charge, to any person

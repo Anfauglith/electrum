@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2011 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -45,7 +45,7 @@ WIF_BYTE = 0x31
 #ADDRTYPE_P2WPKH = 6 # Segwit Addresses
 XPRV_HEADER = 0xAE3416F6
 XPUB_HEADER = 0x2780915F
-HEADERS_URL = "https://headers.fermatum.org/blockchain_headers" # TODO Change this
+HEADERS_URL = "https://headers.electrum-iop.org/blockchain_headers" # TODO Change this
 
 def set_testnet():
     global ADDRTYPE_P2PKH, ADDRTYPE_P2SH#, ADDRTYPE_P2WPKH
@@ -58,7 +58,7 @@ def set_testnet():
     #ADDRTYPE_P2WPKH = 3 # Segwit Addresses
     XPRV_HEADER = 0x2B7FA42A
     XPUB_HEADER = 0xBB8F4852
-    HEADERS_URL = "https://headers.fermatum.org/testnet_headers"
+    HEADERS_URL = "https://headers.electrum-iop.org/testnet_headers"
 
 #def set_nolnet():
 #    global ADDRTYPE_P2PKH, ADDRTYPE_P2SH, ADDRTYPE_P2WPKH
@@ -70,7 +70,7 @@ def set_testnet():
 #    ADDRTYPE_P2WPKH = 6
 #    XPRV_HEADER = 0x0488ade4
 #    XPUB_HEADER = 0x0488b21e
-#    HEADERS_URL = "https://headers.fermatum.org/nolnet_headers"
+#    HEADERS_URL = "https://headers.electrum-iop.org/nolnet_headers"
 
 
 
@@ -211,15 +211,15 @@ def is_old_seed(seed):
     words = seed.strip().split()
     try:
         old_mnemonic.mn_decode(words)
-        uses_fermatum_words = True
+        uses_electrum_iop_words = True
     except Exception:
-        uses_fermatum_words = False
+        uses_electrum_iop_words = False
     try:
         seed.decode('hex')
         is_hex = (len(seed) == 32 or len(seed) == 64)
     except Exception:
         is_hex = False
-    return is_hex or (uses_fermatum_words and (len(words) == 12 or len(words) == 24))
+    return is_hex or (uses_electrum-iop_words and (len(words) == 12 or len(words) == 24))
 
 
 def seed_type(x):

@@ -5,10 +5,10 @@ from io import BytesIO
 import sys
 import platform
 
-from fermatum.plugins import BasePlugin, hook
-from fermatum_gui.qt.util import WaitingDialog, EnterButton, WindowModalDialog
-from fermatum.util import print_msg, print_error
-from fermatum.i18n import _
+from electrum_iop.plugins import BasePlugin, hook
+from electrum_iop_gui.qt.util import WaitingDialog, EnterButton, WindowModalDialog
+from electrum_iop.util import print_msg, print_error
+from electrum_iop.i18n import _
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *

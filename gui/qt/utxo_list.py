@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -24,8 +24,8 @@
 # SOFTWARE.
 
 from util import *
-from fermatum.i18n import _
-from fermatum.iop import is_address
+from electrum_iop.i18n import _
+from electrum_iop.iop import is_address
 
 
 class UTXOList(MyTreeWidget):

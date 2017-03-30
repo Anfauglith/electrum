@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2013 ecdsa@github
 #
 # Permission is hereby granted, free of charge, to any person
@@ -25,12 +25,12 @@
 
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-from fermatum.i18n import _
+from electrum_iop.i18n import _
 from util import *
 import re
 import math
 
-from fermatum.plugins import run_hook
+from electrum_iop.plugins import run_hook
 
 def check_password_strength(password):
 

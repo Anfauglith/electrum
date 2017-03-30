@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -32,10 +32,10 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import PyQt4.QtCore as QtCore
 
-from fermatum import transaction
-from fermatum.iop import base_encode
-from fermatum.i18n import _
-from fermatum.plugins import run_hook
+from electrum_iop import transaction
+from electrum_iop.iop import base_encode
+from electrum_iop.i18n import _
+from electrum_iop.plugins import run_hook
 
 from util import *
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2011 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -42,7 +42,7 @@ import pem
 
 
 def Connection(server, queue, config_path):
-    """Makes asynchronous connections to a remote fermatum server.
+    """Makes asynchronous connections to a remote electrum-iop server.
     Returns the running thread that is making the connection.
 
     Once the thread has connected, it finishes, placing a tuple on the
@@ -212,7 +212,7 @@ class TcpConnection(threading.Thread, util.PrintError):
 
 class Interface(util.PrintError):
     """The Interface class handles a socket connected to a single remote
-    fermatum server.  It's exposed API is:
+    electrum-iop server.  It's exposed API is:
 
     - Member functions close(), fileno(), get_responses(), has_timed_out(),
       ping_required(), queue_request(), send_requests()

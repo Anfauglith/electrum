@@ -1,0 +1,16 @@
+# If you want electrum-iop to appear in a linux app launcher ("start menu"), install this by doing:
+# sudo desktop-file-install electrum-iop.desktop
+
+[Desktop Entry]
+Comment=Lightweight IoP Client
+Exec=electrum-iop %u
+GenericName[en_US]=Electrum-IOP
+GenericName=Electrum-IOP
+Icon=electrum-iop
+Name[en_US]=Electrum-IOP Internet of People Wallet
+Name=Electrum-IOP Internet of People Wallet
+Categories=Network;
+StartupNotify=false
+Terminal=false
+Type=Application
+MimeType=x-scheme-handler/IoP;

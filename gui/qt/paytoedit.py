@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2012 thomasv@gitorious
 #
 # Permission is hereby granted, free of charge, to any person
@@ -29,7 +29,7 @@ from qrtextedit import ScanQRTextEdit
 
 import re
 from decimal import Decimal
-from fermatum import iop
+from electrum_iop import iop
 
 import util
 
@@ -87,7 +87,7 @@ class PayToEdit(ScanQRTextEdit):
             return iop.TYPE_SCRIPT, script
 
     def parse_script(self, x):
-        from fermatum.transaction import opcodes, push_script
+        from electrum_iop.transaction import opcodes, push_script
         script = ''
         for word in x.split():
             if word[0:3] == 'OP_':

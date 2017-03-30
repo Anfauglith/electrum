@@ -1,8 +1,8 @@
 #!/usr/bin/env python2
 # -*- mode: python -*-
 #
-# Fermatum - lightweight IoP client
-# Copyright (C) 2016  The Fermatum developers
+# Electrum-IOP - lightweight IoP client
+# Copyright (C) 2016  The Electrum-IOP developers
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files
@@ -27,11 +27,11 @@
 import threading
 
 from PyQt4.Qt import QVBoxLayout, QLabel, SIGNAL
-from fermatum_gui.qt.password_dialog import PasswordDialog, PW_PASSPHRASE
-from fermatum_gui.qt.util import *
+from electrum_iop_gui.qt.password_dialog import PasswordDialog, PW_PASSPHRASE
+from electrum_iop_gui.qt.util import *
 
-from fermatum.i18n import _
-from fermatum.util import PrintError
+from electrum_iop.i18n import _
+from electrum_iop.util import PrintError
 
 # The trickiest thing about this handler was getting windows properly
 # parented on MacOSX.
@@ -171,9 +171,9 @@ class QtHandlerBase(QObject, PrintError):
 
 
 
-from fermatum.plugins import hook
-from fermatum.util import UserCancelled
-from fermatum_gui.qt.main_window import StatusBarButton
+from electrum_iop.plugins import hook
+from electrum_iop.util import UserCancelled
+from electrum_iop_gui.qt.main_window import StatusBarButton
 
 class QtPluginBase(object):
 

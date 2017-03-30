@@ -4,9 +4,8 @@
 build/
 dist/
 *.egg/
-/fermatum.py
 contrib/pyinstaller/
-Fermatum.egg-info/
+Electrum-IOP.egg-info/
 gui/qt/icons_rc.py
 locale/
 .devlocaltmp/
@@ -16,8 +15,7 @@ env/
 .tox/
 .buildozer/
 bin/
-Fermatum.egg-info
-fermatumenv
+Electrum-IOP.egg-info
 .eggs
 .python-version
 lib/paymentrequest_pb2.py

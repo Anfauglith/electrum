@@ -1,5 +1,5 @@
 from labels import LabelsPlugin
-from fermatum.plugins import hook
+from electrum_iop.plugins import hook
 
 class Plugin(LabelsPlugin):
 
@@ -11,4 +11,3 @@ class Plugin(LabelsPlugin):
     def on_pulled(self, wallet):
         self.print_error('on pulled')
         self.window._trigger_update_history()
-

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2016 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -395,5 +395,5 @@ class BaseWizard(object):
             self.wallet.synchronize()
             self.wallet.storage.write()
             self.terminate()
-        msg = _("Fermatum is generating your addresses, please wait.")
+        msg = _("Electrum-IOP is generating your addresses, please wait.")
         self.waiting_dialog(task, msg)

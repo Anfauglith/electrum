@@ -1,15 +1,15 @@
 # ----------------------------------------------------------------------------------
-# Fermatum plugin for the Digital Bitbox hardware wallet by Shift Devices AG
+# Electrum-IOP plugin for the Digital Bitbox hardware wallet by Shift Devices AG
 # digitalbitbox.com
 #
 
 try:
-    import fermatum as fermatum
-    from fermatum.iop import TYPE_ADDRESS, var_int, msg_magic, Hash, verify_message, public_key_to_p2pkh, EncodeAES, DecodeAES
-    from fermatum.i18n import _
-    from fermatum.keystore import Hardware_KeyStore
+    import electrum_iop
+    from electrum_iop.iop import TYPE_ADDRESS, var_int, msg_magic, Hash, verify_message, public_key_to_p2pkh, EncodeAES, DecodeAES
+    from electrum_iop.i18n import _
+    from electrum_iop.keystore import Hardware_KeyStore
     from ..hw_wallet import HW_PluginBase
-    from fermatum.util import print_error
+    from electrum_iop.util import print_error
 
     import time
     import hid
@@ -152,7 +152,7 @@ class DigitalBitbox_Client():
         
         # Initialize device if not yet initialized
         if not self.setupRunning:
-            self.isInitialized = True # Wallet exists. Fermatum code later checks if the device matches the wallet
+            self.isInitialized = True # Wallet exists. Electrum-IOP code later checks if the device matches the wallet
         elif not self.isInitialized:
             reply = self.hid_send_encrypt('{"device":"info"}')
             if reply['device']['id'] <> "":
@@ -204,8 +204,8 @@ class DigitalBitbox_Client():
 
     def dbb_generate_wallet(self):
         key = self.stretch_key(self.password)
-        filename = "Fermatum-" + time.strftime("%Y-%m-%d-%H-%M-%S") + ".pdf"
-        msg = '{"seed":{"source": "create", "key": "%s", "filename": "%s", "entropy": "%s"}}' % (key, filename, 'Digital Bitbox Fermatum Plugin')
+        filename = "Electrum-IOP-" + time.strftime("%Y-%m-%d-%H-%M-%S") + ".pdf"
+        msg = '{"seed":{"source": "create", "key": "%s", "filename": "%s", "entropy": "%s"}}' % (key, filename, 'Digital Bitbox Electrum-IOP Plugin')
         reply = self.hid_send_encrypt(msg)
         if 'error' in reply:
             raise Exception(reply['error']['message'])

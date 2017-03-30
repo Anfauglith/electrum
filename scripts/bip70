@@ -4,11 +4,11 @@ import tlslite
 import time
 import hashlib
 
-from fermatum.transaction import Transaction
-from fermatum import iop
-from fermatum import x509
-from fermatum import paymentrequest
-from fermatum import paymentrequest_pb2 as pb2
+from electrum-iop.transaction import Transaction
+from electrum-iop import iop
+from electrum-iop import x509
+from electrum-iop import paymentrequest
+from electrum-iop import paymentrequest_pb2 as pb2
 
 chain_file = 'mychain.pem'
 cert_file = 'mycert.pem'

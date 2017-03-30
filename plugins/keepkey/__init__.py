@@ -1,4 +1,4 @@
-from fermatum.i18n import _
+from electrum_iop.i18n import _
 
 fullname = 'KeepKey'
 description = _('Provides support for KeepKey hardware wallet')

@@ -1,9 +1,9 @@
 include LICENCE RELEASE-NOTES AUTHORS
 include README.rst
-include fermatum.conf.sample
-include fermatum.desktop
+include electrum-iop.conf.sample
+include electrum-iop.desktop
 include *.py
-include fermatum
+include electrum-iop
 recursive-include lib *.py
 recursive-include gui *.py
 recursive-include plugins *.py

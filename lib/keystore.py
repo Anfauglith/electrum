@@ -1,8 +1,8 @@
 #!/usr/bin/env python2
 # -*- mode: python -*-
 #
-# Fermatum - lightweight IoP client
-# Copyright (C) 2016  The Fermatum developers
+# Electrum-IOP - lightweight IoP client
+# Copyright (C) 2016  The Electrum-IOP developers
 #
 # Permission is hereby granted, free of charge, to any person
 # obtaining a copy of this software and associated documentation files

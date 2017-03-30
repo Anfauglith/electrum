@@ -5,14 +5,14 @@ import threading
 from binascii import hexlify, unhexlify
 from functools import partial
 
-from fermatum.iop import (bc_address_to_hash_160, xpub_from_pubkey,
+from electrum_iop.iop import (bc_address_to_hash_160, xpub_from_pubkey,
                               public_key_to_p2pkh, EncodeBase58Check,
                               TYPE_ADDRESS, TYPE_SCRIPT,
                               TESTNET, ADDRTYPE_P2PKH, ADDRTYPE_P2SH)
-from fermatum.i18n import _
-from fermatum.plugins import BasePlugin, hook
-from fermatum.transaction import deserialize, Transaction
-from fermatum.keystore import Hardware_KeyStore, is_xpubkey, parse_xpubkey
+from electrum_iop.i18n import _
+from electrum_iop.plugins import BasePlugin, hook
+from electrum_iop.transaction import deserialize, Transaction
+from electrum_iop.keystore import Hardware_KeyStore, is_xpubkey, parse_xpubkey
 
 from ..hw_wallet import HW_PluginBase
 
@@ -29,7 +29,7 @@ class TrezorCompatibleKeyStore(Hardware_KeyStore):
         return self.plugin.get_client(self, force_pair)
 
     def decrypt_message(self, sequence, message, password):
-        raise RuntimeError(_('Fermatum and %s encryption and decryption are currently incompatible') % self.device)
+        raise RuntimeError(_('Electrum-IOP and %s encryption and decryption are currently incompatible') % self.device)
         client = self.get_client()
         address_path = self.get_derivation() + "/%d/%d"%sequence
         address_n = client.expand_path(address_path)
@@ -365,7 +365,7 @@ class TrezorCompatiblePlugin(HW_PluginBase):
 
         return outputs
 
-    def fermatum_tx_to_txtype(self, tx):
+    def electrum_iop_tx_to_txtype(self, tx):
         t = self.types.TransactionType()
         d = deserialize(tx.raw)
         t.version = d['version']
@@ -381,4 +381,4 @@ class TrezorCompatiblePlugin(HW_PluginBase):
     # This function is called from the trezor libraries (via tx_api)
     def get_tx(self, tx_hash):
         tx = self.prev_tx[tx_hash]
-        return self.fermatum_tx_to_txtype(tx)
+        return self.electrum_iop_tx_to_txtype(tx)

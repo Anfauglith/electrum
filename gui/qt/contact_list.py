@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -24,11 +24,11 @@
 # SOFTWARE.
 
 
-from fermatum.i18n import _
-from fermatum.iop import is_address
-from fermatum.util import block_explorer_URL, format_satoshis, format_time, age
-from fermatum.plugins import run_hook
-from fermatum.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
+from electrum_iop.i18n import _
+from electrum_iop.iop import is_address
+from electrum_iop.util import block_explorer_URL, format_satoshis, format_time, age
+from electrum_iop.plugins import run_hook
+from electrum_iop.paymentrequest import PR_UNPAID, PR_PAID, PR_UNKNOWN, PR_EXPIRED
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from util import MyTreeWidget, pr_tooltips, pr_icons

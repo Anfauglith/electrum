@@ -1,5 +1,5 @@
 from trezor import TrezorPlugin
-from fermatum.util import print_msg
+from electrum_iop.util import print_msg
 
 class TrezorCmdLineHandler:
 

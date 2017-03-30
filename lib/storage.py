@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2015 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -45,9 +45,9 @@ import iop
 
 # seed_version is now used for the version of the wallet file
 
-OLD_SEED_VERSION = 4        # fermatum versions < 2.0
-NEW_SEED_VERSION = 11       # fermatum versions >= 2.0
-FINAL_SEED_VERSION = 13     # fermatum >= 2.7 will set this to prevent
+OLD_SEED_VERSION = 4        # electrum-iop versions < 2.0
+NEW_SEED_VERSION = 11       # electrum-iop versions >= 2.0
+FINAL_SEED_VERSION = 13     # electrum-iop >= 2.7 will set this to prevent
                             # old versions from overwriting new format
 
 
@@ -141,7 +141,7 @@ class WalletStorage(PrintError):
 
     @profiler
     def write(self):
-        # this ensures that previous versions of fermatum won't open the wallet
+        # this ensures that previous versions of electrum-iop won't open the wallet
         self.put('seed_version', FINAL_SEED_VERSION)
         with self.lock:
             self._write()
@@ -373,7 +373,7 @@ class WalletStorage(PrintError):
                     # pbkdf2 was not included with the binaries, and wallet creation aborted.
                     msg += "\nIt does not contain any keys, and can safely be removed."
                 else:
-                    # creation was complete if fermatum was run from source
-                    msg += "\nPlease open this file with Fermatum 1.9.8, and move your coins to a new wallet."
+                    # creation was complete if electrum-iop was run from source
+                    msg += "\nPlease open this file with Electrum-IOP 1.9.8, and move your coins to a new wallet."
             raise BaseException(msg)
         return seed_version

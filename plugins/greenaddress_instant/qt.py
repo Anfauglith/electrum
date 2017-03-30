@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2014 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -30,8 +30,8 @@ import requests
 
 from PyQt4.QtGui import QApplication, QPushButton
 
-from fermatum.plugins import BasePlugin, hook
-from fermatum.i18n import _
+from electrum_iop.plugins import BasePlugin, hook
+from electrum_iop.i18n import _
 
 
 
@@ -86,7 +86,7 @@ class Plugin(BasePlugin):
 
             # 2. send the request
             response = requests.request("GET", ("https://greenaddress.it/verify/?signature=%s&txhash=%s" % (urllib.quote(sig), tx.hash())),
-                                        headers = {'User-Agent': 'Fermatum'})
+                                        headers = {'User-Agent': 'Electrum-IOP'})
             response = response.json()
 
             # 3. display the result

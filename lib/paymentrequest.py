@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - lightweight IoP client
+# Electrum-IOP - lightweight IoP client
 # Copyright (C) 2014 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
@@ -49,8 +49,8 @@ import rsakey
 
 from iop import TYPE_ADDRESS
 
-REQUEST_HEADERS = {'Accept': 'application/IoP-paymentrequest', 'User-Agent': 'Fermatum'}
-ACK_HEADERS = {'Content-Type':'application/IoP-payment','Accept':'application/IoP-paymentack','User-Agent':'Fermatum'}
+REQUEST_HEADERS = {'Accept': 'application/IoP-paymentrequest', 'User-Agent': 'Electrum-IOP'}
+ACK_HEADERS = {'Content-Type':'application/IoP-payment','Accept':'application/IoP-paymentack','User-Agent':'Electrum-IOP'}
 
 ca_path = requests.certs.where()
 ca_list = None
@@ -272,7 +272,7 @@ class PaymentRequest:
 
         ref_out = paymnt.refund_to.add()
         ref_out.script = transaction.Transaction.pay_script(TYPE_ADDRESS, refund_addr)
-        paymnt.memo = "Paid using Fermatum"
+        paymnt.memo = "Paid using Electrum-IOP"
         pm = paymnt.SerializeToString()
 
         payurl = urlparse.urlparse(pay_det.payment_url)

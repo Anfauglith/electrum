@@ -3,12 +3,12 @@ import threading
 from PyQt4.Qt import (QDialog, QInputDialog, QLineEdit, QTextEdit, QVBoxLayout, QLabel, SIGNAL)
 import PyQt4.QtCore as QtCore
 
-from fermatum.i18n import _
-from fermatum_gui.qt.util import *
-from fermatum.util import print_msg
+from electrum_iop.i18n import _
+from electrum_iop_gui.qt.util import *
+from electrum_iop.util import print_msg
 
 import os, hashlib, websocket, threading, logging, json, copy
-from fermatum_gui.qt.qrcodewidget import QRCodeWidget, QRDialog
+from electrum_iop_gui.qt.qrcodewidget import QRCodeWidget, QRDialog
 from btchip.btchip import *
 
 DEBUG = False

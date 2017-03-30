@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# Fermatum - Lightweight IoP Client
+# Electrum-IOP - Lightweight IoP Client
 # Copyright (c) 2012 Thomas Voegtlin
 #
 # Permission is hereby granted, free of charge, to any person
