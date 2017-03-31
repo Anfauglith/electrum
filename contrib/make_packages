@@ -23,7 +23,7 @@ if __name__ == '__main__':
         'six',
         'jsonrpclib',
         'socks',
-        'google',
+        'google/protobuf',
     ]
     for module in deps:
         f, pathname, descr = imp.find_module(module)
