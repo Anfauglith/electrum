@@ -70,7 +70,7 @@ setup(
         'electrum_iop_plugins': 'plugins',
     },
     package_data={
-        'electrum-iop': [
+        'electrum_iop': [
             'currencies.json',
             'www/index.html',
             'wordlist/*.txt',
