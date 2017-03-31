@@ -1,0 +1,20 @@
+
+sudo apt install python-qt4 python-pip libusb-dev libudev-dev
+
+sudo pip install --upgrade pip virtualenv
+
+mkdir ~/src
+
+cd src
+
+git clone https://github.com/anfauglith/electrum-iop.git
+
+cd electrum-iop
+
+virtualenv env
+
+source env/bin/activate
+
+pip install ecdsa pyaes jsonrpclib qrcode pysocks pbkdf2 requests dnspython trezor cython protobuf
+
+
