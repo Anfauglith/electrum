@@ -75,7 +75,8 @@ class BaseWizard(object):
         name = os.path.basename(self.storage.path)
         title = _("Create '%s'"%name)
         message = '\n'.join([
-            _("What kind of wallet do you want to create?")
+            _("What kind of wallet do you want to create?"),
+            _("If you are unsure, select 'Standard wallet'.")
         ])
         wallet_kinds = [
             ('standard',  _("Standard wallet")),

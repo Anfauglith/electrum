@@ -477,7 +477,7 @@ class InstallWizard(QDialog, MessageBoxMixin, BaseWizard):
                   "information about your transactions and addresses. The "
                   "servers all fulfil the same purpose only differing in "
                   "hardware. In most cases you simply want to let Electrum-IOP "
-                  "pick one at random.  However if you prefer feel free to "
+                  "pick one at random.  However, if you prefer feel free to "
                   "select a server manually.")
         choices = [_("Auto connect"), _("Select server manually")]
         title = _("How do you want to connect to a server? ")
