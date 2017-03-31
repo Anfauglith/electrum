@@ -219,7 +219,7 @@ def is_old_seed(seed):
         is_hex = (len(seed) == 32 or len(seed) == 64)
     except Exception:
         is_hex = False
-    return is_hex or (uses_electrum-iop_words and (len(words) == 12 or len(words) == 24))
+    return is_hex or (uses_electrum_iop_words and (len(words) == 12 or len(words) == 24))
 
 
 def seed_type(x):

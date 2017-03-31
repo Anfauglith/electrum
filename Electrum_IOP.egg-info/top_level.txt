@@ -1,3 +1,0 @@
-electrum-iop
-electrum-iop_gui
-electrum-iop_plugins
